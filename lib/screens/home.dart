@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   double fontSize = 16;
   SPSettings settings = SPSettings();
   Bible? bible;
-  late List<BIBLEBOOK> books;
+  List<BIBLEBOOK> books = [];
 
   @override
   void initState() {
