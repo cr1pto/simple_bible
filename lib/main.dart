@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       ),
       // home: SettingsScreen(),
       home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
