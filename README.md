@@ -6,6 +6,10 @@ This project represents a very simple mobile app for the Bible.
 
 ## Building the project
 
+### Prerequisites
+
+- You need flutter to build this app.  Download it here: https://docs.flutter.dev/get-started/install?gclid=Cj0KCQjwj7CZBhDHARIsAPPWv3e9dUqtof6PAihBeTejkeBN8VtmisQom4m0FzsSjP2Hxznl0fWmH9QaAo0YEALw_wcB&gclsrc=aw.ds
+
 Below is what I have on my machine for what is currently used to build the application.  
 - Flutter: 3.0.2
 - Java Zulu JDK (open java jdk): 17.0.1
@@ -32,3 +36,7 @@ Python 3.9.7
 cr1pto simple_bible % ruby --version
 ruby 2.6.8p205 (2021-07-07 revision 67951) [universal.arm64e-darwin21]
 ```
+
+- Run `flutter doctor` to ensure that everything works as expected from the command line.
+### Running the app
+
