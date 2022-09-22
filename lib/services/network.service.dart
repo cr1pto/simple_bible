@@ -27,13 +27,13 @@ class NetworkService {
     String text = '\n\nName: $name\nValue: ${networkSettings.wifiIp}'
         // '\nHost: ${networkSettings.hostName}'
         // '\nConnection Name: ${connectivity.name}'
-        '\nGateway: ${networkSettings?.wifiGateway ?? 'n/a'}'
-        '\nWifi Name: ${networkSettings?.wifiName}'
-        '\nWifi Broadcast: ${networkSettings?.wifiBroadcast}'
-        '\nWifi Ipv4: ${networkSettings?.wifiIp}'
-        '\nWifi Ipv6: ${networkSettings?.wifiIpv6}'
-        '\nWifi BssId: ${networkSettings?.wifiBssId}'
-        '\nWifi Submask: ${networkSettings?.wifiSubmask}';
+        '\nGateway: ${networkSettings.wifiGateway ?? 'n/a'}'
+        '\nWifi Name: ${networkSettings.wifiName}'
+        '\nWifi Broadcast: ${networkSettings.wifiBroadcast}'
+        '\nWifi Ipv4: ${networkSettings.wifiIp}'
+        '\nWifi Ipv6: ${networkSettings.wifiIpv6}'
+        '\nWifi BssId: ${networkSettings.wifiBssId}'
+        '\nWifi Submask: ${networkSettings.wifiSubmask}';
     // '\nType: ${networkSettings.type.name}';
 
     // text += networkSettings.type.name.contains('IPv4') ?  '\nRaw Address:${networkSettings.rawAddress.toString().replaceAll(', ', '.')}': '\nRaw Address:${ipInfo.rawAddress.toString().replaceAll(', ', ':')}';

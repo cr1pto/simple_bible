@@ -41,9 +41,7 @@ class _BibleScreenState extends State<BibleScreen> {
 
     if (bible == null) return Container();
 
-    for (BIBLEBOOK book in bible.xMLBIBLE!.bIBLEBOOK) {
-      books.add(book);
-    }
+    books = widget.bibleService.getBooksFromBible(bible);
 
     return Scaffold(
       body: BooksScreen(settingColor, fontSize, books),

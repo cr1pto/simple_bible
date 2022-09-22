@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/screens/bible_screen.dart';
 import 'package:simple_bible/screens/home.dart';
-import 'package:simple_bible/screens/memos.dart';
-import 'package:simple_bible/screens/passwords.dart';
 import 'package:simple_bible/screens/settings.dart';
 
 class MenuDrawer extends StatefulWidget {
@@ -21,9 +19,6 @@ class _MenuDrawerState extends State<MenuDrawer> {
   List<Widget> buildMenuItems(BuildContext context) {
     final List<String> menuTitles = [
       'Home',
-      'Memos',
-      'Passwords',
-      'My Network',
       'Bible',
       'Settings'
     ];
@@ -31,7 +26,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
     List<Widget> menuItems = [];
     menuItems.add(DrawerHeader(
         decoration: BoxDecoration(color: Color(settingColor)),
-        child: const Text('Globo Fitness',
+        child: const Text('Simple Bible',
             style: TextStyle(color: Colors.white, fontSize: 28))));
     //iterate through all menuItems and assign title to widgets
     for (var element in menuTitles) {
@@ -43,12 +38,6 @@ class _MenuDrawerState extends State<MenuDrawer> {
           switch (element) {
             case 'Home':
               screen = HomeScreen();
-              break;
-            case 'Memos':
-              screen = const MemoScreen();
-              break;
-            case 'Passwords':
-              screen = const PasswordsScreen();
               break;
             case 'Bible':
               screen = BibleScreen();

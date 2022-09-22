@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:simple_bible/screens/home.dart';
-import 'package:simple_bible/screens/settings.dart';
-import 'package:simple_bible/shared/menu_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'GlobApp',
+      title: 'Simple Bible',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

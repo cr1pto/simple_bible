@@ -22,6 +22,7 @@ class _BooksScreenState extends State<BooksScreen> {
     setState(() {
       bookWidget = getWidgets();
     });
+
     super.initState();
   }
 

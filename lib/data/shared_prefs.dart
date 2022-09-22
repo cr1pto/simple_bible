@@ -12,9 +12,7 @@ class SPSettings {
 
   // factory constructor that allows you to return something from a constructor
   factory SPSettings() {
-    if (_instance == null) {
-      _instance = SPSettings.internal();
-    }
+    _instance ??= SPSettings.internal();
     return _instance as SPSettings;
   }
 
@@ -29,9 +27,7 @@ class SPSettings {
   int getColor() {
     int? color = _sp.getInt(colorKey);
 
-    if (color == null) {
-      color = 0xff1976d2;
-    }
+    color ??= 0xff1976d2;
     return color;
   }
 
@@ -42,9 +38,7 @@ class SPSettings {
   double getFontSize() {
     double? fontSize = _sp.getDouble(fontSizeKey);
 
-    if(fontSize == null) {
-       fontSize = 12;
-    }
+    fontSize ??= 12;
     return fontSize;
   }
 
