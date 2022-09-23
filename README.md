@@ -1,4 +1,5 @@
 # simple_bible
+    <a href="https://github.com/cr1pto/simple_bible/actions"><img src="https://github.com/cr1pto/simple_bible/workflows/test-my-app/badge.svg" alt="Build Status"></a>
 
 This project represents a very simple mobile app for the Bible.
 
