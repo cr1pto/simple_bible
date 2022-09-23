@@ -21,8 +21,8 @@ jobs:
         with:
           flutter-version: '3.0.5'
       - run: flutter pub get
-      - name: Analyze
-        run: flutter analyze
+      # - name: Analyze
+      #   run: flutter analyze
 
       - name: Run tests
         run: flutter test --coverage
