@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:simple_bible/data/sembast_db.dart';
 import 'package:simple_bible/models/password.dart';
@@ -8,7 +10,9 @@ class PasswordDetailDialog extends StatefulWidget {
   final bool isNew;
   final SembastDb sembastDb;
 
-  PasswordDetailDialog(this.password, this.isNew, this.sembastDb);
+  const PasswordDetailDialog(this.password, this.isNew, this.sembastDb,
+      {Key? key})
+      : super(key: key);
 
   @override
   _PasswordDetailDialogState createState() => _PasswordDetailDialogState();
@@ -45,12 +49,12 @@ class _PasswordDetailDialogState extends State<PasswordDetailDialog> {
                       });
                     },
                     icon: hidePassword
-                        ? Icon(Icons.visibility)
-                        : Icon(Icons.visibility_off))))
+                        ? const Icon(Icons.visibility)
+                        : const Icon(Icons.visibility_off))))
       ]),
       actions: [
         TextButton(
-            child: Text('Save'),
+            child: const Text('Save'),
             onPressed: () async {
               widget.password.name = txtName.text;
               widget.password.password = txtPassword.text;
@@ -63,11 +67,14 @@ class _PasswordDetailDialogState extends State<PasswordDetailDialog> {
               }
 
               Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => PasswordsScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PasswordsScreen()));
             }),
         TextButton(
-            onPressed: () => Navigator.pop(context), child: Text('Cancel'))
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'))
       ],
     );
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:simple_bible/data/sembast_db.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
@@ -53,7 +55,6 @@ class _PasswordsScreenState extends State<PasswordsScreen> {
         children: buildPasswordView(context),
       ),
       floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
           backgroundColor: Color(settingColor),
           onPressed: () {
             showDialog(
@@ -62,7 +63,8 @@ class _PasswordsScreenState extends State<PasswordsScreen> {
                   Password pwd = Password('', '');
                   return PasswordDetailDialog(pwd, true, sembastDb);
                 });
-          }),
+          },
+          child: const Icon(Icons.add)),
     );
   }
 
@@ -79,18 +81,19 @@ class _PasswordsScreenState extends State<PasswordsScreen> {
                   title: Text('Delete ${pwd.name}?'),
                   actions: [
                     TextButton(
-                        child: Text('Delete'),
+                        child: const Text('Delete'),
                         onPressed: () async {
                           await sembastDb.deletePassword(pwd);
                           Navigator.pop(context);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => PasswordsScreen()));
+                                  builder: (context) =>
+                                      const PasswordsScreen()));
                         }),
                     TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: Text('Cancel'))
+                        child: const Text('Cancel'))
                   ],
                 );
               });

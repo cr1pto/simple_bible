@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/screens/bible_screen.dart';
@@ -17,11 +19,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
   double fontSize = 16;
 
   List<Widget> buildMenuItems(BuildContext context) {
-    final List<String> menuTitles = [
-      'Home',
-      'Bible',
-      'Settings'
-    ];
+    final List<String> menuTitles = ['Home', 'Bible', 'Settings'];
 
     List<Widget> menuItems = [];
     menuItems.add(DrawerHeader(

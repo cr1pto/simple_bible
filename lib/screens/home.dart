@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/models/bible.dart';
@@ -7,9 +9,10 @@ import 'package:simple_bible/shared/menu_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   final BibleService bibleService = BibleService();
+
+  HomeScreen({Key? key}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
-
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -38,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         settingColor = settings.getColor();
         fontSize = settings.getFontSize();
-
       });
     });
   }

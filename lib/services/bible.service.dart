@@ -19,7 +19,7 @@ class BibleService {
     Bible? bible = await loadAsset();
     List<BIBLEBOOK> books = [];
 
-    if(bible == null) return <BIBLEBOOK>[];
+    if (bible == null) return <BIBLEBOOK>[];
 
     for (BIBLEBOOK book in bible.xMLBIBLE!.bIBLEBOOK) {
       books.add(book);
@@ -27,10 +27,10 @@ class BibleService {
     return books;
   }
 
-  List<BIBLEBOOK> getBooksFromBible(Bible? bible)  {
+  List<BIBLEBOOK> getBooksFromBible(Bible? bible) {
     List<BIBLEBOOK> books = [];
 
-    if(bible == null) return <BIBLEBOOK>[];
+    if (bible == null) return <BIBLEBOOK>[];
 
     for (BIBLEBOOK book in bible.xMLBIBLE!.bIBLEBOOK) {
       books.add(book);
@@ -53,5 +53,20 @@ class BibleService {
     }
 
     return allBookWidgets;
+  }
+
+  BIBLEBOOK? getBookByName(String bookName, List<BIBLEBOOK> books) {
+    return books.firstWhere((BIBLEBOOK bkName) =>
+    bkName.sBname?.toLowerCase().contains(bookName.toLowerCase()) ?? false);
+  }
+
+  Widget getBookScreenByName(String bookName, List<BIBLEBOOK> books) {
+    BIBLEBOOK? book = getBookByName(bookName, books);
+
+    if (book == null) return Container();
+
+    return ListTile(
+      leading: BookScreen(book),
+    );
   }
 }

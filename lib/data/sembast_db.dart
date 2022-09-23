@@ -1,4 +1,5 @@
 import 'package:simple_bible/models/password.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
@@ -10,7 +11,7 @@ class SembastDb {
   final store = intMapStoreFactory.store('passwords');
   static final SembastDb _singleton = SembastDb._internal();
 
-  SembastDb._internal() {}
+  SembastDb._internal();
 
   factory SembastDb() {
     return _singleton;

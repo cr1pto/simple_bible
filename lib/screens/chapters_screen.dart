@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:simple_bible/models/bible.dart';
 import 'package:simple_bible/screens/chapter_screen.dart';
@@ -10,7 +12,8 @@ class ChaptersScreen extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ChaptersScreenState createState() => _ChaptersScreenState(this.bookName);
+  // ignore: no_logic_in_create_state
+  _ChaptersScreenState createState() => _ChaptersScreenState(bookName);
 }
 
 class _ChaptersScreenState extends State<ChaptersScreen> {
@@ -35,12 +38,12 @@ class _ChaptersScreenState extends State<ChaptersScreen> {
       chaptersWidget = Scaffold(
         body: ListView(children: allChapters),
         floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.arrow_circle_left),
             backgroundColor: Colors.blue,
             heroTag: bookName,
             onPressed: () {
               Navigator.pop(context);
-            }),
+            },
+            child: const Icon(Icons.arrow_circle_left)),
       );
     });
     super.initState();

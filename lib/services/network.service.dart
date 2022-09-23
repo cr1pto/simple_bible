@@ -1,11 +1,8 @@
-import 'dart:io';
 import 'package:simple_bible/models/network_settings.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 
 class NetworkService {
   Future<NetworkSettings> getNetworkData() async {
-    List<NetworkInterface> networks =
-        await NetworkInterface.list(includeLoopback: true);
     final info = NetworkInfo();
     // ConnectivityResult connectivity = await Connectivity().checkConnectivity();
 

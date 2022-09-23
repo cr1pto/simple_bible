@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:simple_bible/shared/menu_bar.dart';
 import '../data/shared_prefs.dart';
@@ -162,7 +164,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 class ColorSquare extends StatelessWidget {
   final int colorCode;
 
-  ColorSquare(this.colorCode);
+  const ColorSquare(this.colorCode, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

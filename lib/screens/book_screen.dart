@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:simple_bible/models/bible.dart';
 import 'package:simple_bible/shared/menu_bar.dart';
@@ -40,11 +42,11 @@ class _BookScreenState extends State<BookScreen> {
       drawer: const MenuDrawer(),
       body: ChaptersScreen(bookName, widget.book.cHAPTER),
       floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.arrow_circle_left),
           backgroundColor: Colors.blue,
           onPressed: () {
             Navigator.pop(context);
-          }),
+          },
+          child: const Icon(Icons.arrow_circle_left)),
     );
   }
 }

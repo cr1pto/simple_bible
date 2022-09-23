@@ -10,7 +10,10 @@ import '../shared/menu_bar.dart';
 class BibleScreen extends StatefulWidget {
   final String widgetName = 'Bible';
   final BibleService bibleService = BibleService();
+
+  BibleScreen({Key? key}) : super(key: key);
   @override
+  // ignore: library_private_types_in_public_api
   _BibleScreenState createState() => _BibleScreenState();
 }
 
@@ -46,11 +49,11 @@ class _BibleScreenState extends State<BibleScreen> {
     return Scaffold(
       body: BooksScreen(settingColor, fontSize, books),
       floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.arrow_circle_left),
           backgroundColor: Color(settingColor),
           onPressed: () {
             Navigator.pop(context);
-          }),
+          },
+          child: const Icon(Icons.arrow_circle_left)),
     );
   }
 
