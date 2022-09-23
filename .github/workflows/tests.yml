@@ -9,6 +9,7 @@ on:
 
 jobs:
   testAndBuildAndroid:
+    name: Test and Build Flutter App for Android
     runs-on: ubuntu-latest
 
     steps:
@@ -33,16 +34,21 @@ jobs:
       - name: Build iOS
 
   testAndBuildiOS:
+    name: Test and Build Flutter App for iOS
     runs-on: macos-latest
+    
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           architecture: x64
-      - run: flutter pub get
-      - run: flutter test
-      - run: flutter build ios --release --no-codesign
+      - name: Get flutter packages
+        run: flutter pub get
+      - name: Run flutter tests
+        run: flutter test
+      - name: Build flutter app for iOS
+        run: flutter build ios --release --no-codesign
 
 
 
