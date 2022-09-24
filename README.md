@@ -42,3 +42,23 @@ ruby 2.6.8p205 (2021-07-07 revision 67951) [universal.arm64e-darwin21]
 - Run `flutter doctor` to ensure that everything works as expected from the command line.
 ### Running the app
 
+
+### Running the app wireless
+
+Step 1:
+Connect the device to the host computer with a USB cable.
+
+Step 2:
+Set the target device to listen for a TCP/IP connection on port 5555
+    `adb tcpip 5555`
+
+Step 3:
+Disconnect the USB cable from the target device.
+
+Step 4:
+Connect to the device by its IP address
+    `adb connect <device_ip_address>`
+
+Optional:
+Confirm that your host computer is connected to the target device:
+    `adb devices`
