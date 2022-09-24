@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/models/bible.dart';
-import 'package:simple_bible/screens/book_search_screen.dart';
+import 'package:simple_bible/screens/bible_screen.dart';
 import 'package:simple_bible/services/bible.service.dart';
 import 'package:simple_bible/shared/menu_bar.dart';
 
@@ -58,12 +58,12 @@ class _HomeScreenState extends State<HomeScreen> {
         future: getSettings(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           return Scaffold(
-              appBar: AppBar(
-                backgroundColor: Color(settingColor),
-                title: const Text('Simple Bible'),
-              ),
+              // appBar: AppBar(
+              //   backgroundColor: Color(settingColor),
+              //   title: const Text('Simple Bible'),
+              // ),
               drawer: const MenuDrawer(),
-              body: BookSearchScreen(settingColor, fontSize, books)
+              body: BibleScreen()
               );
         });
   }
