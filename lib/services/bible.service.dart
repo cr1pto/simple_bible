@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +10,19 @@ class BibleService {
   String kjvBibleAsset = 'assets/bibles/kjv.json';
 
   Future<Bible?> loadAsset() async {
-    String jsonText = await rootBundle.loadString(kjvBibleAsset);
+    return await loadAssetByName(kjvBibleAsset);
+  }
+
+  Future<Bible?> loadAssetByName(String assetName) async {
+    String jsonText = await rootBundle.loadString(assetName);
+    Map<String, Object?> bibleMap = json.decode(jsonText);
+    Bible bible = Bible.fromMap(bibleMap);
+    return bible;
+  }
+
+  Future<Bible?> loadAssetByNameFromFile(String assetName) async {
+    var assetFileContent = File(assetName);
+    String jsonText = await assetFileContent.readAsString();
     Map<String, Object?> bibleMap = json.decode(jsonText);
     Bible bible = Bible.fromMap(bibleMap);
     return bible;

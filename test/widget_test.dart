@@ -17,7 +17,7 @@ void main() {
 
     // Tap the '+' icon and trigger a frame.
     await tester.tap(find.byType(HomeScreen));
-    await tester.pump();
+    await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(find.text('Simple Bible'), findsOneWidget);
   });

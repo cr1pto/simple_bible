@@ -1,3 +1,5 @@
+import 'package:simple_bible/exceptions/bible_serialization_exception.dart';
+
 class Bible {
   XMLBIBLE? xMLBIBLE;
 
@@ -133,13 +135,26 @@ class BIBLEBOOK {
     sBname = map['_bname'];
     sBsname = map['_bsname'];
     try{
-      map['CHAPTER'].forEach((c) => {
-        cHAPTER.add(CHAPTER.fromMap(c))
+      if(map['CHAPTER'] is! List){
+        CHAPTER ch = CHAPTER.fromSingleChapterMap(map['CHAPTER']);
+        cHAPTER.add(ch);
+        return;
+      }
+      map['CHAPTER'].forEach((c) {
+        CHAPTER ch = CHAPTER.fromMap(c);
+        if(ch.vERS.isEmpty) {
+          throw BibleSerializationException(null, null, ch, null);
+        }
+        cHAPTER.add(ch);
       });
     }
     catch(error) {
-      map['CHAPTER'].forEach((c, v) => {
-        cHAPTER.add(CHAPTER.fromMap(map))
+      map['CHAPTER'].forEach((c, v) {
+        CHAPTER ch = CHAPTER.fromMap(map);
+        if(ch.vERS.isEmpty) {
+          throw BibleSerializationException(null, null, ch, null);
+        }
+        cHAPTER.add(ch);
       });
     }
   }
@@ -165,10 +180,23 @@ class CHAPTER {
     if(map['VERS'] != null) {
       map['VERS'].forEach((v) => vERS.add(VERS.fromMap(v)));
     }
+  }
 
+  CHAPTER.fromSingleChapterMap(Map<String, dynamic> map) {
+    sCnumber = '1';
+    if(map['VERS'] != null) {
+      map['VERS'].forEach((v) => vERS.add(VERS.fromMap(v)));
+    }
   }
 
   Map<String, dynamic> toMap() {
+    return {
+      'VERS': vERS.map((v) => v.toMap()),
+      '_cnumber': sCnumber
+    };
+  }
+
+  Map<String, dynamic> toSingleChapterMap() {
     return {
       'VERS': vERS.map((v) => v.toMap()),
       '_cnumber': sCnumber
