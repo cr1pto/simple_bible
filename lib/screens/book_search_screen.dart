@@ -23,11 +23,36 @@ class _BookSearchScreenState extends State<BookSearchScreen> {
   BIBLEBOOK? selectedBook;
   final TextEditingController txtSearch = TextEditingController();
 
-  Widget getBook() => bookWidget;
+  Widget getBook() {
+    Widget bkWidget = bookWidget;
+
+    return bkWidget;
+  }
+
+  @override
+  void initState() {
+    // settings.init().then((value) async {
+    //   bible = await widget.bibleService.loadAsset();
+    //   setState(() {
+    //     settingColor = settings.getColor();
+    //     fontSize = settings.getFontSize();
+    //     books = widget.bibleService.getBooksFromBible(bible);
+    //   });
+    // });
+    availableBooks = widget.books.map((book) => book.sBname ?? '').toList();
+
+    if(widget.books.isNotEmpty) {
+      setState(() {
+        bookWidget = widget.bibleService
+            .getBookScreenByName(availableBooks.first.toString(), widget.books);
+      });
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    availableBooks = widget.books.map((book) => book.sBname ?? '').toList();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Search the Bible for...'),
