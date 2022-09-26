@@ -1,45 +1,27 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/models/bible.dart';
-import 'package:simple_bible/screens/verse_screen.dart';
-import 'package:simple_bible/shared/menu_bar.dart';
 
-class VersesScreen extends StatefulWidget {
-  final List<VERS> verses;
-  final String bookName;
-  const VersesScreen(this.bookName, this.verses, {Key? key}) : super(key: key);
+import '../components/verse.dart';
 
-  @override
-  _VersesScreenState createState() => _VersesScreenState();
-}
+class VersesScreen extends StatelessWidget {
+  const VersesScreen({super.key, required this.title, required this.verses});
 
-class _VersesScreenState extends State<VersesScreen> {
-  late Widget versesWidget;
-  @override
-  void initState() {
-    setState(() {
-      List<Widget> allVerses = [];
-
-      for (VERS verse in widget.verses) {
-        allVerses.add(VerseScreen(verse));
-      }
-
-      versesWidget = ListView(children: allVerses);
-    });
-    super.initState();
-  }
+  final String title;
+  final List<BibleVerse> verses;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.bookName),
-        // backgroundColor: Color(settingColor),
+    return MainLayout(
+      title: title,
+      child: ListView.builder(
+        itemCount: verses.length,
+        itemBuilder: (context, i) {
+          return Verse(verse: verses[i]);
+        },
       ),
-      //probably actually want a special menu drawer
-      drawer: const MenuDrawer(),
-      body: versesWidget,
     );
   }
 }

@@ -34,6 +34,8 @@ dependencies:
   path_provider: ^2.0.9
   sembast: ^3.2.0
   shared_preferences: ^2.0.13
+  flutter_bloc: ^8.0.1
+  equatable: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -66,7 +68,8 @@ flutter:
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   assets:
-    - ./assets/bibles/kjv.json
+    - ./assets/bibles/info.json
+    - ./assets/bibles/basic/kjv.json
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages

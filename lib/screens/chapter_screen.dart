@@ -1,44 +1,29 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/models/bible.dart';
 import 'package:simple_bible/screens/verses_screen.dart';
-import 'package:simple_bible/shared/menu_bar.dart';
 
-class ChapterScreen extends StatefulWidget {
-  final CHAPTER chapter;
+class ChapterScreen extends StatelessWidget {
+  const ChapterScreen({
+    super.key,
+    required this.bookName,
+    required this.chapter,
+  });
+
   final String bookName;
-  const ChapterScreen(this.bookName, this.chapter, {Key? key})
-      : super(key: key);
-
-  @override
-  _ChapterScreenState createState() => _ChapterScreenState();
-}
-
-class _ChapterScreenState extends State<ChapterScreen> {
-  late Widget versesWidget;
-  @override
-  void initState() {
-    setState(() {
-      versesWidget = VersesScreen(
-          '${widget.bookName} - ${widget.chapter.sCnumber}',
-          widget.chapter.vERS);
-    });
-    super.initState();
-  }
+  final BibleChapter chapter;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //probably actually want a special menu drawer
-      drawer: const MenuDrawer(),
-      body: versesWidget,
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.blue,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(Icons.arrow_circle_left)),
+    return MainLayout(
+      floatingBack: true,
+      floatingBackHero: "chapter-back",
+      child: VersesScreen(
+        title: '$bookName - ${chapter.index}',
+        verses: chapter.verses,
+      ),
     );
   }
 }
