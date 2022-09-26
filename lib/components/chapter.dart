@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 
+import '../models/bible.dart';
+import 'verse.dart';
+
 class Chapter extends StatelessWidget {
   const Chapter({
     super.key,
-    required this.text,
-    required this.number,
+    required this.bookName,
+    required this.chapter,
   });
 
-  final String? text;
-  final String? number;
+  final String bookName;
+  final BibleChapter chapter;
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(text ?? ''),
-      leading: Text(
-        number ?? '',
-        style: const TextStyle(
-          fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.w500,
-          fontSize: 20.0,
-        ),
-      ),
+    return ListView.builder(
+      itemCount: chapter.verses.length,
+      itemBuilder: (context, i) {
+        return Verse(verse: chapter.verses[i]);
+      },
     );
   }
 }

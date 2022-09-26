@@ -10,12 +10,13 @@ abstract class BibleState extends Equatable {
 class BibleInitial extends BibleState {}
 
 class BibleLoaded extends BibleState {
+  final BibleInfo info;
   final Bible bible;
 
-  const BibleLoaded({required this.bible});
+  const BibleLoaded({required this.info, required this.bible});
 
   @override
-  List<Object> get props => [bible];
+  List<Object> get props => [info, bible];
 }
 
 class BibleLoadFailed extends BibleState {

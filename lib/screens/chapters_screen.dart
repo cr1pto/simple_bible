@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:simple_bible/models/bible.dart';
 import 'package:simple_bible/screens/chapter_screen.dart';
-import 'package:simple_bible/shared/menu_bar.dart';
+
+import '../layouts/main_layout.dart';
 
 class ChaptersScreen extends StatelessWidget {
   const ChaptersScreen({
@@ -15,28 +16,29 @@ class ChaptersScreen extends StatelessWidget {
   final String bookName;
   final List<BibleChapter> chapters;
 
+  openSelectedChapter(BuildContext context, int index) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ChapterScreen(
+          bookName: bookName,
+          chapter: chapters[index],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const MenuDrawer(),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue,
-        heroTag: bookName,
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: const Icon(Icons.arrow_circle_left),
-      ),
-      body: ListView.builder(
+    return MainLayout(
+      floatingBack: true,
+      floatingBackHero: "chapters-back",
+      child: ListView.builder(
         itemCount: chapters.length,
         itemBuilder: (context, i) {
           return ListTile(
             title: Text(chapters[i].index.toString()),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>
-                    ChapterScreen(bookName: bookName, chapter: chapters[i]),
-              ));
+            onTap: () => {
+              openSelectedChapter(context, i),
             },
           );
         },

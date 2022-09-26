@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:simple_bible/models/bible.dart';
-import 'package:simple_bible/shared/menu_bar.dart';
 
+import '../layouts/main_layout.dart';
 import 'chapters_screen.dart';
 
 class BookScreen extends StatelessWidget {
@@ -14,21 +14,11 @@ class BookScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(bookName),
-        // backgroundColor: Color(settingColor),
-      ),
-      //probably actually want a special menu drawer
-      drawer: const MenuDrawer(),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue,
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: const Icon(Icons.arrow_circle_left),
-      ),
-      body: ChaptersScreen(bookName: bookName, chapters: book.chapters),
+    return MainLayout(
+      title: bookName,
+      floatingBack: true,
+      floatingBackHero: "book-back",
+      child: ChaptersScreen(bookName: bookName, chapters: book.chapters),
     );
   }
 }

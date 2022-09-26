@@ -1,7 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:simple_bible/shared/menu_bar.dart';
+import 'package:simple_bible/components/color_square.dart';
+import 'package:simple_bible/layouts/main_layout.dart';
+
 import '../data/shared_prefs.dart';
 import '../models/font_size.dart';
 
@@ -65,14 +67,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Settings'),
-          backgroundColor: Color(settingColor),
-        ),
-        drawer: const MenuDrawer(),
-        body:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+    return MainLayout(
+      title: 'Settings',
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
           Text('Choose a Font Size for the app',
               style: TextStyle(
                   fontSize: fontSize,
@@ -99,23 +98,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
-                  onTap: () => setColor(colors[0]),
-                  child: ColorSquare(colors[0])),
+                onTap: () => setColor(colors[0]),
+                child: ColorSquare(color: Color(colors[0])),
+              ),
               GestureDetector(
-                  onTap: () => setColor(colors[1]),
-                  child: ColorSquare(colors[1])),
+                onTap: () => setColor(colors[1]),
+                child: ColorSquare(color: Color(colors[1])),
+              ),
               GestureDetector(
-                  onTap: () => setColor(colors[2]),
-                  child: ColorSquare(colors[2])),
+                onTap: () => setColor(colors[2]),
+                child: ColorSquare(color: Color(colors[2])),
+              ),
               GestureDetector(
-                  onTap: () => setColor(colors[3]),
-                  child: ColorSquare(colors[3])),
+                onTap: () => setColor(colors[3]),
+                child: ColorSquare(color: Color(colors[3])),
+              ),
               GestureDetector(
-                  onTap: () => setColor(colors[4]),
-                  child: ColorSquare(colors[4])),
+                onTap: () => setColor(colors[4]),
+                child: ColorSquare(color: Color(colors[4])),
+              ),
             ],
           )
-        ]));
+        ],
+      ),
+    );
   }
 
   void setColor(int color) {
@@ -127,11 +133,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   List<DropdownMenuItem<String>> getFontTypes() {
     List<DropdownMenuItem<String>> items = [];
-    items = List.of(fontTypeNames.map((fontTypeForItem) {
-      DropdownMenuItem<String> item = DropdownMenuItem(
-          value: fontTypeForItem, child: Text(fontTypeForItem));
-      return item;
-    }));
+    items = List.of(
+      fontTypeNames.map(
+        (fontTypeForItem) {
+          DropdownMenuItem<String> item = DropdownMenuItem(
+              value: fontTypeForItem, child: Text(fontTypeForItem));
+          return item;
+        },
+      ),
+    );
 
     return items;
   }
@@ -139,9 +149,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
     List<DropdownMenuItem<String>> items = [];
 
-    items = List.of(fontSizes.map((fontSizeForItem) => DropdownMenuItem(
-        value: fontSizeForItem.size.toString(),
-        child: Text(fontSizeForItem.name))));
+    items = List.of(
+      fontSizes.map(
+        (fontSizeForItem) => DropdownMenuItem(
+          value: fontSizeForItem.size.toString(),
+          child: Text(fontSizeForItem.name),
+        ),
+      ),
+    );
 
     return items;
   }
@@ -158,22 +173,5 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       fontType = newFontType ?? 'courier';
     });
-  }
-}
-
-class ColorSquare extends StatelessWidget {
-  final int colorCode;
-
-  const ColorSquare(this.colorCode, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 72,
-      height: 72,
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(16)),
-          color: Color(colorCode)),
-    );
   }
 }

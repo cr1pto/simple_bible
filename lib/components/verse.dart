@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
+import '../models/bible.dart';
+
 class Verse extends StatelessWidget {
   const Verse({
     super.key,
-    required this.number,
-    required this.text,
+    required this.verse,
   });
 
-  final String number;
-  final String text;
+  final BibleVerse verse;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(text),
+      title: Text(verse.text),
       leading: Text(
-        number,
+        verse.index.toString(),
         style: const TextStyle(
           fontStyle: FontStyle.italic,
           fontWeight: FontWeight.w500,
