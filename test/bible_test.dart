@@ -1,34 +1,29 @@
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:simple_bible/models/bible.dart';
 import 'package:simple_bible/services/bible.service.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  String kjvSingleChapterBibleAsset = 'assets/bibles/test_single_book_bible.json';
-  String kjvBibleMultipleChsAsset = 'assets/bibles/test_single_book_multiple_chs.json';
   var bibleService = BibleService();
 
   group('Verse', () {
-    test('serializes kjvSingleChapterBibleAsset successfully', () async {
-      Bible? bible = await bibleService.loadAssetByNameFromFile(kjvBibleMultipleChsAsset);
-      expect(bible != null, true);
-      expect(bible?.xMLBIBLE != null, true);
-      expect(bible?.xMLBIBLE?.bIBLEBOOK != null, true);
-      expect(bible?.xMLBIBLE?.bIBLEBOOK.first != null, true);
-      expect(bible?.xMLBIBLE?.bIBLEBOOK.first.cHAPTER != null, true);
-      expect(bible?.xMLBIBLE?.bIBLEBOOK.first.cHAPTER.first != null, true);
-      expect(bible?.xMLBIBLE?.bIBLEBOOK.first.cHAPTER.first.vERS != null, true);
+    test('loads bible info successfully', () async {
+      BibleInfo info = await bibleService.loadInfo();
+      expect(info != null, true);
+      expect(info.versions.isNotEmpty, true);
+      expect(info.books.isNotEmpty, true);
+      expect(info.books[0].index == 1, true);
     });
-    test('serializes kjvBibleMultipleChsAsset successfully', () async {
-      Bible? bible = await bibleService.loadAssetByNameFromFile(kjvSingleChapterBibleAsset);
+    test('loads simple kjv successfully', () async {
+      Bible bible = await bibleService.loadKJV();
       expect(bible != null, true);
-      expect(bible?.xMLBIBLE != null, true);
-      expect(bible?.xMLBIBLE?.bIBLEBOOK != null, true);
-      expect(bible?.xMLBIBLE?.bIBLEBOOK.first != null, true);
-      expect(bible?.xMLBIBLE?.bIBLEBOOK.first.cHAPTER != null, true);
-      expect(bible?.xMLBIBLE?.bIBLEBOOK.first.cHAPTER.first != null, true);
-      expect(bible?.xMLBIBLE?.bIBLEBOOK.first.cHAPTER.first.vERS != null, true);
+      expect(bible.version == "kjv", true);
+      expect(bible.books.isNotEmpty, true);
+      expect(bible.books[0].index == 1, true);
+      expect(bible.books[0].chapters.isNotEmpty, true);
+      expect(bible.books[0].chapters[0].index == 1, true);
+      expect(bible.books[0].chapters[0].verses.isNotEmpty, true);
+      expect(bible.books[0].chapters[0].verses[0].index == 1, true);
     });
   });
 }
