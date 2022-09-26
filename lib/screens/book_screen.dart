@@ -6,47 +6,29 @@ import 'package:simple_bible/shared/menu_bar.dart';
 
 import 'chapters_screen.dart';
 
-class BookScreen extends StatefulWidget {
-  final BIBLEBOOK book;
-  const BookScreen(this.book, {Key? key}) : super(key: key);
+class BookScreen extends StatelessWidget {
+  const BookScreen({super.key, required this.bookName, required this.book});
 
-  @override
-  _BookScreenState createState() => _BookScreenState();
-}
-
-class _BookScreenState extends State<BookScreen> {
-  late Widget chaptersScreen;
-  late String bookName;
-
-  @override
-  void initState() {
-    bookName = widget.book.sBname ?? '';
-    setState(() {
-      // chaptersScreen = getChapters();
-    });
-    super.initState();
-  }
-
-  Widget getChapters() {
-    return ChaptersScreen(bookName, widget.book.cHAPTER);
-  }
+  final String bookName;
+  final BibleBook book;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.book.sBname ?? ''),
+        title: Text(bookName),
         // backgroundColor: Color(settingColor),
       ),
       //probably actually want a special menu drawer
       drawer: const MenuDrawer(),
-      body: ChaptersScreen(bookName, widget.book.cHAPTER),
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.blue,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(Icons.arrow_circle_left)),
+        backgroundColor: Colors.blue,
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: const Icon(Icons.arrow_circle_left),
+      ),
+      body: ChaptersScreen(bookName: bookName, chapters: book.chapters),
     );
   }
 }

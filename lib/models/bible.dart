@@ -1,224 +1,167 @@
-import 'package:simple_bible/exceptions/bible_serialization_exception.dart';
+class BibleInfo {
+  List<BibleInfoVersion> versions = <BibleInfoVersion>[];
+  List<BibleInfoBook> books = <BibleInfoBook>[];
+
+  BibleInfo(this.versions, this.books);
+
+  BibleInfo.fromMap(Map<String, dynamic> json)
+      : versions = (json["versions"] as List<dynamic>)
+            .map((v) => BibleInfoVersion.fromMap(v))
+            .toList(),
+        books = (json["books"] as List<dynamic>)
+            .map((v) => BibleInfoBook.fromMap(v))
+            .toList();
+
+  Map<String, dynamic> toMap() {
+    return {
+      'versions': versions.map((v) => v.toMap()),
+      'books': books.map((b) => b.toMap()),
+    };
+  }
+}
+
+class BibleInfoVersion {
+  String name;
+  String abbr;
+  String language;
+
+  BibleInfoVersion(
+    this.name,
+    this.abbr,
+    this.language,
+  );
+
+  BibleInfoVersion.fromMap(dynamic json)
+      : name = json["name"],
+        abbr = json["abbr"],
+        language = json["language"];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'abbr': abbr,
+      'language': language,
+    };
+  }
+}
+
+class BibleInfoBook {
+  int index;
+  String name;
+  String abbr;
+  int chapterCount;
+  String testament;
+
+  BibleInfoBook(
+    this.index,
+    this.name,
+    this.abbr,
+    this.chapterCount,
+    this.testament,
+  );
+
+  BibleInfoBook.fromMap(dynamic json)
+      : index = json["index"],
+        name = json["name"],
+        abbr = json["abbr"],
+        chapterCount = json["chapterCount"],
+        testament = json["testament"];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'index': index,
+      'name': name,
+      'abbr': abbr,
+      'chapterCount': chapterCount,
+      'testament': testament,
+    };
+  }
+}
 
 class Bible {
-  XMLBIBLE? xMLBIBLE;
+  String version;
+  List<BibleBook> books = <BibleBook>[];
 
-  Bible(this.xMLBIBLE);
+  Bible(this.version, this.books);
 
-  Bible.fromMap(Map<String, dynamic> map) {
-    xMLBIBLE = XMLBIBLE.fromMap(map['XMLBIBLE']);
-  }
+  Bible.fromMap(this.version, List<dynamic> jsonList) {
+    for (final i in jsonList) {
+      int bookNo, chapterNo, verseNo;
+      BibleBook book;
+      BibleChapter chapter;
 
-  Map<String, dynamic> toMap() {
-    return {
-      'XMLBIBLE': xMLBIBLE?.toMap()
-    };
-  }
-}
+      bookNo = int.parse((i['n'] as String).substring(0, 2));
+      chapterNo = int.parse((i['n'] as String).substring(2, 5));
+      verseNo = int.parse((i['n'] as String).substring(5, 8));
 
-class XMLBIBLE {
-  INFORMATION? iNFORMATION;
-  List<BIBLEBOOK> bIBLEBOOK = <BIBLEBOOK>[];
-  String? sXmlnsXsi;
-  String? sBiblename;
-  String? sXsiNoNamespaceSchemaLocation;
-
-  XMLBIBLE(
-      this.iNFORMATION,
-      this.bIBLEBOOK,
-        this.sXmlnsXsi,
-        this.sBiblename,
-        this.sXsiNoNamespaceSchemaLocation);
-
-  XMLBIBLE.fromMap(Map<String, dynamic> map) {
-    iNFORMATION = INFORMATION.fromMap(map['INFORMATION']);
-
-    if(map['BIBLEBOOK'] != null) {
-      map['BIBLEBOOK'].forEach((b) => bIBLEBOOK.add(BIBLEBOOK.fromMap(b)));
-    }
-
-    sXmlnsXsi = map['_xmlns:xsi'];
-    sBiblename = map['_biblename'];
-    sXsiNoNamespaceSchemaLocation = map['_xsi:noNamespaceSchemaLocation'];
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'INFORMATION': iNFORMATION?.toMap(),
-      'BIBLEBOOK': bIBLEBOOK.map((e) => e.toMap()),
-      '_xmlns:xsi': sXmlnsXsi,
-      '_biblename': sBiblename,
-      '_xsi:noNamespaceSchemaLocation': sXsiNoNamespaceSchemaLocation
-    };
-  }
-}
-
-class INFORMATION {
-  String? title;
-  String? contributors;
-  String? subject;
-  String? creator;
-  String? description;
-  String? publisher;
-  String? format;
-  String? language;
-  String? identifier;
-  String? date;
-  String? source;
-  String? type;
-  String? rights;
-  String? coverage;
-
-  INFORMATION(
-      this.title,
-        this.contributors,
-        this.subject,
-        this.creator,
-        this.description,
-        this.publisher,
-        this.format,
-        this.language,
-        this.identifier,
-        this.date,
-        this.source,
-        this.type,
-        this.rights,
-        this.coverage);
-
-  INFORMATION.fromMap(Map<String, dynamic> map) {
-    title = map['title'];
-    contributors = map['contributors'];
-    subject = map['subject'];
-    creator = map['creator'];
-    description = map['description'];
-    publisher = map['publisher'];
-    format = map['format'];
-    language = map['language'];
-    identifier = map['identifier'];
-    date = map['date'];
-    source = map['source'];
-    type = map['type'];
-    rights = map['rights'];
-    coverage = map['coverage'];
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'contributors': contributors,
-      'subject': subject,
-      'creator': creator,
-      'description': description,
-      'publisher': publisher,
-      'format': format,
-      'language': language,
-      'identifier': identifier,
-      'date': date,
-      'source': source,
-      'type': type,
-      'rights': rights,
-      'coverage': coverage,
-    };
-  }
-}
-
-class BIBLEBOOK {
-  List<CHAPTER> cHAPTER = <CHAPTER>[];
-  String? sBnumber;
-  String? sBname;
-  String? sBsname;
-
-  BIBLEBOOK(this.cHAPTER, this.sBnumber, this.sBname, this.sBsname);
-
-  BIBLEBOOK.fromMap(Map<String, dynamic> map) {
-    sBnumber = map['_bnumber'];
-    sBname = map['_bname'];
-    sBsname = map['_bsname'];
-    try{
-      if(map['CHAPTER'] is! List){
-        CHAPTER ch = CHAPTER.fromSingleChapterMap(map['CHAPTER']);
-        cHAPTER.add(ch);
-        return;
+      if (books.where((b) => b.index == bookNo).isEmpty) {
+        books.add(BibleBook(bookNo, <BibleChapter>[]));
       }
-      map['CHAPTER'].forEach((c) {
-        CHAPTER ch = CHAPTER.fromMap(c);
-        if(ch.vERS.isEmpty) {
-          throw BibleSerializationException(null, null, ch, null);
-        }
-        cHAPTER.add(ch);
-      });
-    }
-    catch(error) {
-      map['CHAPTER'].forEach((c, v) {
-        CHAPTER ch = CHAPTER.fromMap(map);
-        if(ch.vERS.isEmpty) {
-          throw BibleSerializationException(null, null, ch, null);
-        }
-        cHAPTER.add(ch);
-      });
+      book = books.firstWhere((b) => b.index == bookNo);
+
+      if (book.chapters.where((c) => c.index == chapterNo).isEmpty) {
+        book.chapters.add(BibleChapter(chapterNo, <BibleVerse>[]));
+      }
+      chapter = book.chapters.firstWhere((b) => b.index == chapterNo);
+      chapter.verses.add(BibleVerse(verseNo, i['t']));
     }
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'CHAPTER': cHAPTER.map((v) => v.toMap()),
-      '_bnumber': sBnumber,
-      '_bname': sBname,
-      '_bsname': sBsname,
+      'version': version,
+      'books': books.map((b) => b.toMap()),
     };
   }
 }
 
-class CHAPTER {
-  List<VERS> vERS = <VERS>[];
-  String? sCnumber;
+class BibleBook {
+  int index;
+  List<BibleChapter> chapters = <BibleChapter>[];
 
-  CHAPTER(this.vERS, this.sCnumber);
-
-  CHAPTER.fromMap(Map<String, dynamic> map) {
-    sCnumber = map['_cnumber'];
-    if(map['VERS'] != null) {
-      map['VERS'].forEach((v) => vERS.add(VERS.fromMap(v)));
-    }
-  }
-
-  CHAPTER.fromSingleChapterMap(Map<String, dynamic> map) {
-    sCnumber = '1';
-    if(map['VERS'] != null) {
-      map['VERS'].forEach((v) => vERS.add(VERS.fromMap(v)));
-    }
-  }
+  BibleBook(
+    this.index,
+    this.chapters,
+  );
 
   Map<String, dynamic> toMap() {
     return {
-      'VERS': vERS.map((v) => v.toMap()),
-      '_cnumber': sCnumber
-    };
-  }
-
-  Map<String, dynamic> toSingleChapterMap() {
-    return {
-      'VERS': vERS.map((v) => v.toMap()),
-      '_cnumber': sCnumber
+      'index': index,
+      'chapters': chapters.map((v) => v.toMap()),
     };
   }
 }
 
-class VERS {
-  String? sVnumber;
-  String? sText;
+class BibleChapter {
+  int index;
+  List<BibleVerse> verses = <BibleVerse>[];
 
-  VERS(this.sVnumber, this.sText);
-
-  VERS.fromMap(Map<String, dynamic> map) {
-    sVnumber = map['_vnumber'];
-    sText = map['__text'];
-  }
+  BibleChapter(
+    this.index,
+    this.verses,
+  );
 
   Map<String, dynamic> toMap() {
     return {
-      '_vnumber': sVnumber,
-      '__text': sText
+      'index': index,
+      'verses': verses.map((v) => v.toMap()),
+    };
+  }
+}
+
+class BibleVerse {
+  int index;
+  String text;
+
+  BibleVerse(
+    this.index,
+    this.text,
+  );
+
+  Map<String, dynamic> toMap() {
+    return {
+      'index': index,
+      'text': text,
     };
   }
 }

@@ -8,7 +8,6 @@ import '../data/shared_prefs.dart';
 import '../shared/menu_bar.dart';
 
 class BibleScreen extends StatefulWidget {
-  final String widgetName = 'Bible';
   final BibleService bibleService = BibleService();
 
   BibleScreen({Key? key}) : super(key: key);
@@ -23,13 +22,15 @@ class _BibleScreenState extends State<BibleScreen> {
   SPSettings settings = SPSettings();
   SembastDb sembastDb = SembastDb();
   Bible? bible;
+  BibleInfo? bibleInfo;
   String bibleText = '';
   late Widget booksWidget;
 
   @override
   void initState() {
     settings.init().then((value) async {
-      bible = await widget.bibleService.loadAsset();
+      bibleInfo = await widget.bibleService.loadInfo();
+      bible = await widget.bibleService.loadKJV();
       setState(() {
         settingColor = settings.getColor();
         fontSize = settings.getFontSize();
@@ -40,20 +41,19 @@ class _BibleScreenState extends State<BibleScreen> {
   }
 
   Widget buildBibleView(BuildContext context, Bible? bible) {
-    List<BIBLEBOOK> books = [];
-
-    if (bible == null) return Container();
-
-    books = widget.bibleService.getBooksFromBible(bible);
+    if (bible == null || bibleInfo?.books == null) {
+      return Container();
+    }
 
     return Scaffold(
-      body: BooksScreen(settingColor, fontSize, books),
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Color(settingColor),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(Icons.arrow_circle_left)),
+        backgroundColor: Color(settingColor),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: const Icon(Icons.arrow_circle_left),
+      ),
+      body: BooksScreen(books: bibleInfo!.books, bible: bible),
     );
   }
 
@@ -61,7 +61,7 @@ class _BibleScreenState extends State<BibleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.widgetName),
+        title: const Text('Bible'),
         backgroundColor: Color(settingColor),
       ),
       drawer: const MenuDrawer(),
