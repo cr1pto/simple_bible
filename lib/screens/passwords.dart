@@ -6,7 +6,6 @@ import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/models/password.dart';
 import 'package:simple_bible/screens/password_detail.dart';
 import 'package:simple_bible/screens/viewable.dart';
-import 'package:simple_bible/shared/menu_bar.dart';
 
 class PasswordsScreen extends StatefulWidget implements Viewable {
   static const String widgetName = 'Passwords List';
@@ -50,7 +49,7 @@ class _PasswordsScreenState extends State<PasswordsScreen> {
         title: const Text(PasswordsScreen.widgetName),
         backgroundColor: Color(settingColor),
       ),
-      drawer: const MenuDrawer(),
+      // drawer: const MenuDrawer(),
       body: ListView(
         children: buildPasswordView(context),
       ),

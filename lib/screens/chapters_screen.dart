@@ -35,11 +35,18 @@ class ChaptersScreen extends StatelessWidget {
       child: ListView.builder(
         itemCount: chapters.length,
         itemBuilder: (context, i) {
-          return ListTile(
-            title: Text(chapters[i].index.toString()),
-            onTap: () => {
-              openSelectedChapter(context, i),
-            },
+          return Card(
+            child: ListTile(
+              title: Text(chapters[i].index.toString(),
+                  style: const TextStyle(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 14.0,
+                  )),
+              onTap: () => {
+                openSelectedChapter(context, i),
+              },
+            ),
           );
         },
       ),

@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/models/note.dart';
-import 'package:simple_bible/shared/menu_bar.dart';
 
 class MemoScreen extends StatefulWidget {
   const MemoScreen({Key? key}) : super(key: key);
@@ -41,7 +40,7 @@ class _MemoScreenState extends State<MemoScreen> {
           title: Text(titleText),
           backgroundColor: Color(settingColor),
         ),
-        drawer: const MenuDrawer(),
+        // drawer: const MenuDrawer(),
         // floatingActionButton: FloatingActionButton(
         //     child: const Icon(Icons.add),
         //     backgroundColor: Color(settingColor),

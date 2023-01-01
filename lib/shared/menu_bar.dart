@@ -18,41 +18,71 @@ class MenuDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: color,
+      width: 250,
       child: ListView(
         children: [
-          DrawerHeader(
-            decoration: BoxDecoration(color: color),
-            child: const Text(
-              'Simple Bible',
-              style: TextStyle(color: Colors.white, fontSize: 28),
+          const Card(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Text(
+                'Simple Bible',
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontStyle: FontStyle.normal,
+                    fontSize: 20,
+                    // color: Colors.white,
+                    fontWeight: FontWeight.w300),
+              ),
             ),
           ),
-          ListTile(
-            title: Text("Home", style: TextStyle(fontSize: fontSize)),
-            onTap: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => HomeScreen()),
-              );
-            },
-          ),
-          ListTile(
-            title: Text("Bible", style: TextStyle(fontSize: fontSize)),
-            onTap: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => BibleScreen()),
-              );
-            },
-          ),
-          ListTile(
-            title: Text(
-              "Settings",
-              style: TextStyle(fontSize: fontSize),
+          Card(
+            child: ListTile(
+              title: const Text("Home",
+                  style: TextStyle(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w300,
+                fontSize: 14.0,
+              )),
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              },
             ),
-            onTap: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const SettingsScreen()),
-              );
-            },
+          ),
+          Card(
+            child: ListTile(
+              title: const Text("Bible",
+                  style: TextStyle(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w300,
+                fontSize: 14.0,
+              )),
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => BibleScreen()),
+                );
+              },
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: const Text(
+                "Settings",
+                style: TextStyle(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w300,
+                  fontSize: 14.0,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const SettingsScreen()),
+                );
+              },
+            ),
           ),
         ],
       ),

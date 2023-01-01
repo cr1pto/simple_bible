@@ -3,14 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:simple_bible/services/bible.service.dart';
 
-import '../models/bible.dart';
-
 class BookSearchScreen extends StatefulWidget {
-  final List<BIBLEBOOK> books;
+  // final List<BIBLEBOOK> books;
   final int settingColor;
   final double fontSize;
   final BibleService bibleService = BibleService();
-  BookSearchScreen(this.settingColor, this.fontSize, this.books, {Key? key})
+  BookSearchScreen(this.settingColor, this.fontSize, {Key? key})
       : super(key: key);
 
   @override
@@ -20,7 +18,7 @@ class BookSearchScreen extends StatefulWidget {
 class _BookSearchScreenState extends State<BookSearchScreen> {
   static List<String> availableBooks = [];
   Widget bookWidget = const ListTile();
-  BIBLEBOOK? selectedBook;
+  // BIBLEBOOK? selectedBook;
   final TextEditingController txtSearch = TextEditingController();
 
   Widget getBook() {
@@ -39,14 +37,14 @@ class _BookSearchScreenState extends State<BookSearchScreen> {
     //     books = widget.bibleService.getBooksFromBible(bible);
     //   });
     // });
-    availableBooks = widget.books.map((book) => book.sBname ?? '').toList();
+    // availableBooks = widget.books.map((book) => book.sBname ?? '').toList();
 
-    if(widget.books.isNotEmpty) {
-      setState(() {
-        bookWidget = widget.bibleService
-            .getBookScreenByName(availableBooks.first.toString(), widget.books);
-      });
-    }
+    // if(widget.books.isNotEmpty) {
+    //   setState(() {
+    //     bookWidget = widget.bibleService
+    //         .getBookScreenByName(availableBooks.first.toString(), widget.books);
+    //   });
+    // }
 
     super.initState();
   }
@@ -66,11 +64,11 @@ class _BookSearchScreenState extends State<BookSearchScreen> {
                     hintText: 'Search the Bible...',
                     prefixIcon: IconButton(
                         onPressed: () {
-                          setState(() {
-                            bookWidget = widget.bibleService
-                                .getBookScreenByName(
-                                    selectedBook?.sBname ?? '', widget.books);
-                          });
+                          // setState(() {
+                          //   bookWidget = widget.bibleService
+                          //       .getBookScreenByName(
+                          //           selectedBook?.sBname ?? '', widget.books);
+                          // });
                         },
                         icon: const Icon(Icons.book_online)))),
             Autocomplete<String>(
@@ -87,8 +85,8 @@ class _BookSearchScreenState extends State<BookSearchScreen> {
               onSelected: (String book) {
                 setState(() {
                   // selectedBook = widget.bibleService.getBookByName(book, widget.books);
-                  bookWidget = widget.bibleService
-                      .getBookScreenByName(book, widget.books);
+                  // bookWidget = widget.bibleService
+                  //     .getBookScreenByName(book, widget.books);
                 });
               },
             ),

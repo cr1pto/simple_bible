@@ -27,11 +27,18 @@ class BooksScreen extends StatelessWidget {
       child: ListView.builder(
         itemCount: books.length,
         itemBuilder: (context, i) {
-          return ListTile(
-            title: Text(books[i].name.toString()),
-            onTap: () => {
-              openSelectedBook(context, i + 1),
-            },
+          return Card(
+            child: ListTile(
+              title: Text(books[i].name.toString(),
+                  style: const TextStyle(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 14.0,
+                  )),
+              onTap: () => {
+                openSelectedBook(context, i + 1),
+              },
+            ),
           );
         },
       ),

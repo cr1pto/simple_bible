@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
-import 'package:simple_bible/screens/bible_screen.dart';
+import 'package:simple_bible/screens/home_options_screen.dart';
 import 'package:simple_bible/services/bible.service.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      child: BibleScreen(),
+      child: HomeOptionsScreen(),
     );
   }
 }

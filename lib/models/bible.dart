@@ -103,7 +103,7 @@ class Bible {
         book.chapters.add(BibleChapter(chapterNo, <BibleVerse>[]));
       }
       chapter = book.chapters.firstWhere((b) => b.index == chapterNo);
-      chapter.verses.add(BibleVerse(verseNo, i['t']));
+      chapter.verses.add(BibleVerse(verseNo, i['t'], chapterNo, bookNo));
     }
   }
 
@@ -150,18 +150,34 @@ class BibleChapter {
 }
 
 class BibleVerse {
-  int index;
-  String text;
+  int? id;
+  late int index;
+  late String text;
+  late int chapterNumber;
+  late int bookNumber;
 
   BibleVerse(
     this.index,
     this.text,
+    this.chapterNumber,
+    this.bookNumber
   );
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'index': index,
       'text': text,
+      'chapterNumber': chapterNumber,
+      'bookNumber': bookNumber,
     };
+  }
+
+  BibleVerse.fromMap(Map<String, dynamic> map) {
+    id = map['id'];
+    index = map['index'];
+    text = map['text'];
+    chapterNumber = map['chapterNumber'];
+    bookNumber = map['bookNumber'];
   }
 }

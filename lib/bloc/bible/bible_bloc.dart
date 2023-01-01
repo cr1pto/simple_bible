@@ -1,9 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-
-import '../../models/bible.dart';
-import '../../services/bible.service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simple_bible/models/bible.dart';
+import 'package:simple_bible/services/bible.service.dart';
 
 part 'bible_event.dart';
 part 'bible_state.dart';

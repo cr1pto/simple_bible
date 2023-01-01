@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
+import 'package:simple_bible/screens/home.dart';
 
 import '../shared/menu_bar.dart';
 
@@ -69,7 +70,14 @@ class _MainLayoutState extends State<MainLayout> {
               backgroundColor: Color(settingColor),
               heroTag: widget.floatingBackHero ?? "main-layout-back",
               onPressed: () {
-                Navigator.pop(context);
+                if(Navigator.canPop(context)){
+                  Navigator.pop(context);
+                }
+                else{
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                }
               },
               child: const Icon(Icons.arrow_circle_left),
             )

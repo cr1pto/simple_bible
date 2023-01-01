@@ -69,6 +69,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return MainLayout(
       title: 'Settings',
+      floatingBack: true,
+      floatingBackHero: "home-back",
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

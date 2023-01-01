@@ -1,11 +1,21 @@
+import 'package:f_logs/f_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simple_bible/bloc/bible/bible_bloc.dart';
 import 'package:simple_bible/screens/home.dart';
 
-import 'bloc/bible/bible_bloc.dart';
-
 void main() {
-  runApp(const MyApp());
+  FlutterError.onError = (FlutterErrorDetails details) {
+    //this line prints the default flutter gesture caught exception in console
+    //FlutterError.dumpErrorToConsole(details);
+    FLog.fatal(text: details.exception.toString(), exception: details.exception);
+  };
+  try{
+    runApp(const MyApp());
+  }
+  catch(exception) {
+    FLog.fatal(text: "The application crashed.", exception: exception);
+  }
 }
 
 class MyApp extends StatelessWidget {
