@@ -19,6 +19,6 @@ void main() {
     await tester.tap(find.byType(HomeScreen));
     await tester.pumpAndSettle(const Duration(seconds: 5));
 
-    expect(find.text('Bible'), findsOneWidget);
+    expect(find.text('Home'), findsOneWidget);
   });
 }
