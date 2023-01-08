@@ -8,462 +8,462 @@
   ],
   "books": [
     {
-      "index": 1,
+      "bookNumber": 1,
       "name": "Genesis",
       "abbr": "Gen",
       "chapterCount": 50,
       "testament": "old"
     },
     {
-      "index": 2,
+      "bookNumber": 2,
       "name": "Exodus",
       "abbr": "Ex",
       "chapterCount": 40,
       "testament": "old"
     },
     {
-      "index": 3,
+      "bookNumber": 3,
       "name": "Leviticus",
       "abbr": "Lev",
       "chapterCount": 27,
       "testament": "old"
     },
     {
-      "index": 4,
+      "bookNumber": 4,
       "name": "Numbers",
       "abbr": "Num",
       "chapterCount": 36,
       "testament": "old"
     },
     {
-      "index": 5,
+      "bookNumber": 5,
       "name": "Deuteronomy",
       "abbr": "Deut",
       "chapterCount": 34,
       "testament": "old"
     },
     {
-      "index": 6,
+      "bookNumber": 6,
       "name": "Joshua",
       "abbr": "Josh",
       "chapterCount": 24,
       "testament": "old"
     },
     {
-      "index": 7,
+      "bookNumber": 7,
       "name": "Judges",
       "abbr": "Judg",
       "chapterCount": 21,
       "testament": "old"
     },
     {
-      "index": 8,
+      "bookNumber": 8,
       "name": "Ruth",
       "abbr": "Ruth",
       "chapterCount": 4,
       "testament": "old"
     },
     {
-      "index": 9,
+      "bookNumber": 9,
       "name": "1 Samuel",
       "abbr": "1 Sam",
       "chapterCount": 31,
       "testament": "old"
     },
     {
-      "index": 10,
+      "bookNumber": 10,
       "name": "2 Samuel",
       "abbr": "2 Sam",
       "chapterCount": 24,
       "testament": "old"
     },
     {
-      "index": 11,
+      "bookNumber": 11,
       "name": "1 Kings",
       "abbr": "1 Kings",
       "chapterCount": 22,
       "testament": "old"
     },
     {
-      "index": 12,
+      "bookNumber": 12,
       "name": "2 Kings",
       "abbr": "2 Kings",
       "chapterCount": 25,
       "testament": "old"
     },
     {
-      "index": 13,
+      "bookNumber": 13,
       "name": "1 Chronicles",
       "abbr": "1 Chron",
       "chapterCount": 29,
       "testament": "old"
     },
     {
-      "index": 14,
+      "bookNumber": 14,
       "name": "2 Chronicles",
       "abbr": "2 Chron",
       "chapterCount": 36,
       "testament": "old"
     },
     {
-      "index": 15,
+      "bookNumber": 15,
       "name": "Ezra",
       "abbr": "Ezra",
       "chapterCount": 10,
       "testament": "old"
     },
     {
-      "index": 16,
+      "bookNumber": 16,
       "name": "Nehemiah",
       "abbr": "Neh",
       "chapterCount": 13,
       "testament": "old"
     },
     {
-      "index": 17,
+      "bookNumber": 17,
       "name": "Esther",
       "abbr": "Est",
       "chapterCount": 10,
       "testament": "old"
     },
     {
-      "index": 18,
+      "bookNumber": 18,
       "name": "Job",
       "abbr": "Job",
       "chapterCount": 42,
       "testament": "old"
     },
     {
-      "index": 19,
+      "bookNumber": 19,
       "name": "Psalms",
       "abbr": "Ps",
       "chapterCount": 150,
       "testament": "old"
     },
     {
-      "index": 20,
+      "bookNumber": 20,
       "name": "Proverbs",
       "abbr": "Prov",
       "chapterCount": 31,
       "testament": "old"
     },
     {
-      "index": 21,
+      "bookNumber": 21,
       "name": "Ecclesiastes",
       "abbr": "Eccles",
       "chapterCount": 12,
       "testament": "old"
     },
     {
-      "index": 22,
+      "bookNumber": 22,
       "name": "Song of Solomon",
       "abbr": "Song",
       "chapterCount": 8,
       "testament": "old"
     },
     {
-      "index": 23,
+      "bookNumber": 23,
       "name": "Isaiah",
       "abbr": "Isa",
       "chapterCount": 66,
       "testament": "old"
     },
     {
-      "index": 24,
+      "bookNumber": 24,
       "name": "Jeremiah",
       "abbr": "Jer",
       "chapterCount": 52,
       "testament": "old"
     },
     {
-      "index": 25,
+      "bookNumber": 25,
       "name": "Lamentations",
       "abbr": "Lam",
       "chapterCount": 5,
       "testament": "old"
     },
     {
-      "index": 26,
+      "bookNumber": 26,
       "name": "Ezekiel",
       "abbr": "Ezek",
       "chapterCount": 48,
       "testament": "old"
     },
     {
-      "index": 27,
+      "bookNumber": 27,
       "name": "Daniel",
       "abbr": "Dan",
       "chapterCount": 12,
       "testament": "old"
     },
     {
-      "index": 28,
+      "bookNumber": 28,
       "name": "Hosea",
       "abbr": "Hos",
       "chapterCount": 14,
       "testament": "old"
     },
     {
-      "index": 29,
+      "bookNumber": 29,
       "name": "Joel",
       "abbr": "Joel",
       "chapterCount": 3,
       "testament": "old"
     },
     {
-      "index": 30,
+      "bookNumber": 30,
       "name": "Amos",
       "abbr": "Amos",
       "chapterCount": 9,
       "testament": "old"
     },
     {
-      "index": 31,
+      "bookNumber": 31,
       "name": "Obadiah",
       "abbr": "Obad",
       "chapterCount": 1,
       "testament": "old"
     },
     {
-      "index": 32,
+      "bookNumber": 32,
       "name": "Jonah",
       "abbr": "Jonah",
       "chapterCount": 4,
       "testament": "old"
     },
     {
-      "index": 33,
+      "bookNumber": 33,
       "name": "Micah",
       "abbr": "Mic",
       "chapterCount": 7,
       "testament": "old"
     },
     {
-      "index": 34,
+      "bookNumber": 34,
       "name": "Nahum",
       "abbr": "Nah",
       "chapterCount": 3,
       "testament": "old"
     },
     {
-      "index": 35,
+      "bookNumber": 35,
       "name": "Habakkuk",
       "abbr": "Hab",
       "chapterCount": 3,
       "testament": "old"
     },
     {
-      "index": 36,
+      "bookNumber": 36,
       "name": "Zephaniah",
       "abbr": "Zeph",
       "chapterCount": 3,
       "testament": "old"
     },
     {
-      "index": 37,
+      "bookNumber": 37,
       "name": "Haggai",
       "abbr": "Hag",
       "chapterCount": 2,
       "testament": "old"
     },
     {
-      "index": 38,
+      "bookNumber": 38,
       "name": "Zechariah",
       "abbr": "Zech",
       "chapterCount": 14,
       "testament": "old"
     },
     {
-      "index": 39,
+      "bookNumber": 39,
       "name": "Malachi",
       "abbr": "Mal",
       "chapterCount": 4,
       "testament": "old"
     },
     {
-      "index": 40,
+      "bookNumber": 40,
       "name": "Matthew",
       "abbr": "Matt",
       "chapterCount": 28,
       "testament": "new"
     },
     {
-      "index": 41,
+      "bookNumber": 41,
       "name": "Mark",
       "abbr": "Mark",
       "chapterCount": 16,
       "testament": "new"
     },
     {
-      "index": 42,
+      "bookNumber": 42,
       "name": "Luke",
       "abbr": "Luke",
       "chapterCount": 24,
       "testament": "new"
     },
     {
-      "index": 43,
+      "bookNumber": 43,
       "name": "John",
       "abbr": "John",
       "chapterCount": 21,
       "testament": "new"
     },
     {
-      "index": 44,
+      "bookNumber": 44,
       "name": "Acts",
       "abbr": "Acts",
       "chapterCount": 28,
       "testament": "new"
     },
     {
-      "index": 45,
+      "bookNumber": 45,
       "name": "Romans",
       "abbr": "Rom",
       "chapterCount": 16,
       "testament": "new"
     },
     {
-      "index": 46,
+      "bookNumber": 46,
       "name": "1 Corinthians",
       "abbr": "1 Cor",
       "chapterCount": 16,
       "testament": "new"
     },
     {
-      "index": 47,
+      "bookNumber": 47,
       "name": "2 Corinthians",
       "abbr": "2 Cor",
       "chapterCount": 13,
       "testament": "new"
     },
     {
-      "index": 48,
+      "bookNumber": 48,
       "name": "Galatians",
       "abbr": "Gal",
       "chapterCount": 6,
       "testament": "new"
     },
     {
-      "index": 49,
+      "bookNumber": 49,
       "name": "Ephesians",
       "abbr": "Eph",
       "chapterCount": 6,
       "testament": "new"
     },
     {
-      "index": 50,
+      "bookNumber": 50,
       "name": "Philippians",
       "abbr": "Phil",
       "chapterCount": 4,
       "testament": "new"
     },
     {
-      "index": 51,
+      "bookNumber": 51,
       "name": "Colossians",
       "abbr": "Col",
       "chapterCount": 4,
       "testament": "new"
     },
     {
-      "index": 52,
+      "bookNumber": 52,
       "name": "1 Thessalonians",
       "abbr": "1 Thess",
       "chapterCount": 5,
       "testament": "new"
     },
     {
-      "index": 53,
+      "bookNumber": 53,
       "name": "2 Thessalonians",
       "abbr": "2 Thess",
       "chapterCount": 3,
       "testament": "new"
     },
     {
-      "index": 54,
+      "bookNumber": 54,
       "name": "1 Timothy",
       "abbr": "1 Tim",
       "chapterCount": 6,
       "testament": "new"
     },
     {
-      "index": 55,
+      "bookNumber": 55,
       "name": "2 Timothy",
       "abbr": "2 Tim",
       "chapterCount": 4,
       "testament": "new"
     },
     {
-      "index": 56,
+      "bookNumber": 56,
       "name": "Titus",
       "abbr": "Titus",
       "chapterCount": 3,
       "testament": "new"
     },
     {
-      "index": 57,
+      "bookNumber": 57,
       "name": "Philemon",
       "abbr": "Philem",
       "chapterCount": 1,
       "testament": "new"
     },
     {
-      "index": 58,
+      "bookNumber": 58,
       "name": "Hebrews",
       "abbr": "Heb",
       "chapterCount": 13,
       "testament": "new"
     },
     {
-      "index": 59,
+      "bookNumber": 59,
       "name": "James",
       "abbr": "James",
       "chapterCount": 5,
       "testament": "new"
     },
     {
-      "index": 60,
+      "bookNumber": 60,
       "name": "1 Peter",
       "abbr": "1 Pet",
       "chapterCount": 5,
       "testament": "new"
     },
     {
-      "index": 61,
+      "bookNumber": 61,
       "name": "2 Peter",
       "abbr": "2 Pet",
       "chapterCount": 3,
       "testament": "new"
     },
     {
-      "index": 62,
+      "bookNumber": 62,
       "name": "1 John",
       "abbr": "1 John",
       "chapterCount": 5,
       "testament": "new"
     },
     {
-      "index": 63,
+      "bookNumber": 63,
       "name": "2 John",
       "abbr": "2 John",
       "chapterCount": 1,
       "testament": "new"
     },
     {
-      "index": 64,
+      "bookNumber": 64,
       "name": "3 John",
       "abbr": "3 John",
       "chapterCount": 1,
       "testament": "new"
     },
     {
-      "index": 65,
+      "bookNumber": 65,
       "name": "Jude",
       "abbr": "Jude",
       "chapterCount": 1,
       "testament": "new"
     },
     {
-      "index": 66,
+      "bookNumber": 66,
       "name": "Revelation",
       "abbr": "Rev",
       "chapterCount": 22,

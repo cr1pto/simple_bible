@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:simple_bible/data/sembast_db.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
+import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/screens/bible_screen.dart';
 import 'package:simple_bible/screens/memorize_scripture_screen.dart';
 import 'package:simple_bible/screens/recent_activity_screen.dart';
 import 'package:simple_bible/services/bible.service.dart';
+import 'package:simple_bible/services/log.service.dart';
 
+@Injectable()
 class HomeOptionsScreen extends StatefulWidget {
-  final BibleService bibleService = BibleService();
-
+  final SPSettings settings = getIt();
   HomeOptionsScreen({Key? key}) : super(key: key);
   @override
   // ignore: library_private_types_in_public_api
@@ -19,16 +22,14 @@ class HomeOptionsScreen extends StatefulWidget {
 class _HomeOptionsScreenState extends State<HomeOptionsScreen> {
   int settingColor = 0xff1976d2;
   double fontSize = 16;
-  SPSettings settings = SPSettings();
-  SembastDb sembastDb = SembastDb();
   Color color = const Color(0x00000000);
 
   @override
   void initState() {
-    settings.init().then((value) async {
+    widget.settings.init().then((value) async {
       setState(() {
-        settingColor = settings.getColor();
-        fontSize = settings.getFontSize();
+        settingColor = widget.settings.getColor();
+        fontSize = widget.settings.getFontSize();
         color = Color(settingColor);
       });
     });
@@ -53,7 +54,7 @@ class _HomeOptionsScreenState extends State<HomeOptionsScreen> {
               )),
               onTap: () {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const RecentActivityScreen()),
+                  MaterialPageRoute(builder: (context) => RecentActivityScreen()),
                 );
               },
             ),

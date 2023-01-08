@@ -66,6 +66,8 @@ class _PasswordDetailDialogState extends State<PasswordDetailDialog> {
                 await widget.sembastDb.addPassword(widget.password);
               }
 
+              // if (!context.mounted) return;
+
               Navigator.pop(context);
               Navigator.push(
                   context,

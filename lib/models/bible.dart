@@ -1,109 +1,49 @@
-class BibleInfo {
-  List<BibleInfoVersion> versions = <BibleInfoVersion>[];
-  List<BibleInfoBook> books = <BibleInfoBook>[];
+import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:simple_bible/injection.dart';
+import 'package:simple_bible/models/bible_book.dart';
+import 'package:simple_bible/models/bible_chapter.dart';
+import 'package:simple_bible/models/bible_verse.dart';
+import 'package:simple_bible/services/log.service.dart';
 
-  BibleInfo(this.versions, this.books);
+part 'bible.g.dart';
 
-  BibleInfo.fromMap(Map<String, dynamic> json)
-      : versions = (json["versions"] as List<dynamic>)
-            .map((v) => BibleInfoVersion.fromMap(v))
-            .toList(),
-        books = (json["books"] as List<dynamic>)
-            .map((v) => BibleInfoBook.fromMap(v))
-            .toList();
-
-  Map<String, dynamic> toMap() {
-    return {
-      'versions': versions.map((v) => v.toMap()),
-      'books': books.map((b) => b.toMap()),
-    };
-  }
-}
-
-class BibleInfoVersion {
-  String name;
-  String abbr;
-  String language;
-
-  BibleInfoVersion(
-    this.name,
-    this.abbr,
-    this.language,
-  );
-
-  BibleInfoVersion.fromMap(dynamic json)
-      : name = json["name"],
-        abbr = json["abbr"],
-        language = json["language"];
-
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'abbr': abbr,
-      'language': language,
-    };
-  }
-}
-
-class BibleInfoBook {
-  int index;
-  String name;
-  String abbr;
-  int chapterCount;
-  String testament;
-
-  BibleInfoBook(
-    this.index,
-    this.name,
-    this.abbr,
-    this.chapterCount,
-    this.testament,
-  );
-
-  BibleInfoBook.fromMap(dynamic json)
-      : index = json["index"],
-        name = json["name"],
-        abbr = json["abbr"],
-        chapterCount = json["chapterCount"],
-        testament = json["testament"];
-
-  Map<String, dynamic> toMap() {
-    return {
-      'index': index,
-      'name': name,
-      'abbr': abbr,
-      'chapterCount': chapterCount,
-      'testament': testament,
-    };
-  }
-}
-
-class Bible {
+@Injectable()
+@JsonSerializable()
+class Bible extends Equatable {
   String version;
   List<BibleBook> books = <BibleBook>[];
+  final LogService logService = getIt();
 
   Bible(this.version, this.books);
 
   Bible.fromMap(this.version, List<dynamic> jsonList) {
-    for (final i in jsonList) {
-      int bookNo, chapterNo, verseNo;
-      BibleBook book;
-      BibleChapter chapter;
+    try{
+      for (final i in jsonList) {
+        int bookNo, chapterNo, verseNo;
+        BibleBook book;
+        BibleChapter chapter;
 
-      bookNo = int.parse((i['n'] as String).substring(0, 2));
-      chapterNo = int.parse((i['n'] as String).substring(2, 5));
-      verseNo = int.parse((i['n'] as String).substring(5, 8));
+        bookNo = int.parse((i['n'] as String).substring(0, 2));
+        chapterNo = int.parse((i['n'] as String).substring(2, 5));
+        verseNo = int.parse((i['n'] as String).substring(5, 8));
 
-      if (books.where((b) => b.index == bookNo).isEmpty) {
-        books.add(BibleBook(bookNo, <BibleChapter>[]));
+        if (books.where((b) => b.bookNumber == bookNo).isEmpty) {
+          books.add(BibleBook(bookNo, <BibleChapter>[]));
+        }
+        book = books.firstWhere((b) => b.bookNumber == bookNo);
+
+        if (book.chapters.where((c) => c.chapterNumber == chapterNo).isEmpty) {
+          book.chapters.add(BibleChapter(chapterNo, <BibleVerse>[]));
+        }
+        chapter = book.chapters.firstWhere((b) => b.chapterNumber == chapterNo);
+        chapter.verses.add(BibleVerse(verseNo, i['t'], chapterNo, bookNo));
       }
-      book = books.firstWhere((b) => b.index == bookNo);
-
-      if (book.chapters.where((c) => c.index == chapterNo).isEmpty) {
-        book.chapters.add(BibleChapter(chapterNo, <BibleVerse>[]));
-      }
-      chapter = book.chapters.firstWhere((b) => b.index == chapterNo);
-      chapter.verses.add(BibleVerse(verseNo, i['t'], chapterNo, bookNo));
+    }
+    catch(exception) {
+      logService.error("Failed to setup Bible", exception);
+      rethrow;
     }
   }
 
@@ -113,71 +53,11 @@ class Bible {
       'books': books.map((b) => b.toMap()),
     };
   }
-}
 
-class BibleBook {
-  int index;
-  List<BibleChapter> chapters = <BibleChapter>[];
+  @override
+  List<Object?> get props => [version, books];
 
-  BibleBook(
-    this.index,
-    this.chapters,
-  );
+  factory Bible.fromJson(Map<String, dynamic> json) => _$BibleFromJson(json);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'index': index,
-      'chapters': chapters.map((v) => v.toMap()),
-    };
-  }
-}
-
-class BibleChapter {
-  int index;
-  List<BibleVerse> verses = <BibleVerse>[];
-
-  BibleChapter(
-    this.index,
-    this.verses,
-  );
-
-  Map<String, dynamic> toMap() {
-    return {
-      'index': index,
-      'verses': verses.map((v) => v.toMap()),
-    };
-  }
-}
-
-class BibleVerse {
-  int? id;
-  late int index;
-  late String text;
-  late int chapterNumber;
-  late int bookNumber;
-
-  BibleVerse(
-    this.index,
-    this.text,
-    this.chapterNumber,
-    this.bookNumber
-  );
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'index': index,
-      'text': text,
-      'chapterNumber': chapterNumber,
-      'bookNumber': bookNumber,
-    };
-  }
-
-  BibleVerse.fromMap(Map<String, dynamic> map) {
-    id = map['id'];
-    index = map['index'];
-    text = map['text'];
-    chapterNumber = map['chapterNumber'];
-    bookNumber = map['bookNumber'];
-  }
+  Map<String, dynamic> toJson() => _$BibleToJson(this);
 }

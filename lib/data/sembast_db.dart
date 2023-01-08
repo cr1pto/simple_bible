@@ -1,4 +1,5 @@
-import 'package:simple_bible/models/bible.dart';
+import 'package:injectable/injectable.dart';
+import 'package:simple_bible/models/bible_verse.dart';
 import 'package:simple_bible/models/password.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
@@ -6,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 
+@Singleton()
 class SembastDb {
   DatabaseFactory dbFactory = databaseFactoryIo;
   Database? _db;
@@ -17,6 +19,10 @@ class SembastDb {
 
   factory SembastDb() {
     return _singleton;
+  }
+
+  static SembastDb getInstance() {
+    return SembastDb();
   }
 
   Future<Database> init() async {

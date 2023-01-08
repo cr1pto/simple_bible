@@ -1,11 +1,15 @@
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
+import 'package:simple_bible/injection.dart';
+
+@Injectable()
 class SPSettings {
   final String fontSizeKey = 'font_size';
   final String fontTypeKey = 'font_type';
   final String colorKey = 'color';
-  static late SharedPreferences _sp;
+  SharedPreferences _sp = getIt();
   static SPSettings? _instance;
 
   SPSettings.internal();

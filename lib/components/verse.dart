@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:simple_bible/data/sembast_db.dart';
-import 'package:simple_bible/models/bible.dart';
+import 'package:simple_bible/models/bible_verse.dart';
 
 class Verse extends StatefulWidget {
   const Verse({
@@ -75,7 +75,7 @@ class _VerseState extends State<Verse> {
           });
         },
         leading: Text(
-          widget.verse.index.toString(),
+          widget.verse.verseNumber.toString(),
             style: const TextStyle(
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.w300,

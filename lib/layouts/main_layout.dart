@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
+import 'package:simple_bible/data/sembast_db.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/screens/home.dart';
+import 'package:simple_bible/services/bible.service.dart';
+import 'package:simple_bible/services/log.service.dart';
+import 'package:simple_bible/shared/menu_bar.dart';
 
-import '../shared/menu_bar.dart';
-
+@Injectable()
 class MainLayout extends StatefulWidget {
+  final Widget child;
+  final String? title;
+  final bool drawer;
+  final bool floatingBack;
+  final String? floatingBackHero;
+
   const MainLayout({
     super.key,
     required this.child,
@@ -13,12 +23,6 @@ class MainLayout extends StatefulWidget {
     this.floatingBack = false,
     this.floatingBackHero,
   });
-
-  final Widget child;
-  final String? title;
-  final bool drawer;
-  final bool floatingBack;
-  final String? floatingBackHero;
 
   @override
   State<MainLayout> createState() => _MainLayoutState();

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:simple_bible/components/recent_verse.dart';
 import 'package:simple_bible/data/sembast_db.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
-import 'package:simple_bible/models/bible.dart';
+import 'package:simple_bible/models/bible_verse.dart';
 
+@Injectable()
 class RecentActivityScreen extends StatefulWidget {
   const RecentActivityScreen({Key? key}) : super(key: key);
 
@@ -94,6 +96,11 @@ class _RecentActivityScreenState extends State<RecentActivityScreen> {
         body: ListView.builder(
           itemCount: verses.length,
           itemBuilder: (context, i) {
+            if(i >= verses.length - 1) {
+              return SizedBox(
+                  height: 200,
+                  child: RecentVerse(verse: verses[i]));
+            }
             return RecentVerse(verse: verses[i]);
           },
         ),

@@ -1,14 +1,17 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:simple_bible/services/bible.service.dart';
 
+@Injectable()
 class BookSearchScreen extends StatefulWidget {
   // final List<BIBLEBOOK> books;
   final int settingColor;
   final double fontSize;
-  final BibleService bibleService = BibleService();
-  BookSearchScreen(this.settingColor, this.fontSize, {Key? key})
+  final BibleService bibleService;
+
+  const BookSearchScreen(this.settingColor, this.fontSize, {Key? key, required this.bibleService})
       : super(key: key);
 
   @override

@@ -1,19 +1,23 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:simple_bible/screens/bible_screen.dart';
 import 'package:simple_bible/screens/home.dart';
 import 'package:simple_bible/screens/settings.dart';
+import 'package:simple_bible/services/bible.service.dart';
+import 'package:simple_bible/services/log.service.dart';
 
+@Injectable()
 class MenuDrawer extends StatelessWidget {
+  final Color color;
+  final double fontSize;
+
   const MenuDrawer({
     super.key,
     required this.color,
     required this.fontSize,
   });
-
-  final Color color;
-  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +83,7 @@ class MenuDrawer extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const SettingsScreen()),
+                  MaterialPageRoute(builder: (context) => SettingsScreen()),
                 );
               },
             ),

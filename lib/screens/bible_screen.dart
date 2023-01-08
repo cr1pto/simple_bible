@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:simple_bible/bloc/bible/bible_bloc.dart';
 import 'package:simple_bible/data/sembast_db.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
+import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
+import 'package:simple_bible/models/bible.dart';
+import 'package:simple_bible/models/bible_info_book.dart';
+import 'package:simple_bible/models/bibleinfo.dart';
 import 'package:simple_bible/screens/books_screen.dart';
 import 'package:simple_bible/services/bible.service.dart';
+import 'package:simple_bible/services/log.service.dart';
 
+@Injectable()
 class BibleScreen extends StatefulWidget {
-  final BibleService bibleService = BibleService();
+  final SPSettings settings = getIt();
 
   BibleScreen({super.key});
   @override
@@ -19,15 +26,13 @@ class BibleScreen extends StatefulWidget {
 class _BibleScreenState extends State<BibleScreen> {
   int settingColor = 0xff1976d2;
   double fontSize = 16;
-  SPSettings settings = SPSettings();
-  SembastDb sembastDb = SembastDb();
 
   @override
   void initState() {
-    settings.init().then((value) async {
+    widget.settings.init().then((value) async {
       setState(() {
-        settingColor = settings.getColor();
-        fontSize = settings.getFontSize();
+        settingColor = widget.settings.getColor();
+        fontSize = widget.settings.getFontSize();
       });
     });
     super.initState();
@@ -42,7 +47,7 @@ class _BibleScreenState extends State<BibleScreen> {
       child: BlocBuilder<BibleBloc, BibleState>(
         builder: (context, state) {
           if (state is BibleLoaded) {
-            return BooksScreen(books: state.info.books, bible: state.bible);
+            return BooksScreen(bibleInfo: state.info, bible: state.bible);
           }
           return Container();
         },

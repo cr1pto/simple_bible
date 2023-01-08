@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../models/bible.dart';
-import 'verse.dart';
+import 'package:simple_bible/components/verse.dart';
+import 'package:simple_bible/models/bible_chapter.dart';
 
 class Chapter extends StatelessWidget {
   const Chapter({

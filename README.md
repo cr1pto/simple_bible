@@ -62,3 +62,10 @@ Connect to the device by its IP address
 Optional:
 Confirm that your host computer is connected to the target device:
     `adb devices`
+
+## General Architecture
+
+This repo uses BLoC and Dependency Injection.
+
+Read about BLoC here: <link to bloc library>
+Read about the DI Libraries here: <link to injectable and getIt>
