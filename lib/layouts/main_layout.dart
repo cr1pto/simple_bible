@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:simple_bible/data/sembast_db.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/screens/home.dart';
-import 'package:simple_bible/services/bible.service.dart';
-import 'package:simple_bible/services/log.service.dart';
 import 'package:simple_bible/shared/menu_bar.dart';
 
 @Injectable()
@@ -79,7 +76,7 @@ class _MainLayoutState extends State<MainLayout> {
                 }
                 else{
                   Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
                   );
                 }
               },

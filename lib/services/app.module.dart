@@ -1,8 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simple_bible/data/sembast_db.dart';
-import 'package:simple_bible/services/bible.service.dart';
-import 'package:simple_bible/services/log.service.dart';
 
 @module
 abstract class AppModule {

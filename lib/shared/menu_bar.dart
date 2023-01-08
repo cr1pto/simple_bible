@@ -5,8 +5,6 @@ import 'package:injectable/injectable.dart';
 import 'package:simple_bible/screens/bible_screen.dart';
 import 'package:simple_bible/screens/home.dart';
 import 'package:simple_bible/screens/settings.dart';
-import 'package:simple_bible/services/bible.service.dart';
-import 'package:simple_bible/services/log.service.dart';
 
 @Injectable()
 class MenuDrawer extends StatelessWidget {
@@ -51,7 +49,7 @@ class MenuDrawer extends StatelessWidget {
               )),
               onTap: () {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
                 );
               },
             ),
@@ -83,7 +81,7 @@ class MenuDrawer extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => SettingsScreen()),
+                  MaterialPageRoute(builder: (context) => const SettingsScreen()),
                 );
               },
             ),

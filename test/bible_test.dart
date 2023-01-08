@@ -2,12 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:simple_bible/models/bible.dart';
 import 'package:simple_bible/models/bibleinfo.dart';
 import 'package:simple_bible/services/bible.service.dart';
-import 'package:simple_bible/services/log.service.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  LogService logService = LogService();
-  BibleService bibleService = BibleService(logService);
+  BibleService bibleService = BibleService();
 
   group('Verse', () {
     test('loads bible info successfully', () async {

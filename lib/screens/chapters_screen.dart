@@ -7,8 +7,6 @@ import 'package:simple_bible/models/bible.dart';
 import 'package:simple_bible/models/bible_chapter.dart';
 import 'package:simple_bible/models/bibleinfo.dart';
 import 'package:simple_bible/screens/chapter_screen.dart';
-import 'package:simple_bible/services/bible.service.dart';
-import 'package:simple_bible/services/log.service.dart';
 
 @Injectable()
 class ChaptersScreen extends StatelessWidget {

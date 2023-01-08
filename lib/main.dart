@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/screens/myapp.dart';
-import 'package:simple_bible/services/bible.service.dart';
 import 'package:simple_bible/services/log.service.dart';
 
 void main() async {
   LogService logService = LogService();
-  BibleService bibleService = BibleService(logService);
 
   try {
     WidgetsFlutterBinding.ensureInitialized();

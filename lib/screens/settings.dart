@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:simple_bible/components/color_square.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
-import 'package:simple_bible/services/bible.service.dart';
-import 'package:simple_bible/services/log.service.dart';
 
 import '../data/shared_prefs.dart';
 import '../models/font_size.dart';

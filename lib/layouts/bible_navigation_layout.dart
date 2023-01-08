@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:simple_bible/bloc/bible/bible_bloc.dart';
+import 'package:simple_bible/data/sembast_db.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/models/bible.dart';
@@ -9,6 +10,7 @@ import 'package:simple_bible/models/bible_chapter.dart';
 import 'package:simple_bible/models/bibleinfo.dart';
 import 'package:simple_bible/screens/bible_screen.dart';
 import 'package:simple_bible/screens/chapter_screen.dart';
+import 'package:simple_bible/services/bible.service.dart';
 import 'package:simple_bible/shared/menu_bar.dart';
 
 @Injectable()
@@ -20,6 +22,8 @@ class BibleNavigationLayout extends StatefulWidget {
   final bool floatingBack;
   final String? floatingBackHero;
   final SPSettings settings = getIt();
+  final BibleService bibleService = getIt();
+  final SembastDb sembastDb = getIt();
 
   BibleNavigationLayout({
     super.key,
@@ -84,7 +88,7 @@ class _BibleNavigationLayoutState extends State<BibleNavigationLayout> {
                 tooltip: 'Previous Chapter',
                 icon: const Icon(Icons.arrow_circle_left),
                 onPressed: () {
-
+                  // BibleChapter chapter = widget.bibleService.getNextChapterFromVerse(bible, bibleInfo, widget.)
                   Navigator.push(
                       context,
                       MaterialPageRoute(

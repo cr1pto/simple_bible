@@ -14,9 +14,9 @@ import 'package:simple_bible/services/log.service.dart';
 class BibleService {
   String infoAsset = 'assets/bibles/info.json';
   String kjvAsset = 'assets/bibles/basic/kjv.json';
-  final LogService logService;
+  final LogService logService = getIt();
 
-  BibleService(this.logService);
+  BibleService();
 
   Future<BibleInfo> loadInfo() async {
     String jsonText = await rootBundle.loadString(infoAsset);
@@ -116,7 +116,6 @@ class BibleService {
   }
 
   static getInstance() {
-    LogService logService = getIt();
-    return BibleService(logService);
+    return BibleService();
   }
 }

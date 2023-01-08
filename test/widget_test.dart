@@ -8,12 +8,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:simple_bible/screens/home.dart';
 import 'package:simple_bible/screens/myapp.dart';
-import 'package:simple_bible/services/bible.service.dart';
-import 'package:simple_bible/services/log.service.dart';
 
 void main() {
-  final LogService logService = LogService();
-  final BibleService bibleService = BibleService(logService);
   testWidgets('Application Loads Successfully', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
