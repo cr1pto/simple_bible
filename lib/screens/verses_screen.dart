@@ -43,12 +43,18 @@ class _VersesScreenState extends State<VersesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    BibleChapter chapter = widget.bibleService.getChapterFromVerse(widget.bible, widget.bibleInfo, widget.verses[0]);
+    BibleChapter currentChapter = widget.bibleService.getChapterFromVerse(widget.bible, widget.bibleInfo, widget.verses[0]);
+    BibleChapter previousChapter = widget.bibleService.getPreviousChapterFromVerse(widget.bible, widget.bibleInfo, currentChapter.verses[0]);
+    BibleChapter nextChapter = widget.bibleService.getNextChapterFromVerse(widget.bible, widget.bibleInfo, currentChapter.verses[0]);
     return BibleNavigationLayout(
       title: widget.title,
-      chapter: chapter,
+      chapter: currentChapter,
+      previousChapter: previousChapter,
+      nextChapter: nextChapter,
+      bible: widget.bible,
+      bibleInfo: widget.bibleInfo,
       child: ListView.builder(
-        itemCount: chapter.verses.length,
+        itemCount: currentChapter.verses.length,
         itemBuilder: (context, i) {
           return Verse(verse: widget.verses[i]);
       })

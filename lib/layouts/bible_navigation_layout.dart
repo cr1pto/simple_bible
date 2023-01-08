@@ -16,6 +16,10 @@ import 'package:simple_bible/shared/menu_bar.dart';
 @Injectable()
 class BibleNavigationLayout extends StatefulWidget {
   final BibleChapter chapter;
+  final BibleChapter previousChapter;
+  final BibleChapter nextChapter;
+  final Bible bible;
+  final BibleInfo bibleInfo;
   final Widget child;
   final String? title;
   final bool drawer;
@@ -32,7 +36,7 @@ class BibleNavigationLayout extends StatefulWidget {
     this.title,
     this.drawer = true,
     this.floatingBack = false,
-    this.floatingBackHero,
+    this.floatingBackHero, required this.previousChapter, required this.nextChapter, required this.bible, required this.bibleInfo,
   });
 
   @override
@@ -92,7 +96,7 @@ class _BibleNavigationLayoutState extends State<BibleNavigationLayout> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (routeContext) => ChapterScreen(bookName: "Genesis", chapter: BibleChapter(0, []), bibleInfo: bibleInfo, bible: bible,)));
+                          builder: (routeContext) => ChapterScreen(bible: widget.bible, bibleInfo: widget.bibleInfo, chapter: widget.previousChapter, bookName: "TBD")));
                 },
               ),
               IconButton(
@@ -102,7 +106,7 @@ class _BibleNavigationLayoutState extends State<BibleNavigationLayout> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (routeContext) => ChapterScreen(bookName: "Exodus", chapter: BibleChapter(0, []), bibleInfo: bibleInfo, bible: bible)));
+                          builder: (routeContext) => ChapterScreen(bible: widget.bible, bibleInfo: widget.bibleInfo, chapter: widget.nextChapter, bookName: "TBD")));
                 },
               ),
             ],

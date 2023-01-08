@@ -19,9 +19,9 @@ import 'package:simple_bible/models/bible.dart' as _i3;
 import 'package:simple_bible/models/bible_book.dart' as _i4;
 import 'package:simple_bible/models/bible_chapter.dart' as _i7;
 import 'package:simple_bible/models/bible_verse.dart' as _i24;
-import 'package:simple_bible/models/bibleinfo.dart' as _i11;
-import 'package:simple_bible/screens/bible_screen.dart' as _i8;
-import 'package:simple_bible/screens/book_screen.dart' as _i10;
+import 'package:simple_bible/models/bibleinfo.dart' as _i8;
+import 'package:simple_bible/screens/bible_screen.dart' as _i9;
+import 'package:simple_bible/screens/book_screen.dart' as _i11;
 import 'package:simple_bible/screens/book_search_screen.dart' as _i12;
 import 'package:simple_bible/screens/chapter_screen.dart' as _i13;
 import 'package:simple_bible/screens/chapters_screen.dart' as _i14;
@@ -33,7 +33,7 @@ import 'package:simple_bible/screens/recent_activity_screen.dart' as _i22;
 import 'package:simple_bible/screens/settings.dart' as _i27;
 import 'package:simple_bible/screens/verses_screen.dart' as _i29;
 import 'package:simple_bible/services/app.module.dart' as _i31;
-import 'package:simple_bible/services/bible.service.dart' as _i9;
+import 'package:simple_bible/services/bible.service.dart' as _i10;
 import 'package:simple_bible/services/log.service.dart' as _i17;
 import 'package:simple_bible/shared/menu_bar.dart' as _i20;
 
@@ -63,34 +63,38 @@ extension GetItInjectableX on _i1.GetIt {
           drawer: gh<bool>(),
           floatingBack: gh<bool>(),
           floatingBackHero: gh<String>(),
+          previousChapter: gh<_i7.BibleChapter>(),
+          nextChapter: gh<_i7.BibleChapter>(),
+          bible: gh<_i3.Bible>(),
+          bibleInfo: gh<_i8.BibleInfo>(),
         ));
-    gh.factory<_i8.BibleScreen>(() => _i8.BibleScreen(key: gh<_i6.Key>()));
-    gh.factory<_i9.BibleService>(() => _i9.BibleService());
-    gh.factory<_i10.BookScreen>(() => _i10.BookScreen(
+    gh.factory<_i9.BibleScreen>(() => _i9.BibleScreen(key: gh<_i6.Key>()));
+    gh.factory<_i10.BibleService>(() => _i10.BibleService());
+    gh.factory<_i11.BookScreen>(() => _i11.BookScreen(
           key: gh<_i6.Key>(),
           bookName: gh<String>(),
           book: gh<_i4.BibleBook>(),
           bible: gh<_i3.Bible>(),
-          bibleInfo: gh<_i11.BibleInfo>(),
+          bibleInfo: gh<_i8.BibleInfo>(),
         ));
     gh.factory<_i12.BookSearchScreen>(() => _i12.BookSearchScreen(
           gh<int>(),
           gh<double>(),
           key: gh<_i6.Key>(),
-          bibleService: gh<_i9.BibleService>(),
+          bibleService: gh<_i10.BibleService>(),
         ));
     gh.factory<_i13.ChapterScreen>(() => _i13.ChapterScreen(
           key: gh<_i6.Key>(),
           bookName: gh<String>(),
           chapter: gh<_i7.BibleChapter>(),
-          bibleInfo: gh<_i11.BibleInfo>(),
+          bibleInfo: gh<_i8.BibleInfo>(),
           bible: gh<_i3.Bible>(),
         ));
     gh.factory<_i14.ChaptersScreen>(() => _i14.ChaptersScreen(
           key: gh<_i6.Key>(),
           bookName: gh<String>(),
           chapters: gh<List<_i7.BibleChapter>>(),
-          bibleInfo: gh<_i11.BibleInfo>(),
+          bibleInfo: gh<_i8.BibleInfo>(),
           bible: gh<_i3.Bible>(),
         ));
     gh.factory<_i15.HomeOptionsScreen>(
@@ -131,10 +135,10 @@ extension GetItInjectableX on _i1.GetIt {
           key: gh<_i6.Key>(),
           title: gh<String>(),
           verses: gh<List<_i24.BibleVerse>>(),
-          bibleInfo: gh<_i11.BibleInfo>(),
+          bibleInfo: gh<_i8.BibleInfo>(),
           bible: gh<_i3.Bible>(),
         ));
-    gh.factory<_i30.BibleBloc>(() => _i30.BibleBloc(gh<_i9.BibleService>()));
+    gh.factory<_i30.BibleBloc>(() => _i30.BibleBloc(gh<_i10.BibleService>()));
     return this;
   }
 }

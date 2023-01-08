@@ -30,12 +30,12 @@ class Bible extends Equatable {
         verseNo = int.parse((i['n'] as String).substring(5, 8));
 
         if (books.where((b) => b.bookNumber == bookNo).isEmpty) {
-          books.add(BibleBook(bookNo, const <BibleChapter>[]));
+          books.add(BibleBook(bookNo, <BibleChapter>[]));
         }
         book = books.firstWhere((b) => b.bookNumber == bookNo);
 
         if (book.chapters.where((c) => c.chapterNumber == chapterNo).isEmpty) {
-          book.chapters.add(BibleChapter(chapterNo, const <BibleVerse>[]));
+          book.chapters.add(BibleChapter(chapterNo, <BibleVerse>[]));
         }
         chapter = book.chapters.firstWhere((b) => b.chapterNumber == chapterNo);
         chapter.verses.add(BibleVerse(verseNo, i['t'], chapterNo, bookNo));
