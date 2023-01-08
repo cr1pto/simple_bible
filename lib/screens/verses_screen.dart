@@ -1,14 +1,12 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:simple_bible/bloc/bible/bible_bloc.dart';
+import 'package:simple_bible/components/verse.dart';
 import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/layouts/bible_navigation_layout.dart';
 import 'package:simple_bible/models/bible.dart';
 import 'package:simple_bible/models/bible_chapter.dart';
-import 'package:simple_bible/models/bible_info_book.dart';
 import 'package:simple_bible/models/bible_verse.dart';
 import 'package:simple_bible/models/bibleinfo.dart';
 import 'package:simple_bible/screens/chapter_screen.dart';
@@ -45,31 +43,15 @@ class _VersesScreenState extends State<VersesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    BibleChapter chapter = widget.bibleService.getChapterFromVerse(widget.bible, widget.bibleInfo, widget.verses[0]);
     return BibleNavigationLayout(
       title: widget.title,
-      chapter: widget.bibleService.getChapterFromVerse(widget.bible, widget.bibleInfo, widget.verses[0]),
-      child: BlocBuilder<BibleBloc, BibleState>(
-          builder: (context, state) {
-            if (state is BibleLoaded) {
-              BibleVerse verse = widget.bibleService.getRandomVerse(widget.bibleInfo, widget.bible);
-              BibleInfoBook bookInfo = widget.bibleService.getBookInfoFromBookNumberIndex(widget.bible, widget.bibleInfo, verse.bookNumber - 1);
-              BibleChapter bibleChapter = widget.bibleService.getChapterInfoFromNumberIndex(widget.bible, bookInfo, verse.chapterNumber - 1);
-              return Card(
-                child: ListTile(
-                  title: Text("${bookInfo.name} ${verse.chapterNumber}:${verse.verseNumber} - ${verse.text}",
-                      style: const TextStyle(
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w300,
-                        fontSize: 14.0,
-                      )),
-                  onTap: () => {
-                    openSelectedChapter(context, bookInfo.name, bibleChapter),
-                  },
-                ),
-              );
-            }
-            return Container();
-          })
+      chapter: chapter,
+      child: ListView.builder(
+        itemCount: chapter.verses.length,
+        itemBuilder: (context, i) {
+          return Verse(verse: widget.verses[i]);
+      })
     );
   }
 }
