@@ -14,7 +14,6 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
 
-    // Tap the '+' icon and trigger a frame.
     await tester.tap(find.byType(HomeScreen));
     await tester.pumpAndSettle(const Duration(seconds: 5));
 

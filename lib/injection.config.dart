@@ -8,10 +8,10 @@
 import 'package:flutter/material.dart' as _i6;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:shared_preferences/shared_preferences.dart' as _i28;
-import 'package:simple_bible/bloc/bible/bible_bloc.dart' as _i30;
+import 'package:shared_preferences/shared_preferences.dart' as _i29;
+import 'package:simple_bible/bloc/bible/bible_bloc.dart' as _i31;
 import 'package:simple_bible/components/recent_verse.dart' as _i23;
-import 'package:simple_bible/data/sembast_db.dart' as _i26;
+import 'package:simple_bible/data/sembast_db.dart' as _i27;
 import 'package:simple_bible/data/shared_prefs.dart' as _i25;
 import 'package:simple_bible/layouts/bible_navigation_layout.dart' as _i5;
 import 'package:simple_bible/layouts/main_layout.dart' as _i18;
@@ -30,9 +30,10 @@ import 'package:simple_bible/screens/home_options_screen.dart' as _i15;
 import 'package:simple_bible/screens/memorize_scripture_screen.dart' as _i19;
 import 'package:simple_bible/screens/myapp.dart' as _i21;
 import 'package:simple_bible/screens/recent_activity_screen.dart' as _i22;
-import 'package:simple_bible/screens/settings.dart' as _i27;
-import 'package:simple_bible/screens/verses_screen.dart' as _i29;
-import 'package:simple_bible/services/app.module.dart' as _i31;
+import 'package:simple_bible/screens/search_screen.dart' as _i26;
+import 'package:simple_bible/screens/settings.dart' as _i28;
+import 'package:simple_bible/screens/verses_screen.dart' as _i30;
+import 'package:simple_bible/services/app.module.dart' as _i32;
 import 'package:simple_bible/services/bible.service.dart' as _i10;
 import 'package:simple_bible/services/log.service.dart' as _i17;
 import 'package:simple_bible/shared/menu_bar.dart' as _i20;
@@ -124,23 +125,24 @@ extension GetItInjectableX on _i1.GetIt {
           verse: gh<_i24.BibleVerse>(),
         ));
     gh.factory<_i25.SPSettings>(() => _i25.SPSettings());
-    gh.singleton<_i26.SembastDb>(_i26.SembastDb());
-    gh.factory<_i27.SettingsScreen>(
-        () => _i27.SettingsScreen(key: gh<_i6.Key>()));
-    await gh.factoryAsync<_i28.SharedPreferences>(
+    gh.factory<_i26.SearchScreen>(() => _i26.SearchScreen(key: gh<_i6.Key>()));
+    gh.singleton<_i27.SembastDb>(_i27.SembastDb());
+    gh.factory<_i28.SettingsScreen>(
+        () => _i28.SettingsScreen(key: gh<_i6.Key>()));
+    await gh.factoryAsync<_i29.SharedPreferences>(
       () => appModule.prefs,
       preResolve: true,
     );
-    gh.factory<_i29.VersesScreen>(() => _i29.VersesScreen(
+    gh.factory<_i30.VersesScreen>(() => _i30.VersesScreen(
           key: gh<_i6.Key>(),
           title: gh<String>(),
           verses: gh<List<_i24.BibleVerse>>(),
           bibleInfo: gh<_i8.BibleInfo>(),
           bible: gh<_i3.Bible>(),
         ));
-    gh.factory<_i30.BibleBloc>(() => _i30.BibleBloc(gh<_i10.BibleService>()));
+    gh.factory<_i31.BibleBloc>(() => _i31.BibleBloc(gh<_i10.BibleService>()));
     return this;
   }
 }
 
-class _$AppModule extends _i31.AppModule {}
+class _$AppModule extends _i32.AppModule {}

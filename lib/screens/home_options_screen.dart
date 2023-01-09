@@ -6,6 +6,7 @@ import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/screens/bible_screen.dart';
 import 'package:simple_bible/screens/memorize_scripture_screen.dart';
 import 'package:simple_bible/screens/recent_activity_screen.dart';
+import 'package:simple_bible/screens/search_screen.dart';
 
 @Injectable()
 class HomeOptionsScreen extends StatefulWidget {
@@ -84,6 +85,23 @@ class _HomeOptionsScreenState extends State<HomeOptionsScreen> {
               onTap: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => MemorizeScriptureScreen()),
+                );
+              },
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: const Text(
+                "Search Scripture",
+                style: TextStyle(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w300,
+                  fontSize: 14.0,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => SearchScreen()),
                 );
               },
             ),
