@@ -41,8 +41,8 @@ class Bible extends Equatable {
         chapter.verses.add(BibleVerse(verseNo, i['t'], chapterNo, bookNo));
       }
     }
-    catch(exception) {
-      logService.error("Failed to setup Bible", exception);
+    catch(exception, stacktrace) {
+      logService.error("Failed to setup Bible", exception, stacktrace);
       rethrow;
     }
   }

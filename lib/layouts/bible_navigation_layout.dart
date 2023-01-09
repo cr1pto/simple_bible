@@ -96,7 +96,7 @@ class _BibleNavigationLayoutState extends State<BibleNavigationLayout> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (routeContext) => ChapterScreen(bible: widget.bible, bibleInfo: widget.bibleInfo, chapter: widget.previousChapter, bookName: "TBD")));
+                          builder: (routeContext) => ChapterScreen(bible: widget.bible, bibleInfo: widget.bibleInfo, chapter: widget.previousChapter, bookName: widget.bibleService.getBookInfoFromBookNumberIndex(widget.bible, widget.bibleInfo, widget.previousChapter.verses[0].bookNumber - 1).name)));
                 },
               ),
               IconButton(
@@ -106,7 +106,7 @@ class _BibleNavigationLayoutState extends State<BibleNavigationLayout> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (routeContext) => ChapterScreen(bible: widget.bible, bibleInfo: widget.bibleInfo, chapter: widget.nextChapter, bookName: "TBD")));
+                          builder: (routeContext) => ChapterScreen(bible: widget.bible, bibleInfo: widget.bibleInfo, chapter: widget.nextChapter, bookName: widget.bibleService.getBookInfoFromBookNumberIndex(widget.bible, widget.bibleInfo, widget.nextChapter.verses[0].bookNumber - 1).name)));
                 },
               ),
             ],

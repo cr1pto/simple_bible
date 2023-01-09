@@ -37,12 +37,55 @@ class BibleService {
 
   BibleChapter getChapterInfoFromNumberIndex(Bible bible, BibleInfoBook bookInfo, int chapterNumberIndex) {
     if(chapterNumberIndex < 0) chapterNumberIndex = 0;
+    if(chapterNumberIndex > bible.books[bookInfo.bookNumber - 1].chapters.length - 1) chapterNumberIndex = 0;
     return bible.books[bookInfo.bookNumber - 1].chapters[chapterNumberIndex];
   }
 
   BibleChapter getChapterFromVerse(Bible bible, BibleInfo bibleInfo, BibleVerse verse) {
-    BibleInfoBook bibleInfoBook = bibleInfo.books[verse.chapterNumber -1];
+    BibleInfoBook bibleInfoBook = bibleInfo.books[verse.bookNumber - 1];
     return bible.books[bibleInfoBook.bookNumber - 1].chapters[verse.chapterNumber - 1];
+  }
+
+  BibleChapter getPreviousChapterFromCurrentChapter(Bible bible, BibleInfo bibleInfo, BibleChapter currentChapter){
+    BibleInfoBook bibleInfoBook = bibleInfo.books[currentChapter.verses[0].bookNumber - 1];
+    BibleChapter previousChapter;
+    if(isFirstChapter(currentChapter)) {
+      //TODO: is this the first chapter of the entire Bible?
+      previousChapter = getChapterInfoFromNumberIndex(bible, bibleInfoBook, currentChapter.chapterNumber - 1);
+    }
+    else if(isLastChapter(currentChapter, bibleInfoBook)) {
+      //TODO: is this the last chapter of the entire Bible?
+      previousChapter = getChapterInfoFromNumberIndex(bible, bibleInfoBook, currentChapter.chapterNumber - 2);
+    }
+    else{
+      //TODO: error scenario - just return the current chapter
+      previousChapter = getChapterInfoFromNumberIndex(bible, bibleInfoBook, currentChapter.chapterNumber - 2);
+    }
+
+    return previousChapter;
+  }
+
+  bool isLastChapter(BibleChapter chapter, BibleInfoBook bibleInfoBook) => chapter.chapterNumber == bibleInfoBook.chapterCount;
+
+  bool isFirstChapter(BibleChapter chapter) => chapter.chapterNumber == 1;
+
+  BibleChapter getNextChapterFromCurrentChapter(Bible bible, BibleInfo bibleInfo, BibleChapter currentChapter){
+    BibleInfoBook bibleInfoBook = bibleInfo.books[currentChapter.verses[0].bookNumber - 1];
+    BibleChapter nextChapter;
+    if(isFirstChapter(currentChapter)) {
+      //TODO: is this the first chapter of the entire Bible?
+      nextChapter = getChapterInfoFromNumberIndex(bible, bibleInfoBook, currentChapter.chapterNumber);
+    }
+    else if(isLastChapter(currentChapter, bibleInfoBook)) {
+      //TODO: is this the last chapter of the entire Bible?
+      nextChapter = getChapterInfoFromNumberIndex(bible, bibleInfoBook, currentChapter.chapterNumber - 1);
+    }
+    else{
+      //TODO: error scenario - just return the current chapter
+      nextChapter = getChapterInfoFromNumberIndex(bible, bibleInfoBook, currentChapter.chapterNumber);
+    }
+
+    return nextChapter;
   }
 
   BibleChapter getPreviousChapterFromVerse(Bible bible, BibleInfo bibleInfo, BibleVerse verse) {
@@ -104,8 +147,8 @@ class BibleService {
       //"$bookName ${verse.chapterNumber}:${verse.index} - ${verse.text}"
       return verse;
     }
-    catch(exception) {
-      logService.error("Failed to generate random verse.", exception);
+    catch(exception, stacktrace) {
+      logService.error("Failed to generate random verse.", exception, stacktrace);
       //fallback to gen. 1:1
       BibleInfoBook book = getBookInfoFromBookNumberIndex(bible, bibleInfo, 0);
       BibleVerse verse = getVerse(bible, book, 0, 0);

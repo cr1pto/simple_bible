@@ -9,11 +9,11 @@ void main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
     FlutterError.onError = (FlutterErrorDetails details) {
-      logService.fatal(details.exception.toString(), details.exception);
+      logService.fatal(details.exception.toString(), details.exception, details.stack );
     };
     await configureDependencies();
     runApp(MyApp());
-  } catch (exception) {
-    logService.fatal("The application crashed.", exception);
+  } catch (exception, stacktrace) {
+    logService.fatal("The application crashed.", exception, stacktrace);
   }
 }

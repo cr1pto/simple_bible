@@ -7,12 +7,12 @@ class LogService {
     FLog.info(text: text);
   }
 
-  void fatal(String text, Object ex) {
-    FLog.fatal(text: text, exception: ex);
+  void fatal(String text, Object ex, StackTrace? stackTrace) {
+    FLog.fatal(text: text, exception: ex, stacktrace: stackTrace);
   }
 
-  void error(String text, Object ex) {
-    FLog.error(text: text, exception: ex);
+  void error(String text, Object ex, StackTrace? stackTrace) {
+    FLog.error(text: text, exception: ex, stacktrace: stackTrace);
   }
 
   void warning(String text) {
