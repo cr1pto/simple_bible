@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:simple_bible/injection.dart';
-import 'package:simple_bible/models/bible.dart';
-import 'package:simple_bible/models/bible_chapter.dart';
-import 'package:simple_bible/models/bible_info_book.dart';
-import 'package:simple_bible/models/bibleinfo.dart';
+import 'package:simple_bible/models/simple_objects/bible.dart';
+import 'package:simple_bible/models/simple_objects/bible_chapter.dart';
+import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
+import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
 import 'package:simple_bible/services/bible.service.dart';
 import 'package:simple_bible/services/log.service.dart';
 

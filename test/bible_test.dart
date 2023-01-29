@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:simple_bible/models/bible.dart';
-import 'package:simple_bible/models/bibleinfo.dart';
+import 'package:simple_bible/models/simple_objects/bible.dart';
+import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
 import 'package:simple_bible/services/bible.service.dart';
 
 void main() {

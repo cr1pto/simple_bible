@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:simple_bible/models/bible.dart';
-import 'package:simple_bible/models/bibleinfo.dart';
+import 'package:simple_bible/models/simple_objects/bible.dart';
+import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
 import 'package:simple_bible/services/bible.service.dart';
 
 part 'bible_event.dart';

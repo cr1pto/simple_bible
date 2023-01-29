@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
@@ -9,6 +11,9 @@ class SPSettings {
   final String fontSizeKey = 'font_size';
   final String fontTypeKey = 'font_type';
   final String colorKey = 'color';
+  final String brightnessKey = 'brightness';
+  final String fontStyleKey = 'fontStyle';
+  final String fontWeightKey = 'fontWeight';
   SharedPreferences _sp = getIt();
   static SPSettings? _instance;
 
@@ -55,5 +60,41 @@ class SPSettings {
   }
   Future setFontType(String fontType) async {
     await _sp.setString(fontTypeKey, fontType);
+  }
+
+  Future setBrightness(bool isDark) {
+    return _sp.setBool(brightnessKey, isDark);
+  }
+
+  Brightness getBrightness() {
+    bool isDark = _sp.getBool(brightnessKey) ?? true;
+    Brightness brightness = isDark ? Brightness.dark : Brightness.light;
+
+    return brightness;
+  }
+
+  Future setStyle(FontStyle style) {
+    return _sp.setString(fontStyleKey, style.name);
+  }
+
+  FontStyle getStyle() {
+    String? style = _sp.getString(fontStyleKey);
+
+    if(style != null && FontStyle.italic.name == style) return FontStyle.italic;
+
+    return FontStyle.normal;
+  }
+
+  Future setFontWeight(String weight) {
+    return _sp.setString(fontWeightKey, weight);
+  }
+
+  FontWeight getFontWeight() {
+    String? fontWeight = _sp.getString(fontWeightKey);
+    if(fontWeight == null) return FontWeight.w300;
+
+    FontWeight weight = FontWeight.values.firstWhere((element) => fontWeight == element.toString());
+
+    return weight;
   }
 }

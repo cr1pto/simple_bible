@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class ColorSquare extends StatelessWidget {
   const ColorSquare({super.key, required this.color});
-
   final Color color;
 
   @override

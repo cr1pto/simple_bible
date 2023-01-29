@@ -31,9 +31,9 @@ dependencies:
     sdk: flutter
   f_logs: ^2.0.1
   cupertino_icons: ^1.0.5
-  path_provider: ^2.0.11
-  sembast: ^3.3.1+1
-  shared_preferences: ^2.0.15
+  path_provider: ^2.0.12
+  sembast: ^3.4.0+6
+  shared_preferences: ^2.0.17
   flutter_bloc: ^8.1.1
   equatable: ^2.0.5
 #  // Our service locator
@@ -43,11 +43,24 @@ dependencies:
 #  // Generates code for us by providing annotations we can use
   injectable: ^2.1.0
 #  // Allows converting json to dart class and back
-  json_annotation: ^4.7.0
+  json_annotation: ^4.8.0
 #  // Allows easier routing
   auto_route: ^5.0.4
 #  // Required to work with firebase.
   firebase_core: ^2.4.1
+  redux: ^5.0.0
+  flutter_redux: ^0.10.0
+  redux_thunk: ^0.4.0
+  redux_logging: ^0.5.0
+  redux_persist_flutter: ^0.9.0
+  redux_persist: ^0.9.0
+
+  # Layout & design
+  flutter_staggered_grid_view: ^0.6.2
+  loading_overlay: ^0.3.0
+  http: ^0.13.5
+  intl: ^0.17.0
+  path: ^1.8.2
 #  sqfentity:
 #  sqfentity_gen:
 
@@ -67,7 +80,8 @@ dev_dependencies:
   # add build runner if not already added
   build_runner: ^2.3.3
   injectable_generator: ^2.1.3 # Version 2
-  json_serializable: ^6.5.4
+  json_serializable: ^6.6.0
+  flutter_redux_dev_tools: ^0.5.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

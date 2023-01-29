@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:simple_bible/injection.dart';
-import 'package:simple_bible/models/bible.dart';
-import 'package:simple_bible/models/bible_chapter.dart';
-import 'package:simple_bible/models/bible_info_book.dart';
-import 'package:simple_bible/models/bible_verse.dart';
-import 'package:simple_bible/models/bibleinfo.dart';
+import 'package:simple_bible/models/simple_objects/bible.dart';
+import 'package:simple_bible/models/simple_objects/bible_chapter.dart';
+import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
+import 'package:simple_bible/models/simple_objects/bible_verse.dart';
+import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
 import 'package:simple_bible/services/log.service.dart';
 
 @Injectable()
@@ -17,6 +17,20 @@ class BibleService {
   final LogService logService = getIt();
 
   BibleService();
+
+  Future<Bible> loadBible() async {
+    try {
+      final info = await loadInfo();
+      final bible = await loadKJV();
+      return bible;
+      // emit(BibleLoaded(info: info, bible: bible));
+    } catch (e) {
+      logService.fatal("Error loading bible:", e, Error().stackTrace);
+      const String message = "Failed to load bible";
+      // emit(const BibleLoadFailed(message: message));
+      rethrow;
+    }
+  }
 
   Future<BibleInfo> loadInfo() async {
     String jsonText = await rootBundle.loadString(infoAsset);
