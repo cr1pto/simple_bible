@@ -8,20 +8,27 @@ import 'package:simple_bible/redux/state/settings_state.dart';
 part 'bible_app_state.g.dart';
 
 //the state itself that we want to define in the store
-@immutable
+// @immutable
 @JsonSerializable()
 class BibleAppState{
-  // final BibleBook book;
-  // final BibleChapter chapter;
-  // final List<BibleVerse> verses;
-  final SettingsState settingsState = SettingsState.initialState();
-  final BibleState bibleState = BibleState.initialState();
-  final ChapterState chapterState = ChapterState.intialState();
+  SettingsState settingsState = SettingsState.initialState();
+  BibleState bibleState = BibleState.initialState();
+  ChapterState chapterState = ChapterState.intialState();
 
   BibleAppState();
+  BibleAppState.bibleState({required this.bibleState});
+  // BibleAppState.settingsState({required this.settingsState});
 
   static initialState() {
     return BibleAppState();
+  }
+
+  void updateSettings(SettingsState state) {
+    settingsState = state;
+  }
+
+  void updateBibleState(BibleState state) {
+    bibleState = state;
   }
 
   factory BibleAppState.fromJson(Map<String, dynamic> json) => _$BibleAppStateFromJson(json);

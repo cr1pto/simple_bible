@@ -1,9 +1,13 @@
-import 'package:simple_bible/models/simple_objects/bible_book.dart';
-import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
+import 'package:simple_bible/models/simple_objects/bible.dart';
+import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
 
 class BibleVm {
-  final BibleInfoBook bibleInfoBook;
-  final BibleBook bible;
+  final BibleInfo bibleInfo;
+  final Bible bible;
 
-  BibleVm(this.bibleInfoBook, this.bible);
+  BibleVm(this.bibleInfo, this.bible);
+
+  static initial() {
+    return BibleVm(BibleInfo.empty(), Bible.empty());
+  }
 }

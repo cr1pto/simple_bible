@@ -27,8 +27,8 @@ class ChapterScreen extends StatelessWidget {
         child: VersesScreen(
           title: '${store.state.chapterState.bookInfo.name} ${store.state.chapterState.chapter.chapterNumber}',
           verses: store.state.chapterState.chapter.verses,
-          bible: store.state.bibleState.bible,
-          bibleInfo: store.state.bibleState.bibleInfo
+          bible: store.state.bibleState.bibleVm?.bible ?? Bible.empty(),
+          bibleInfo: store.state.bibleState.bibleVm?.bibleInfo ?? BibleInfo.empty()
         ),
       ),
     );

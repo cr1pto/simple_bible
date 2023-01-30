@@ -10,6 +10,7 @@ import 'package:simple_bible/redux/state/bible_app_state.dart';
 import 'package:simple_bible/screens/stateless/chapter_screen.dart';
 import 'package:simple_bible/services/bible.service.dart';
 import 'package:simple_bible/services/log.service.dart';
+import 'package:simple_bible/viewModels/bible_vm.dart';
 
 @Injectable()
 class RecentVerse extends StatelessWidget {
@@ -32,9 +33,10 @@ class RecentVerse extends StatelessWidget {
   }
 
   getRecentVerse(BuildContext context) {
-    BibleInfoBook bookInfo = bibleService.getBookInfoFromBookNumberIndex(store.state.bibleState.bible, store.state.bibleState.bibleInfo, verse.bookNumber - 1);
-    BibleInfoBook verseInfoBook = bibleService.getBookInfoFromBookNumberIndex(store.state.bibleState.bible, store.state.bibleState.bibleInfo, verse.bookNumber - 1);
-    BibleChapter chapter = bibleService.getChapterInfoFromNumberIndex(store.state.bibleState.bible, verseInfoBook, verse.chapterNumber - 1);
+    BibleVm bibleVm = store.state.bibleState.bibleVm ?? BibleVm.initial();
+    BibleInfoBook bookInfo = bibleService.getBookInfoFromBookNumberIndex(bibleVm.bible, bibleVm.bibleInfo, verse.bookNumber - 1);
+    BibleInfoBook verseInfoBook = bibleService.getBookInfoFromBookNumberIndex(bibleVm.bible, bibleVm.bibleInfo, verse.bookNumber - 1);
+    BibleChapter chapter = bibleService.getChapterInfoFromNumberIndex(bibleVm.bible, verseInfoBook, verse.chapterNumber - 1);
     return Card(
       child: ListTile(
         onTap: () {

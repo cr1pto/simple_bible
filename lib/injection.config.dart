@@ -26,7 +26,7 @@ import 'package:simple_bible/modules/app.module.dart' as _i35;
 import 'package:simple_bible/redux/state/bible_app_state.dart' as _i32;
 import 'package:simple_bible/redux/store.dart' as _i11;
 import 'package:simple_bible/screens/stateful/book_search_screen.dart' as _i13;
-import 'package:simple_bible/screens/stateful/settings.dart' as _i29;
+import 'package:simple_bible/screens/stateful/settings_screen.dart' as _i29;
 import 'package:simple_bible/screens/stateless/bible_screen.dart' as _i9;
 import 'package:simple_bible/screens/stateless/book_screen.dart' as _i12;
 import 'package:simple_bible/screens/stateless/chapter_screen.dart' as _i14;
@@ -106,7 +106,7 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.factory<_i17.HomeOptionsScreen>(
         () => _i17.HomeOptionsScreen(key: gh<_i6.Key>()));
-    gh.factory<_i18.HomeScreen>(() => _i18.HomeScreen(key: gh<_i6.Key>()));
+    gh.factory<_i18.HomeScreen>(() => _i18.HomeScreen());
     gh.singleton<_i19.LogService>(_i19.LogService());
     gh.factory<_i20.MainLayout>(() => _i20.MainLayout(
           key: gh<_i6.Key>(),

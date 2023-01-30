@@ -55,7 +55,10 @@ class SharedAppSettings {
     return items;
   }
   List<int> colors = [
-    0xFF455A64,
+    // 0xFF455A64,
+    //#625D5D
+    0x625D5D5D,
+    0xD6D5D5D5,
     0xFFFFC107,
     0xFF673AB7,
     0xFFF57C00,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:injectable/injectable.dart';
+import 'package:simple_bible/redux/state/bible_app_state.dart';
 import 'package:simple_bible/redux/state/settings_state.dart';
 import 'package:simple_bible/screens/stateless/bible_screen.dart';
 import 'package:simple_bible/screens/stateless/home_screen.dart';
-import 'package:simple_bible/screens/stateful/settings.dart';
+import 'package:simple_bible/screens/stateful/settings_screen.dart';
 
 @Injectable()
 class MenuDrawer extends StatelessWidget {
@@ -14,8 +15,8 @@ class MenuDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<SettingsState, SettingsState>(
-        converter: (store) => store.state,
+    return StoreConnector<BibleAppState, SettingsState>(
+        converter: (store) => store.state.settingsState,
         builder: (_, state) {
           return Drawer(
             backgroundColor: Color(state.settingColor),

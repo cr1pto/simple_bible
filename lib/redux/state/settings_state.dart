@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 //the state itself that we want to define in the store
-@immutable
+// @immutable
 class SettingsState {
-  final int fontWeightIndex;
-  final String fontStyleName;
-  final int settingColor;
-  final double fontSize;
-  final String fontType;
-  final bool isDarkModeOn;
+  int fontWeightIndex;
+  String fontStyleName;
+  int settingColor;
+  double fontSize;
+  String fontType;
+  bool isDarkModeOn;
 
   // final FontWeight fontWeight = FontWeight.w300;
   // FontStyle fontStyle = FontStyle.normal;
@@ -17,10 +17,15 @@ class SettingsState {
   // String fontType = 'courier';
   // bool isDarkModeOn = false;
   // Brightness currentBrightness = Brightness.dark;
-  const SettingsState(this.fontWeightIndex, this.fontStyleName, this.settingColor, this.fontSize, this.fontType, this.isDarkModeOn);
+  SettingsState(this.fontWeightIndex, this.fontStyleName, this.settingColor, this.fontSize, this.fontType, this.isDarkModeOn);
+  SettingsState.state(SettingsState state) : this(state.fontWeightIndex, state.fontStyleName, state.settingColor, state.fontSize, state.fontType, state.isDarkModeOn);
+
+  void updateColor(int newColor) {
+    settingColor = newColor;
+  }
 
   static SettingsState initialState() {
-    return const SettingsState(0, "normal", 0, 14, "roboto", true);
+    return SettingsState(0, "normal", 0, 14, "roboto", true);
   }
 
 

@@ -12,6 +12,7 @@ import 'package:simple_bible/models/simple_objects/bible_verse.dart';
 import 'package:simple_bible/redux/state/bible_app_state.dart';
 import 'package:simple_bible/screens/stateless/chapter_screen.dart';
 import 'package:simple_bible/services/bible.service.dart';
+import 'package:simple_bible/viewModels/bible_vm.dart';
 
 @Injectable()
 class MemorizeScriptureScreen extends StatelessWidget {
@@ -19,8 +20,6 @@ class MemorizeScriptureScreen extends StatelessWidget {
   final SembastDb sembastDb = getIt();
   final BibleService bibleService = getIt();
   final Store<BibleAppState> store = getIt();
-
-
   BibleVerse randomBibleVerse = BibleVerse(0, "", 0, 0);
 
   MemorizeScriptureScreen({Key? key}) : super(key: key);
@@ -29,8 +28,7 @@ class MemorizeScriptureScreen extends StatelessWidget {
   openSelectedChapter(BuildContext context, String bookName, BibleChapter chapter) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ChapterScreen(
-        ),
+        builder: (context) => ChapterScreen(),
       ),
     );
   }
@@ -49,9 +47,10 @@ class MemorizeScriptureScreen extends StatelessWidget {
   }
 
   Widget getRandomScripture(BuildContext context) {
-    BibleVerse verse = bibleService.getRandomVerse(store.state.bibleState.bibleInfo, store.state.bibleState.bible);
-    BibleInfoBook bookInfo = bibleService.getBookInfoFromBookNumberIndex(store.state.bibleState.bible, store.state.bibleState.bibleInfo, verse.bookNumber - 1);
-    BibleChapter bibleChapter = bibleService.getChapterInfoFromNumberIndex(store.state.bibleState.bible, bookInfo, verse.chapterNumber - 1);
+    BibleVm bibleVm = store.state.bibleState.bibleVm ?? BibleVm.initial();
+    BibleVerse verse = bibleService.getRandomVerse(bibleVm.bibleInfo, bibleVm.bible);
+    BibleInfoBook bookInfo = bibleService.getBookInfoFromBookNumberIndex(bibleVm.bible, bibleVm.bibleInfo, verse.bookNumber - 1);
+    BibleChapter bibleChapter = bibleService.getChapterInfoFromNumberIndex(bibleVm.bible, bookInfo, verse.chapterNumber - 1);
     return Card(
       child: ListTile(
         title: Text("${bookInfo.name} ${verse.chapterNumber}:${verse.verseNumber} - ${verse.text}",

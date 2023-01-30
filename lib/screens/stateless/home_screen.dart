@@ -14,10 +14,10 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  build(BuildContext context) {
     return StoreProvider<BibleAppState>(
         store: store,
-        child: const MaterialRoot(),
+        child: MaterialRoot(),
     );
   }
 }

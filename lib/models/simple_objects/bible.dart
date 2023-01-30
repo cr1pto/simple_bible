@@ -17,6 +17,7 @@ class Bible extends Equatable {
   final LogService logService = getIt();
 
   Bible(this.version, this.books);
+  Bible.empty({this.version = ""});
 
   Bible.fromMap(this.version, List<dynamic> jsonList) {
     try{

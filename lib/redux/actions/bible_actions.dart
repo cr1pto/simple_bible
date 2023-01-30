@@ -1,4 +1,3 @@
-import 'package:injectable/injectable.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 import 'package:simple_bible/models/simple_objects/bible_book.dart';
@@ -7,14 +6,19 @@ import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
 import 'package:simple_bible/models/simple_objects/bible_verse.dart';
 import 'package:simple_bible/redux/state/bible_app_state.dart';
 import 'package:simple_bible/redux/state/settings_state.dart';
+import 'package:simple_bible/services/bible.service.dart';
+import 'package:simple_bible/viewModels/bible_vm.dart';
 
-ThunkAction<BibleAppState> fetchVerses = (Store<BibleAppState> store) async {
+ThunkAction<BibleAppState> loadBible = (Store<BibleAppState> store) async {
+  if(store.state.bibleState.bibleVm?.bible?.books != null && store.state.bibleState.bibleVm!.bible.books.length > 1){
+    store.dispatch(LoadBibleAction(store.state.bibleState.bibleVm ?? BibleVm.initial()));
+    return;
+  }
+  BibleService bibleService = BibleService();
 
-  // store.dispatch(FetchVersesAction(location, time));
-};
+  var vm = await bibleService.loadBible();
 
-ThunkAction<BibleAppState> fetchBible = (Store<BibleAppState> store) async {
-  store.dispatch(LoadBibleAction);
+  store.dispatch(LoadBibleAction(vm));
 };
 
 //Action that dispatches to the store
@@ -28,9 +32,20 @@ class FetchBibleBooksAction {
 }
 
 class LoadBibleAction{
+  final BibleVm _bibleVm;
 
+  BibleVm get bibleVm => _bibleVm;
+
+  LoadBibleAction(this._bibleVm);
 }
 
+class FetchBibleVmAction{
+  final BibleVm _bibleVm;
+
+  BibleVm get bibleVm => _bibleVm;
+
+  FetchBibleVmAction(this._bibleVm);
+}
 class FetchBibleBookAction {
   final BibleBook _book;
 

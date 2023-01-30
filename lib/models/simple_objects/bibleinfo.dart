@@ -11,6 +11,7 @@ class BibleInfo extends Equatable{
   List<BibleInfoBook> books = <BibleInfoBook>[];
 
   BibleInfo(this.versions, this.books);
+  BibleInfo.empty();
 
   BibleInfo.fromMap(Map<String, dynamic> json)
       : versions = (json["versions"] as List<dynamic>)

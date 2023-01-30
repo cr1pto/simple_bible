@@ -9,20 +9,21 @@ import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
 import 'package:simple_bible/models/simple_objects/bible_verse.dart';
 import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
 import 'package:simple_bible/services/log.service.dart';
+import 'package:simple_bible/viewModels/bible_vm.dart';
 
 @Injectable()
 class BibleService {
+  final LogService logService = LogService();
   String infoAsset = 'assets/bibles/info.json';
   String kjvAsset = 'assets/bibles/basic/kjv.json';
-  final LogService logService = getIt();
 
   BibleService();
 
-  Future<Bible> loadBible() async {
+  Future<BibleVm> loadBible() async {
     try {
       final info = await loadInfo();
       final bible = await loadKJV();
-      return bible;
+      return BibleVm(info, bible);
       // emit(BibleLoaded(info: info, bible: bible));
     } catch (e) {
       logService.fatal("Error loading bible:", e, Error().stackTrace);
