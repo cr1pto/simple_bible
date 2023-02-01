@@ -43,7 +43,7 @@ dependencies:
 #  // Generates code for us by providing annotations we can use
   injectable: ^2.1.0
 #  // Allows converting json to dart class and back
-  json_annotation: ^4.7.0
+  json_annotation: ^4.8.0
 #  // Allows easier routing
   auto_route: ^5.0.4
 #  // Required to work with firebase.
