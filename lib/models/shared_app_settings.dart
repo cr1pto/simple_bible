@@ -25,7 +25,9 @@ class SharedAppSettings {
     FontSize('large', 20),
     FontSize('extra-large', 24),
   ];
+
   final SPSettings settings = getIt();
+
   List<DropdownMenuItem<String>> getFontTypes() {
     List<DropdownMenuItem<String>> items = [];
     items = List.of(
@@ -40,7 +42,7 @@ class SharedAppSettings {
 
     return items;
   }
-  List<DropdownMenuItem<String>> getDropDownMenuItems() {
+  List<DropdownMenuItem<String>> getFontSizeItems() {
     List<DropdownMenuItem<String>> items = [];
 
     items = List.of(
@@ -66,23 +68,4 @@ class SharedAppSettings {
   ];
   List<DropdownMenuItem<String>> fontSizesItems = [];
   List<DropdownMenuItem<String>> fontTypes = [];
-
-  // void updateCommonAppSettings() {
-  //   settingColor = settings.getColor();
-  //   fontSize = settings.getFontSize();
-  //   fontType = settings.getFontType();
-  //   fontSizesItems = getDropDownMenuItems();
-  //   fontTypes = getFontTypes();
-  //   fontStyle = settings.getStyle();
-  //   fontWeight = settings.getFontWeight();
-  //   currentBrightness = settings.getBrightness();
-  // }
-
-  // void refreshDarkMode() {
-  //   isDarkModeOn = Brightness.dark.name == currentBrightness.name;
-  // }
-
-  // bool getIsDarkModeOn() {
-  //   return isDarkModeOn;
-  // }
 }

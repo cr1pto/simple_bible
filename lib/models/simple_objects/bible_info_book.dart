@@ -5,11 +5,11 @@ part 'bible_info_book.g.dart';
 
 @JsonSerializable()
 class BibleInfoBook extends Equatable {
-  int bookNumber;
-  String name;
-  String abbr;
-  int chapterCount;
-  String testament;
+  int bookNumber = 0;
+  String name = "";
+  String abbr = "";
+  int chapterCount = 0;
+  String testament = "";
 
   BibleInfoBook(
       this.bookNumber,
@@ -18,6 +18,7 @@ class BibleInfoBook extends Equatable {
       this.chapterCount,
       this.testament,
       );
+  BibleInfoBook.initial();
 
   // BibleInfoBook.fromMap(dynamic json) => _$BibleInfoBookFromJson(json);
 

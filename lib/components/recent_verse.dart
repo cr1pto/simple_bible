@@ -33,7 +33,7 @@ class RecentVerse extends StatelessWidget {
   }
 
   getRecentVerse(BuildContext context) {
-    BibleVm bibleVm = store.state.bibleState.bibleVm ?? BibleVm.initial();
+    BibleVm bibleVm = store.state.bibleState!.bibleVm ?? BibleVm.initial();
     BibleInfoBook bookInfo = bibleService.getBookInfoFromBookNumberIndex(bibleVm.bible, bibleVm.bibleInfo, verse.bookNumber - 1);
     BibleInfoBook verseInfoBook = bibleService.getBookInfoFromBookNumberIndex(bibleVm.bible, bibleVm.bibleInfo, verse.bookNumber - 1);
     BibleChapter chapter = bibleService.getChapterInfoFromNumberIndex(bibleVm.bible, verseInfoBook, verse.chapterNumber - 1);

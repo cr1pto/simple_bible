@@ -8,6 +8,18 @@ import 'package:simple_bible/redux/state/bible_app_state.dart';
 import 'package:simple_bible/redux/state/settings_state.dart';
 
 ThunkAction<BibleAppState> fetchSettings = (Store<BibleAppState> store) async {
+  if(store.state.settingsState.settingColor != 0) {
+    return store.dispatch(
+      FetchSettingsAction(
+        store.state.settingsState.fontWeightIndex,
+        store.state.settingsState.fontStyleName,
+          store.state.settingsState.settingColor,
+          store.state.settingsState.fontSize,
+          store.state.settingsState.fontType,
+          store.state.settingsState.isDarkModeOn
+      )
+    );
+  }
   SPSettings settings = getIt();
 
   await settings.init();
@@ -18,7 +30,7 @@ ThunkAction<BibleAppState> fetchSettings = (Store<BibleAppState> store) async {
 };
 
 ThunkAction<BibleAppState> updateColor = (Store<BibleAppState> store) {
-  UpdateColorAction action = UpdateColorAction(store.state.settingsState.settingColor);
+  UpdateColorAction action = UpdateColorAction(store.state.settingsState!.settingColor);
   store.dispatch(action);
 };
 
@@ -26,6 +38,24 @@ class UpdateColorAction {
   final int _settingColor;
   int get settingColor => _settingColor;
   UpdateColorAction(this._settingColor);
+}
+
+class UpdateFontSizeAction {
+  final double _fontSize;
+  double get fontSize => _fontSize;
+  UpdateFontSizeAction(this._fontSize);
+}
+
+class UpdateFontTypeAction {
+  final String _fontType;
+  String get fontType => _fontType;
+  UpdateFontTypeAction(this._fontType);
+}
+
+class UpdateBrightnessAction {
+  final bool _isDarkMode;
+  bool get isDarkMode => _isDarkMode;
+  UpdateBrightnessAction(this._isDarkMode);
 }
 
 class FetchSettingsAction {

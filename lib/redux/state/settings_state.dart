@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'settings_state.g.dart';
 
 //the state itself that we want to define in the store
-// @immutable
+@immutable
+@JsonSerializable()
 class SettingsState {
-  int fontWeightIndex;
-  String fontStyleName;
-  int settingColor;
-  double fontSize;
-  String fontType;
-  bool isDarkModeOn;
+  int fontWeightIndex = 0;
+  String fontStyleName = "";
+  int settingColor = 0;
+  double fontSize = 0.0;
+  String fontType = "";
+  bool isDarkModeOn = true;
 
   // final FontWeight fontWeight = FontWeight.w300;
   // FontStyle fontStyle = FontStyle.normal;
@@ -17,16 +21,10 @@ class SettingsState {
   // String fontType = 'courier';
   // bool isDarkModeOn = false;
   // Brightness currentBrightness = Brightness.dark;
-  SettingsState(this.fontWeightIndex, this.fontStyleName, this.settingColor, this.fontSize, this.fontType, this.isDarkModeOn);
-  SettingsState.state(SettingsState state) : this(state.fontWeightIndex, state.fontStyleName, state.settingColor, state.fontSize, state.fontType, state.isDarkModeOn);
+  SettingsState({required this.fontWeightIndex, required this.fontStyleName, required this.settingColor, required this.fontSize, required this.fontType, required this.isDarkModeOn});
+  SettingsState.initial();
+  SettingsState.state(SettingsState state) : this(fontWeightIndex: state.fontWeightIndex, fontStyleName: state.fontStyleName, settingColor: state.settingColor, fontType: state.fontType, fontSize: state.fontSize, isDarkModeOn: state.isDarkModeOn);
 
-  void updateColor(int newColor) {
-    settingColor = newColor;
-  }
-
-  static SettingsState initialState() {
-    return SettingsState(0, "normal", 0, 14, "roboto", true);
-  }
-
-
+  factory SettingsState.fromJson(Map<String, dynamic> json) => _$SettingsStateFromJson(json);
+  Map<String, dynamic> toJson() => _$SettingsStateToJson(this);
 }

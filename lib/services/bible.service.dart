@@ -23,7 +23,7 @@ class BibleService {
     try {
       final info = await loadInfo();
       final bible = await loadKJV();
-      return BibleVm(info, bible);
+      return BibleVm(bibleInfo: info, bible: bible);
       // emit(BibleLoaded(info: info, bible: bible));
     } catch (e) {
       logService.fatal("Error loading bible:", e, Error().stackTrace);

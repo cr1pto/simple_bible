@@ -23,9 +23,9 @@ class BibleScreen extends StatelessWidget {
       child: StoreConnector<BibleAppState, BibleAppState>(
         converter: (store) => store.state,
         builder: (context, state) {
-          if(state.bibleState.bibleVm?.bible == null) return Container();
+          if(state.bibleState!.bibleVm?.bible == null) return Container();
 
-          return BooksScreen(bibleInfo: state.bibleState.bibleVm!.bibleInfo, bible: state.bibleState.bibleVm!.bible);
+          return BooksScreen(bibleInfo: state.bibleState!.bibleVm!.bibleInfo, bible: state.bibleState!.bibleVm!.bible);
         },
       ),
     );

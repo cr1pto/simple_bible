@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
 import 'package:simple_bible/models/simple_objects/bible_info_version.dart';
@@ -7,11 +8,11 @@ part 'bibleinfo.g.dart';
 
 @JsonSerializable()
 class BibleInfo extends Equatable{
-  List<BibleInfoVersion> versions = <BibleInfoVersion>[];
-  List<BibleInfoBook> books = <BibleInfoBook>[];
+  List<BibleInfoVersion> versions;
+  List<BibleInfoBook> books;
 
   BibleInfo(this.versions, this.books);
-  BibleInfo.empty();
+  BibleInfo.empty() : this(List.empty(), List.empty());
 
   BibleInfo.fromMap(Map<String, dynamic> json)
       : versions = (json["versions"] as List<dynamic>)

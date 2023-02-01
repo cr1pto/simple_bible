@@ -16,29 +16,13 @@ import 'package:simple_bible/shared/menu_bar.dart';
 
 @Injectable()
 class BibleNavigationLayout extends StatelessWidget {
-  final BibleChapter chapter;
-  final BibleChapter previousChapter;
-  final BibleChapter nextChapter;
-  final Bible bible;
-  final BibleInfo bibleInfo;
   final Widget child;
   final String? title;
-  final bool drawer;
-  final bool floatingBack;
-  final String? floatingBackHero;
 
   BibleNavigationLayout({
     super.key,
-    required this.chapter,
     required this.child,
     this.title,
-    this.drawer = true,
-    this.floatingBack = false,
-    this.floatingBackHero,
-    required this.previousChapter,
-    required this.nextChapter,
-    required this.bible,
-    required this.bibleInfo,
   });
 
   final SPSettings settings = getIt();
@@ -55,13 +39,13 @@ class BibleNavigationLayout extends StatelessWidget {
             return Scaffold(
               appBar: title != null
                   ? AppBar(
-                backgroundColor: Color(state.settingsState.settingColor),
+                backgroundColor: Color(state.settingsState!.settingColor),
                 title: Text(title!),
               )
                   : null,
               drawer: MenuDrawer(),
               bottomNavigationBar: title != null ? BottomAppBar(
-                color: Color(state.settingsState.settingColor),
+                color: Color(state.settingsState!.settingColor),
                 child: IconTheme(
                   data: IconThemeData(color: Theme
                       .of(context)

@@ -47,7 +47,7 @@ class MemorizeScriptureScreen extends StatelessWidget {
   }
 
   Widget getRandomScripture(BuildContext context) {
-    BibleVm bibleVm = store.state.bibleState.bibleVm ?? BibleVm.initial();
+    BibleVm bibleVm = store.state.bibleState!.bibleVm ?? BibleVm.initial();
     BibleVerse verse = bibleService.getRandomVerse(bibleVm.bibleInfo, bibleVm.bible);
     BibleInfoBook bookInfo = bibleService.getBookInfoFromBookNumberIndex(bibleVm.bible, bibleVm.bibleInfo, verse.bookNumber - 1);
     BibleChapter bibleChapter = bibleService.getChapterInfoFromNumberIndex(bibleVm.bible, bookInfo, verse.chapterNumber - 1);

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:simple_bible/data/shared_prefs.dart';
-import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/screens/stateless/bible_screen.dart';
 import 'package:simple_bible/screens/stateless/memorize_scripture_screen.dart';
@@ -10,8 +8,6 @@ import 'package:simple_bible/screens/stateless/search_screen.dart';
 
 @Injectable()
 class HomeOptionsScreen extends StatelessWidget {
-  final SPSettings settings = getIt();
-
   HomeOptionsScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {

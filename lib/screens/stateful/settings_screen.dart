@@ -27,14 +27,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void toggleDarkMode(bool value) {
     setState(() {
-
+      store.dispatch(UpdateBrightnessAction(value));
     });
   }
 
-  void changeSize(String? value) {
+  void changeSize(String? fontSize) {
+    double newSize = double.parse(fontSize!);
+    setState(() {
+      store.dispatch(UpdateFontSizeAction(newSize));
+    });
   }
 
-  void changeFontType(String? value) {
+  void changeFontType(String? fontType) {
+    setState(() {
+      store.dispatch(UpdateFontTypeAction(fontType!));
+    });
+    setState(() {
+
+    });
   }
 
   void setColor(int color) {
@@ -72,7 +82,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               )),
           DropdownButton(
               value: state.fontSize.toString(),
-              items: SharedAppSettings().fontSizesItems,
+              items: SharedAppSettings().getFontSizeItems(),
               onChanged: changeSize),
           Text('Choose a Font Type for the app',
               style: TextStyle(
@@ -83,7 +93,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               )),
           DropdownButton(
               value: state.fontType,
-              items: SharedAppSettings().fontTypes,
+              items: SharedAppSettings().getFontTypes(),
               onChanged: changeFontType),
           Text('App Main Color',
               style: TextStyle(
@@ -132,16 +142,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget getSettings() {
     return StoreConnector<BibleAppState, SettingsState>(
-      converter: (store) => store.state!.settingsState,
+      converter: (store) => store.state.settingsState,
       builder: (context, state) => getAll(state)
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return StoreProvider<BibleAppState>(
-        store: store,
-        child: getSettings()
-        );
+    return  getSettings();
   }
 }

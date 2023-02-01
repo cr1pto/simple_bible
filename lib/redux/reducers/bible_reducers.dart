@@ -7,31 +7,58 @@ import 'package:simple_bible/redux/state/settings_state.dart';
 class BibleReducers {
   BibleAppState reducer(BibleAppState prev, dynamic action) {
     if (action is FetchVerseLookupAction) {
-      return BibleAppState();
+      return BibleAppState(settingsState: prev.settingsState, bibleState: prev.bibleState, chapterState: prev.chapterState);
     }
     else if(action is LoadBibleAction) {
-      if(prev.bibleState.bibleVm?.bible?.books != null && prev.bibleState.bibleVm!.bible.books.length > 1) return prev;
-      BibleAppState appState = BibleAppState.bibleState(bibleState: BibleState.bible(action.bibleVm));
-      return appState;
+      return BibleAppState(settingsState: prev.settingsState, bibleState: BibleState.bible(bibleVm: action.bibleVm), chapterState: prev.chapterState);
     }
     else if(action is FetchBibleVmAction) {
-      if(prev.bibleState.bibleVm?.bible?.books != null && prev.bibleState.bibleVm!.bible.books.length > 1) return prev;
-      BibleAppState appState = BibleAppState.bibleState(bibleState: BibleState.bible(action.bibleVm));
-
-      return appState;
+      return BibleAppState(settingsState: prev.settingsState, bibleState: BibleState.bible(bibleVm: action.bibleVm), chapterState: prev.chapterState);
     }
     else if(action is FetchSettingsAction) {
-      SettingsState settingsState = SettingsState(action.fontWeightIndex, action.fontStyleName, action.settingColor, action.fontSize, action.fontType, action.isDarkModeOn);
-      BibleAppState appState = prev;
-      appState.settingsState = settingsState;
-      return appState;
+      SettingsState settingsState = SettingsState(fontWeightIndex: action.fontWeightIndex,
+          fontStyleName: action.fontStyleName,
+          settingColor: action.settingColor,
+          fontSize: action.fontSize,
+          fontType: action.fontType,
+          isDarkModeOn: action.isDarkModeOn);
+      return BibleAppState(bibleState: prev.bibleState, settingsState: settingsState, chapterState: prev.chapterState);
     }
     else if(action is UpdateColorAction) {
-      BibleAppState appState = prev;
-      SettingsState settingsState = prev.settingsState;
-      settingsState.updateColor(action.settingColor);
-      appState.settingsState = settingsState;
-      return appState;
+      SettingsState state = SettingsState(fontWeightIndex: prev.settingsState.fontWeightIndex,
+          fontStyleName: prev.settingsState.fontStyleName,
+          settingColor: action.settingColor,
+          fontSize: prev.settingsState.fontSize,
+          fontType: prev.settingsState.fontType,
+          isDarkModeOn: prev.settingsState.isDarkModeOn);
+      return BibleAppState(settingsState: state, bibleState: prev.bibleState, chapterState: prev.chapterState);
+    }
+    else if(action is UpdateBrightnessAction) {
+      SettingsState state = SettingsState(fontWeightIndex: prev.settingsState.fontWeightIndex,
+          fontStyleName: prev.settingsState.fontStyleName,
+          settingColor: prev.settingsState.settingColor,
+          fontSize: prev.settingsState.fontSize,
+          fontType: prev.settingsState.fontType,
+          isDarkModeOn: action.isDarkMode);
+      return BibleAppState(settingsState: state, bibleState: prev.bibleState, chapterState: prev.chapterState);
+    }
+    else if(action is UpdateFontSizeAction) {
+      SettingsState state = SettingsState(fontWeightIndex: prev.settingsState.fontWeightIndex,
+          fontStyleName: prev.settingsState.fontStyleName,
+          settingColor: prev.settingsState.settingColor,
+          fontSize: action.fontSize,
+          fontType: prev.settingsState.fontType,
+          isDarkModeOn: prev.settingsState.isDarkModeOn);
+      return BibleAppState(settingsState: state, bibleState: prev.bibleState, chapterState: prev.chapterState);
+    }
+    else if(action is UpdateFontTypeAction) {
+      SettingsState state = SettingsState(fontWeightIndex: prev.settingsState.fontWeightIndex,
+          fontStyleName: prev.settingsState.fontStyleName,
+          settingColor: prev.settingsState.settingColor,
+          fontSize: prev.settingsState.fontSize,
+          fontType: action.fontType,
+          isDarkModeOn: prev.settingsState.isDarkModeOn);
+      return BibleAppState(settingsState: state, bibleState: prev.bibleState, chapterState: prev.chapterState);
     }
     else {
       return prev;

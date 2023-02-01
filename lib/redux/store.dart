@@ -25,13 +25,12 @@ class BibleStore{
   Future<BibleAppState> _loadState() async {
     try {
       final BibleAppState? initialState = await persistor.load();
-
       BibleVm bibleVm = await bibleService.loadBible();
-      return BibleAppState.bibleState(bibleState: BibleState.bible(bibleVm));
+      return BibleAppState.bibleState(bibleState: BibleState.bible(bibleVm: bibleVm));
       // return initialState ?? BibleAppState();
     } on Exception {
       // Re-hydration error
-      return BibleAppState();
+      return BibleAppState.initial();
     }
   }
 }

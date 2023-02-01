@@ -6,13 +6,14 @@ part 'bible_book.g.dart';
 
 @JsonSerializable()
 class BibleBook extends Equatable {
-  int bookNumber;
+  int bookNumber = 0;
   List<BibleChapter> chapters = <BibleChapter>[];
 
   BibleBook(
       this.bookNumber,
       this.chapters,
       );
+  BibleBook.initial();
 
   Map<String, dynamic> toMap() {
     return {

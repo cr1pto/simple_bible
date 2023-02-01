@@ -1,5 +1,6 @@
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
+import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/models/simple_objects/bible_book.dart';
 import 'package:simple_bible/models/simple_objects/bible_chapter.dart';
 import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
@@ -10,11 +11,8 @@ import 'package:simple_bible/services/bible.service.dart';
 import 'package:simple_bible/viewModels/bible_vm.dart';
 
 ThunkAction<BibleAppState> loadBible = (Store<BibleAppState> store) async {
-  if(store.state.bibleState.bibleVm?.bible?.books != null && store.state.bibleState.bibleVm!.bible.books.length > 1){
-    store.dispatch(LoadBibleAction(store.state.bibleState.bibleVm ?? BibleVm.initial()));
-    return;
-  }
-  BibleService bibleService = BibleService();
+  if(store.state.bibleState.bibleVm.bibleInfo.books.isNotEmpty) return store.dispatch(LoadBibleAction(store.state.bibleState.bibleVm));
+  BibleService bibleService = getIt();
 
   var vm = await bibleService.loadBible();
 

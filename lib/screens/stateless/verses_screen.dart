@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:injectable/injectable.dart';
 import 'package:simple_bible/components/verse.dart';
 import 'package:simple_bible/injection.dart';
@@ -7,6 +8,8 @@ import 'package:simple_bible/models/simple_objects/bible.dart';
 import 'package:simple_bible/models/simple_objects/bible_chapter.dart';
 import 'package:simple_bible/models/simple_objects/bible_verse.dart';
 import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
+import 'package:simple_bible/redux/state/bible_app_state.dart';
+import 'package:simple_bible/redux/state/bible_state.dart';
 import 'package:simple_bible/screens/stateless/chapter_screen.dart';
 import 'package:simple_bible/services/bible.service.dart';
 
@@ -30,21 +33,16 @@ class VersesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BibleChapter currentChapter = bibleService.getChapterFromVerse(bible, bibleInfo, verses[0]);
-    BibleChapter previousChapter = bibleService.getPreviousChapterFromCurrentChapter(bible, bibleInfo, currentChapter);
-    BibleChapter nextChapter = bibleService.getNextChapterFromCurrentChapter(bible, bibleInfo, currentChapter);
-    return BibleNavigationLayout(
-      title: title,
-      chapter: currentChapter,
-      previousChapter: previousChapter,
-      nextChapter: nextChapter,
-      bible: bible,
-      bibleInfo: bibleInfo,
-      child: ListView.builder(
-        itemCount: currentChapter.verses.length,
-        itemBuilder: (context, i) {
-          return Verse(verse: verses[i]);
-      })
+    return StoreConnector<BibleAppState, BibleState>(
+      converter: (store) => store.state.bibleState,
+      builder: (ctx, state) => BibleNavigationLayout(
+        title: title,
+        child: ListView.builder(
+          itemCount: state.verses.length,
+          itemBuilder: (context, i) {
+            return Verse(verse: verses[i]);
+        })
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:injectable/injectable.dart';
+import 'package:simple_bible/redux/actions/settings_actions.dart';
 import 'package:simple_bible/redux/state/bible_app_state.dart';
 import 'package:simple_bible/redux/state/settings_state.dart';
 import 'package:simple_bible/screens/stateless/home_screen.dart';
