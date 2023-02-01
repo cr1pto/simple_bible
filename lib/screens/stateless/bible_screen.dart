@@ -4,14 +4,12 @@ import 'package:injectable/injectable.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
-import 'package:simple_bible/redux/actions/bible_actions.dart';
 import 'package:simple_bible/redux/state/bible_app_state.dart';
+import 'package:simple_bible/redux/state/bible_state.dart';
 import 'package:simple_bible/screens/stateless/books_screen.dart';
 
 @Injectable()
 class BibleScreen extends StatelessWidget {
-  final SPSettings settings = getIt();
-
   BibleScreen({super.key});
 
   @override
@@ -20,12 +18,10 @@ class BibleScreen extends StatelessWidget {
       title: 'Bible',
       floatingBack: true,
       floatingBackHero: 'home-back',
-      child: StoreConnector<BibleAppState, BibleAppState>(
-        converter: (store) => store.state,
+      child: StoreConnector<BibleAppState, BibleState>(
+        converter: (store) => store.state.bibleState,
         builder: (context, state) {
-          if(state.bibleState!.bibleVm?.bible == null) return Container();
-
-          return BooksScreen(bibleInfo: state.bibleState!.bibleVm!.bibleInfo, bible: state.bibleState!.bibleVm!.bible);
+          return const BooksScreen();
         },
       ),
     );
