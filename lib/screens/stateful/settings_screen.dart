@@ -57,6 +57,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
+  List<DropdownMenuItem<String>> getFontTypes() {
+    List<DropdownMenuItem<String>> items = [];
+    items = List.of(
+      SharedAppSettings().fontTypeNames.map(
+            (fontTypeForItem) {
+          DropdownMenuItem<String> item = DropdownMenuItem(
+              value: fontTypeForItem, child: Text(fontTypeForItem));
+          return item;
+        },
+      ),
+    );
+
+    return items;
+  }
+
+  List<DropdownMenuItem<String>> getFontSizeItems() {
+    List<DropdownMenuItem<String>> items = [];
+
+    items = List.of(
+      SharedAppSettings().fontSizes.map(
+            (fontSizeForItem) => DropdownMenuItem(
+          value: fontSizeForItem.size.toString(),
+          child: Text(fontSizeForItem.name),
+        ),
+      ),
+    );
+
+    return items;
+  }
+
   Widget getAll(SettingsState state) {
     return MainLayout(
       title: 'Settings',
@@ -86,7 +116,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               )),
           DropdownButton(
               value: state.fontSize.toString(),
-              items: SharedAppSettings().getFontSizeItems(),
+              items: getFontSizeItems(),
               onChanged: changeSize),
           Text('Choose a Font Type for the app',
               style: TextStyle(
@@ -97,7 +127,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               )),
           DropdownButton(
               value: state.fontType,
-              items: SharedAppSettings().getFontTypes(),
+              items: getFontTypes(),
               onChanged: changeFontType),
           Text('App Main Color',
               style: TextStyle(
