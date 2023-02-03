@@ -29,8 +29,43 @@ ThunkAction<BibleAppState> fetchSettings = (Store<BibleAppState> store) async {
   store.dispatch(action);
 };
 
-ThunkAction<BibleAppState> updateColor = (Store<BibleAppState> store) {
-  UpdateColorAction action = UpdateColorAction(store.state.settingsState!.settingColor);
+ThunkAction<BibleAppState> updateColor = (Store<BibleAppState> store) async {
+  UpdateColorAction action = UpdateColorAction(store.state.settingsState.settingColor);
+
+  SPSettings settings = getIt();
+
+  await settings.setColor(store.state.settingsState.settingColor);
+
+  store.dispatch(action);
+};
+
+ThunkAction<BibleAppState> updateBrightness = (Store<BibleAppState> store) async {
+  UpdateBrightnessAction action = UpdateBrightnessAction(store.state.settingsState.isDarkModeOn);
+
+  SPSettings settings = getIt();
+
+  await settings.setBrightness(store.state.settingsState.isDarkModeOn);
+
+  store.dispatch(action);
+};
+
+ThunkAction<BibleAppState> updateFontSize = (Store<BibleAppState> store) async {
+  UpdateFontSizeAction action = UpdateFontSizeAction(store.state.settingsState.fontSize);
+
+  SPSettings settings = getIt();
+
+  await settings.setFontSize(store.state.settingsState.fontSize);
+
+  store.dispatch(action);
+};
+
+ThunkAction<BibleAppState> updateFontType = (Store<BibleAppState> store) async {
+  UpdateFontTypeAction action = UpdateFontTypeAction(store.state.settingsState.fontType);
+
+  SPSettings settings = getIt();
+
+  await settings.setFontType(store.state.settingsState.fontType);
+
   store.dispatch(action);
 };
 

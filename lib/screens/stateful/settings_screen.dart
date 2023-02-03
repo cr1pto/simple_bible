@@ -28,6 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void toggleDarkMode(bool value) {
     setState(() {
       store.dispatch(UpdateBrightnessAction(value));
+      store.dispatch(updateBrightness);
     });
   }
 
@@ -35,12 +36,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     double newSize = double.parse(fontSize!);
     setState(() {
       store.dispatch(UpdateFontSizeAction(newSize));
+      store.dispatch(updateFontSize);
     });
   }
 
   void changeFontType(String? fontType) {
     setState(() {
       store.dispatch(UpdateFontTypeAction(fontType!));
+      store.dispatch(updateFontType);
     });
     setState(() {
 
@@ -50,6 +53,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void setColor(int color) {
     setState(() {
       store.dispatch(UpdateColorAction(color));
+      store.dispatch(updateColor);
     });
   }
 

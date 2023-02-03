@@ -26,10 +26,10 @@ class ChapterScreen extends StatelessWidget {
         floatingBack: true,
         floatingBackHero: "chapter-back",
         child: VersesScreen(
-          title: '${state.chapterState?.bookInfo.name} ${state.chapterState?.chapter.chapterNumber}',
-          verses: state.chapterState?.chapter.verses ?? <BibleVerse>[],
-          bible: state.bibleState!.bibleVm?.bible ?? Bible.empty(),
-          bibleInfo: state.bibleState?.bibleVm?.bibleInfo ?? BibleInfo.empty()
+          title: '${state.chapterState.bookInfo.name} ${state.chapterState.chapter.chapterNumber}',
+          verses: state.chapterState.chapter.verses,
+          bible: state.bibleState.bibleVm.bible,
+          bibleInfo: state.bibleState.bibleVm.bibleInfo
         ),
       ),
     );
