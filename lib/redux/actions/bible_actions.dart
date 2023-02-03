@@ -21,14 +21,21 @@ ThunkAction<BibleAppState> loadBible = (Store<BibleAppState> store) async {
 
 ThunkAction<BibleAppState> updateChapter = (Store<BibleAppState> store) async {
   if(store.state.bibleState.bibleVm.bibleInfo.books.isEmpty) return store.dispatch(LoadBibleAction(store.state.bibleState.bibleVm));
-  BibleService bibleService = getIt();
 
   BibleChapter currentChapter = store.state.bibleState.currentChapter;
 
-  // BibleChapter previousChapter = store.state.bibleState.previousChapter;
-  // BibleChapter nextChapter = store.state.bibleState.nextChapter;
-
   UpdateChapterAction action = UpdateChapterAction(currentChapter.chapterNumber, currentChapter.verses);
+
+  store.dispatch(action);
+};
+
+ThunkAction<BibleAppState> updateBook = (Store<BibleAppState> store) async {
+  if(store.state.bibleState.bibleVm.bibleInfo.books.isEmpty) return store.dispatch(LoadBibleAction(store.state.bibleState.bibleVm));
+
+  BibleBook currentBook = store.state.bibleState.book;
+  BibleInfoBook currentBookInfo = store.state.bibleState.bibleInfoBook;
+
+  UpdateBookAction action = UpdateBookAction(currentBookInfo, currentBook);
 
   store.dispatch(action);
 };
@@ -75,6 +82,16 @@ class UpdateChapterAction {
   List<BibleVerse> get verses => _verses;
 
   UpdateChapterAction(this._chapterNumber, this._verses);
+}
+
+class UpdateBookAction {
+  final BibleInfoBook _bookInfo;
+  final BibleBook _book;
+
+  BibleInfoBook get bookInfo => _bookInfo;
+  BibleBook get book => _book;
+
+  UpdateBookAction(this._bookInfo, this._book);
 }
 
 class FetchBibleBooksAction {

@@ -20,6 +20,18 @@ class BibleReducers {
           previousChapter: prev.bibleState.previousChapter, nextChapter: prev.bibleState.nextChapter);
       return BibleAppState(settingsState: prev.settingsState, bibleState: bibleState, chapterState: prev.chapterState);
     }
+    if (action is UpdateBookAction) {
+      BibleState bibleState = BibleState(bibleVm: prev.bibleState.bibleVm,
+          bibleInfoBook: action.bookInfo,
+          book: action.book,
+          chapter: prev.bibleState.chapter,
+          verses: prev.bibleState.verses,
+          chapters: prev.bibleState.chapters,
+          currentChapter: prev.bibleState.currentChapter,
+          previousChapter: prev.bibleState.previousChapter,
+          nextChapter: prev.bibleState.nextChapter);
+      return BibleAppState(settingsState: prev.settingsState, bibleState: bibleState, chapterState: prev.chapterState);
+    }
     if (action is FetchVerseLookupAction) {
       return BibleAppState(settingsState: prev.settingsState, bibleState: prev.bibleState, chapterState: prev.chapterState);
     }

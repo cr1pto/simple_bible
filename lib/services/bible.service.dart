@@ -103,20 +103,6 @@ class BibleService {
     return nextChapter;
   }
 
-  BibleChapter getPreviousChapterFromVerse(Bible bible, BibleInfo bibleInfo, BibleVerse verse) {
-    int currentChapterIndex = verse.chapterNumber - 1;
-    BibleInfoBook currentBookInfo = bibleInfo.books[currentChapterIndex];
-
-    //go to the previous book
-    if(currentChapterIndex < 0) {
-      BibleInfoBook previousBookInfo = bibleInfo.books[currentChapterIndex - 1];
-
-      return bible.books[previousBookInfo.bookNumber - 1].chapters[verse.chapterNumber - 1];
-    }
-
-    return bible.books[currentBookInfo.bookNumber - 1].chapters[verse.chapterNumber - 1];
-  }
-
   BibleChapter getNextChapterFromVerse(Bible bible, BibleInfo bibleInfo, BibleVerse verse) {
     int currentChapterIndex = verse.chapterNumber -1;
     BibleInfoBook bibleInfoBook = bibleInfo.books[verse.chapterNumber -1];

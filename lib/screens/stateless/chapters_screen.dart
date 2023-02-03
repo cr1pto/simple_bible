@@ -4,6 +4,7 @@ import 'package:redux/redux.dart';
 import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/models/simple_objects/bible.dart';
+import 'package:simple_bible/models/simple_objects/bible_book.dart';
 import 'package:simple_bible/models/simple_objects/bible_chapter.dart';
 import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
 import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
@@ -38,8 +39,12 @@ class _ChaptersScreenState extends State<ChaptersScreen> {
   openSelectedChapter(BuildContext context, int chapterIndex) {
     setState(() {
       BibleChapter selectedChapter = widget.chapters[chapterIndex];
+      BibleInfoBook selectedBookInfo = widget.bibleInfo.books.firstWhere((element) => element.name == widget.bookName);
+      BibleBook book = widget.bible.books.firstWhere((element) => element.bookNumber == selectedBookInfo.bookNumber);
       store.dispatch(UpdateChapterAction(chapterIndex + 1, selectedChapter.verses));
+      store.dispatch(UpdateBookAction(selectedBookInfo, book));
       store.dispatch(updateChapter);
+      store.dispatch(updateBook);
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => ChapterScreen(),
