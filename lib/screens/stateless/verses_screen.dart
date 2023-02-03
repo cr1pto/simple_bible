@@ -38,7 +38,7 @@ class VersesScreen extends StatelessWidget {
       builder: (ctx, state) => BibleNavigationLayout(
         title: title,
         child: ListView.builder(
-          itemCount: state.verses.length,
+          itemCount: state.currentChapter.verses.length,
           itemBuilder: (context, i) {
             return Verse(verse: verses[i]);
         })

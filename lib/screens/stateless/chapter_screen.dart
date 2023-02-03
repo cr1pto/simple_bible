@@ -20,16 +20,16 @@ class ChapterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<BibleAppState, BibleAppState>(
-      converter: (store) => store.state,
+    return StoreConnector<BibleAppState, BibleState>(
+      converter: (store) => store.state.bibleState,
       builder: (ctx, state) => MainLayout(
         floatingBack: true,
         floatingBackHero: "chapter-back",
         child: VersesScreen(
-          title: '${state.chapterState.bookInfo.name} ${state.chapterState.chapter.chapterNumber}',
-          verses: state.chapterState.chapter.verses,
-          bible: state.bibleState.bibleVm.bible,
-          bibleInfo: state.bibleState.bibleVm.bibleInfo
+          title: '${state.bibleInfoBook.name} ${state.currentChapter.chapterNumber}',
+          verses: state.currentChapter.verses,
+          bible: state.bibleVm.bible,
+          bibleInfo: state.bibleVm.bibleInfo
         ),
       ),
     );

@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:redux/redux.dart';
+import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/models/simple_objects/bible.dart';
 import 'package:simple_bible/models/simple_objects/bible_chapter.dart';
+import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
 import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
+import 'package:simple_bible/redux/actions/bible_actions.dart';
+import 'package:simple_bible/redux/state/bible_app_state.dart';
 import 'package:simple_bible/screens/stateless/chapter_screen.dart';
+import 'package:simple_bible/services/bible.service.dart';
 
 @Injectable()
-class ChaptersScreen extends StatelessWidget {
+class ChaptersScreen extends StatefulWidget {
   final String bookName;
   final List<BibleChapter> chapters;
   final BibleInfo bibleInfo;
   final Bible bible;
 
-  const ChaptersScreen({
+  ChaptersScreen({
     super.key,
     required this.bookName,
     required this.chapters,
@@ -21,12 +27,25 @@ class ChaptersScreen extends StatelessWidget {
     required this.bible
   });
 
-  openSelectedChapter(BuildContext context, int index) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => ChapterScreen(),
-      ),
-    );
+  @override
+  State<ChaptersScreen> createState() => _ChaptersScreenState();
+}
+
+class _ChaptersScreenState extends State<ChaptersScreen> {
+  final Store<BibleAppState> store = getIt();
+  final BibleService bibleService = getIt();
+
+  openSelectedChapter(BuildContext context, int chapterIndex) {
+    setState(() {
+      BibleChapter selectedChapter = widget.chapters[chapterIndex];
+      store.dispatch(UpdateChapterAction(chapterIndex + 1, selectedChapter.verses));
+      store.dispatch(updateChapter);
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ChapterScreen(),
+        ),
+      );
+    });
   }
 
   @override
@@ -35,11 +54,11 @@ class ChaptersScreen extends StatelessWidget {
       floatingBack: true,
       floatingBackHero: "chapters-back",
       child: ListView.builder(
-        itemCount: chapters.length,
+        itemCount: widget.chapters.length,
         itemBuilder: (context, i) {
           return Card(
             child: ListTile(
-              title: Text(chapters[i].chapterNumber.toString(),
+              title: Text(widget.chapters[i].chapterNumber.toString(),
                   style: const TextStyle(
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w300,

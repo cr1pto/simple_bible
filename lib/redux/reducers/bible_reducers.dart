@@ -1,3 +1,4 @@
+import 'package:simple_bible/models/simple_objects/bible_chapter.dart';
 import 'package:simple_bible/redux/actions/bible_actions.dart';
 import 'package:simple_bible/redux/actions/settings_actions.dart';
 import 'package:simple_bible/redux/state/bible_app_state.dart';
@@ -6,6 +7,19 @@ import 'package:simple_bible/redux/state/settings_state.dart';
 
 class BibleReducers {
   BibleAppState reducer(BibleAppState prev, dynamic action) {
+    if (action is FetchVerseLookupAction) {
+      return BibleAppState(settingsState: prev.settingsState, bibleState: prev.bibleState, chapterState: prev.chapterState);
+    }
+    if (action is UpdateChapterAction) {
+      BibleState bibleState = BibleState(bibleVm: prev.bibleState.bibleVm, bibleInfoBook: prev.bibleState.bibleInfoBook,
+          book: prev.bibleState.book,
+          chapter: BibleChapter(action.chapterNumber, action.verses),
+          verses: prev.bibleState.verses,
+          chapters: prev.bibleState.chapters,
+          currentChapter: BibleChapter(action.chapterNumber, action.verses),
+          previousChapter: prev.bibleState.previousChapter, nextChapter: prev.bibleState.nextChapter);
+      return BibleAppState(settingsState: prev.settingsState, bibleState: bibleState, chapterState: prev.chapterState);
+    }
     if (action is FetchVerseLookupAction) {
       return BibleAppState(settingsState: prev.settingsState, bibleState: prev.bibleState, chapterState: prev.chapterState);
     }
