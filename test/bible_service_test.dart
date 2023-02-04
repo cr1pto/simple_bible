@@ -40,5 +40,37 @@ Future main() async {
       BibleChapter nextChapter = bibleService.getPreviousChapterFromCurrentChapter(bible, bibleInfo, currentChapter);
       expect(nextChapter.chapterNumber == 1, true);
     });
+
+    test('then gets last chapter from previous book successfully', () async {
+      BibleService bibleService = getIt();
+      BibleInfo bibleInfo = await bibleService.loadInfo();
+      Bible bible = await bibleService.loadKJV();
+      BibleInfoBook firstJohnInfo = bibleService.getBookInfoByName(bibleInfo, "1 John");
+      BibleInfoBook secondJohnInfo = bibleService.getBookInfoByName(bibleInfo, "2 John");
+      List<BibleChapter> chaptersFirstJohn = bibleService.getChapters(bible, firstJohnInfo);
+      List<BibleChapter> chaptersSecondJohn = bibleService.getChapters(bible, secondJohnInfo);
+      BibleChapter currentChapter =  chaptersSecondJohn.first;
+      BibleChapter previousChapter = chaptersFirstJohn.last;
+
+      currentChapter = bibleService.getPreviousChapterFromCurrentChapter(bible, bibleInfo, currentChapter);
+
+      expect(previousChapter.chapterNumber == currentChapter.chapterNumber, true);
+    });
+
+    test('then gets first chapter from next book successfully', () async {
+      BibleService bibleService = getIt();
+      BibleInfo bibleInfo = await bibleService.loadInfo();
+      Bible bible = await bibleService.loadKJV();
+      BibleInfoBook firstJohnInfo = bibleService.getBookInfoByName(bibleInfo, "1 John");
+      BibleInfoBook secondJohnInfo = bibleService.getBookInfoByName(bibleInfo, "2 John");
+      List<BibleChapter> chaptersFirstJohn = bibleService.getChapters(bible, firstJohnInfo);
+      List<BibleChapter> chaptersSecondJohn = bibleService.getChapters(bible, secondJohnInfo);
+      BibleChapter currentChapter = chaptersSecondJohn.first;
+      BibleChapter previousChapter = chaptersFirstJohn.last;
+
+      currentChapter = bibleService.getPreviousChapterFromCurrentChapter(bible, bibleInfo, currentChapter);
+
+      expect(previousChapter.chapterNumber == currentChapter.chapterNumber, true);
+    });
   });
 }

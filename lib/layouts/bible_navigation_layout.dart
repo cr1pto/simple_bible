@@ -72,6 +72,7 @@ class BibleNavigationLayout extends StatelessWidget {
                         ),
                         onPressed: () {
                           store.dispatch(updateToPreviousChapter);
+                          store.dispatch(updateBook);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -87,6 +88,7 @@ class BibleNavigationLayout extends StatelessWidget {
                         ),
                         onPressed: () {
                           store.dispatch(updateToNextChapter);
+                          store.dispatch(updateBook);
                           Navigator.push(
                               context,
                               MaterialPageRoute(

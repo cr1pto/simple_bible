@@ -44,6 +44,7 @@ ThunkAction<BibleAppState> updateToNextChapter = (Store<BibleAppState> store) as
 
   BibleChapter currentChapter = store.state.bibleState.currentChapter;
   BibleChapter nextChapter = bibleService.getNextChapterFromCurrentChapter(store.state.bibleState.bibleVm.bible, store.state.bibleState.bibleVm.bibleInfo, currentChapter);
+
   UpdateChapterAction action = UpdateChapterAction(nextChapter.chapterNumber, nextChapter.verses);
 
   store.dispatch(action);
@@ -54,15 +55,15 @@ ThunkAction<BibleAppState> updateToPreviousChapter = (Store<BibleAppState> store
   BibleService bibleService = getIt();
 
   BibleChapter currentChapter = store.state.bibleState.currentChapter;
-
-  // BibleChapter previousChapter = store.state.bibleState.previousChapter;
-  // BibleChapter nextChapter = store.state.bibleState.nextChapter;
-
   BibleChapter previousChapter = bibleService.getPreviousChapterFromCurrentChapter(store.state.bibleState.bibleVm.bible, store.state.bibleState.bibleVm.bibleInfo, currentChapter);
+  BibleInfoBook bookInfo = store.state.bibleState.bibleVm.bibleInfo.books[previousChapter.verses[0].bookNumber - 1];
+  BibleBook book = store.state.bibleState.bibleVm.bible.books[previousChapter.verses[0].bookNumber - 1];
 
   UpdateChapterAction action = UpdateChapterAction(previousChapter.chapterNumber, previousChapter.verses);
+  UpdateBookAction bookAction = UpdateBookAction(bookInfo, book);
 
   store.dispatch(action);
+  store.dispatch(bookAction);
 };
 
 //Action that dispatches to the store

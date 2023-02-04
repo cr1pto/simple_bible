@@ -1,4 +1,6 @@
+import 'package:simple_bible/models/simple_objects/bible_book.dart';
 import 'package:simple_bible/models/simple_objects/bible_chapter.dart';
+import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
 import 'package:simple_bible/redux/actions/bible_actions.dart';
 import 'package:simple_bible/redux/actions/settings_actions.dart';
 import 'package:simple_bible/redux/state/bible_app_state.dart';
@@ -11,10 +13,15 @@ class BibleReducers {
       return BibleAppState(settingsState: prev.settingsState, bibleState: prev.bibleState, chapterState: prev.chapterState);
     }
     if (action is UpdateChapterAction) {
-      BibleState bibleState = BibleState(bibleVm: prev.bibleState.bibleVm, bibleInfoBook: prev.bibleState.bibleInfoBook,
-          book: prev.bibleState.book,
+      BibleInfoBook bookInfo = prev.bibleState.bibleVm.bibleInfo.books[action.verses[0].bookNumber - 1];
+      BibleBook book = prev.bibleState.bibleVm.bible.books[action.verses[0].bookNumber - 1];
+
+      BibleState bibleState = BibleState(
+          bibleVm: prev.bibleState.bibleVm,
+          bibleInfoBook: bookInfo,
+          book: book,
           chapter: BibleChapter(action.chapterNumber, action.verses),
-          verses: prev.bibleState.verses,
+          verses: action.verses,
           chapters: prev.bibleState.chapters,
           currentChapter: BibleChapter(action.chapterNumber, action.verses),
           previousChapter: prev.bibleState.previousChapter, nextChapter: prev.bibleState.nextChapter);
