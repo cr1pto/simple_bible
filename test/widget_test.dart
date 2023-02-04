@@ -11,11 +11,11 @@ import 'package:simple_bible/screens/stateless/home_screen.dart';
 
 import 'test_helpers.dart';
 
-Future main() async {
+void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  GetIt di = await TestHelpers().createContainer();
 
   testWidgets('Application Loads Successfully', (WidgetTester tester) async {
+    GetIt di = await TestHelpers().createContainer();
     // Build our app and trigger a frame.
     await tester.pumpWidget(HomeScreen());
 
