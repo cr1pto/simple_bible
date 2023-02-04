@@ -1,3 +1,4 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,5 +35,17 @@ class TestHelpers {
     ));
 
     return di;
+  }
+
+  static void expectToBeTrue(bool condition) {
+    expect(condition, true);
+  }
+
+  static void expectToBeFalse(bool condition) {
+    expect(condition, false);
+  }
+
+  static void expectToBeEqual(dynamic expected, dynamic actual) {
+    expectToBeTrue(expected == actual);
   }
 }

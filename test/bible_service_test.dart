@@ -4,6 +4,7 @@ import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/models/simple_objects/bible.dart';
 import 'package:simple_bible/models/simple_objects/bible_chapter.dart';
 import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
+import 'package:simple_bible/models/simple_objects/bible_verse.dart';
 import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
 import 'package:simple_bible/services/bible.service.dart';
 import 'test_helpers.dart';
@@ -70,7 +71,22 @@ Future main() async {
 
       currentChapter = bibleService.getPreviousChapterFromCurrentChapter(bible, bibleInfo, currentChapter);
 
-      expect(previousChapter.chapterNumber == currentChapter.chapterNumber, true);
+      TestHelpers.expectToBeEqual(previousChapter.chapterNumber, currentChapter.chapterNumber);
     });
+
+    test('then returns search results successfully', () async {
+      BibleService bibleService = getIt();
+      BibleInfo bibleInfo = await bibleService.loadInfo();
+      Bible bible = await bibleService.loadKJV();
+      String searchText = "life";
+      int expectedCount = 412;
+      List<BibleVerse> foundVerses = <BibleVerse>[];
+
+      foundVerses = bibleService.getVerseFromSearchCriteria(bible, bibleInfo, searchText);
+
+      TestHelpers.expectToBeTrue(foundVerses.isNotEmpty);
+      TestHelpers.expectToBeEqual(expectedCount, foundVerses.length);
+    });
+
   });
 }

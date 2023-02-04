@@ -259,4 +259,17 @@ class BibleService {
   static getInstance() {
     return BibleService();
   }
+
+  List<BibleVerse> getVerseFromSearchCriteria(Bible bible, BibleInfo bibleInfo, String searchText) {
+    List<BibleVerse> verses = <BibleVerse>[];
+
+    //move all verses to sqlite db store for long-term retention
+    for(var i = 0; i < bible.books.length; i++) {
+      for(var j = 0; j < bible.books[i].chapters.length; j++) {
+        verses.addAll(bible.books[i].chapters[j].verses.where((element) => element.text.contains(searchText)));
+      }
+    }
+
+    return verses;
+  }
 }

@@ -36,6 +36,7 @@ class _SearchFormState extends State<SearchForm> {
   Widget build(BuildContext context) {
     return TextField(
       controller: searchTextController,
+      autofocus: true,
     );
   }
 }
