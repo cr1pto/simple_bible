@@ -1,11 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/models/simple_objects/bible.dart';
 import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
 import 'package:simple_bible/services/bible.service.dart';
 
-void main() {
+import 'test_helpers.dart';
+
+Future main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  BibleService bibleService = BibleService();
+  GetIt di = await TestHelpers().createContainer();
+  BibleService bibleService = getIt();
 
   group('Verse', () {
     test('loads bible info successfully', () async {

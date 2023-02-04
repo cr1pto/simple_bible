@@ -6,14 +6,11 @@ import 'package:simple_bible/models/simple_objects/bible_chapter.dart';
 import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
 import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
 import 'package:simple_bible/services/bible.service.dart';
-import 'package:simple_bible/services/log.service.dart';
+import 'test_helpers.dart';
 
-void main() {
+Future main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  final GetIt di = GetIt.instance;
-
-  di.registerSingleton<LogService>(LogService());
-  di.registerSingleton<BibleService>(BibleService());
+  GetIt di = await TestHelpers().createContainer();
 
   group('when BibleService gets current chapter', () {
     test('then gets next chapter successfully', () async {

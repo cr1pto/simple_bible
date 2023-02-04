@@ -6,9 +6,15 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:simple_bible/screens/stateless/home_screen.dart';
 
-void main() {
+import 'test_helpers.dart';
+
+Future main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  GetIt di = await TestHelpers().createContainer();
+
   testWidgets('Application Loads Successfully', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(HomeScreen());
