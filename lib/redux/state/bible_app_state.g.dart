@@ -14,6 +14,8 @@ BibleAppState _$BibleAppStateFromJson(Map<String, dynamic> json) =>
           BibleState.fromJson(json['bibleState'] as Map<String, dynamic>),
       chapterState:
           ChapterState.fromJson(json['chapterState'] as Map<String, dynamic>),
+      searchState:
+          SearchState.fromJson(json['searchState'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BibleAppStateToJson(BibleAppState instance) =>
@@ -21,6 +23,7 @@ Map<String, dynamic> _$BibleAppStateToJson(BibleAppState instance) =>
       'settingsState': instance.settingsState,
       'bibleState': instance.bibleState,
       'chapterState': instance.chapterState,
+      'searchState': instance.searchState,
     };
 
 ChapterState _$ChapterStateFromJson(Map<String, dynamic> json) => ChapterState(

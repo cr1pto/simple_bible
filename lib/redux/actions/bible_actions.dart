@@ -66,8 +66,28 @@ ThunkAction<BibleAppState> updateToPreviousChapter = (Store<BibleAppState> store
   store.dispatch(bookAction);
 };
 
+ThunkAction<BibleAppState> fetchLatestSearchResults = (Store<BibleAppState> store) {
+  if(store.state.bibleState.bibleVm.bibleInfo.books.isEmpty) return store.dispatch(LoadBibleAction(store.state.bibleState.bibleVm));
+  BibleService bibleService = getIt();
+
+  List<BibleVerse> bibleVerses = bibleService.getVerseFromSearchCriteria(store.state.bibleState.bibleVm.bible, store.state.bibleState.bibleVm.bibleInfo, store.state.searchState.searchText);
+  UpdateSearchAction action = UpdateSearchAction(store.state.searchState.searchText, bibleVerses);
+
+  store.dispatch(action);
+};
+
 //Action that dispatches to the store
 //the action definition containing the properties to dispatch
+class UpdateSearchAction {
+  final String _searchText;
+  final List<BibleVerse> _verses;
+
+  String get searchText => _searchText;
+  List<BibleVerse> get verses => _verses;
+
+  UpdateSearchAction(this._searchText, this._verses);
+}
+
 class UpdateChapterAction {
   final int _chapterNumber;
   final List<BibleVerse> _verses;

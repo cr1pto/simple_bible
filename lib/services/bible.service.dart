@@ -263,13 +263,19 @@ class BibleService {
   List<BibleVerse> getVerseFromSearchCriteria(Bible bible, BibleInfo bibleInfo, String searchText) {
     List<BibleVerse> verses = <BibleVerse>[];
 
+    if(searchText == "") return verses;
+
     //move all verses to sqlite db store for long-term retention
     for(var i = 0; i < bible.books.length; i++) {
       for(var j = 0; j < bible.books[i].chapters.length; j++) {
-        verses.addAll(bible.books[i].chapters[j].verses.where((element) => element.text.contains(searchText)));
+        verses.addAll(bible.books[i].chapters[j].verses.where((element) => element.text.toUpperCase().contains(searchText.toUpperCase())));
       }
     }
 
     return verses;
+  }
+
+  String getBookNameByBookNumber(BibleInfo bibleInfo, int bookNumber) {
+    return bibleInfo.books.firstWhere((element) => element.bookNumber == bookNumber, orElse: BibleInfoBook.initial).name;
   }
 }
