@@ -53,6 +53,7 @@ class BibleService {
   BibleChapter getChapterInfoFromNumberIndex(Bible bible, BibleInfoBook bookInfo, int chapterNumberIndex) {
     if(chapterNumberIndex < 0) chapterNumberIndex = 0;
     if(chapterNumberIndex > bible.books[bookInfo.bookNumber - 1].chapters.length - 1) chapterNumberIndex = 0;
+
     return bible.books[bookInfo.bookNumber - 1].chapters[chapterNumberIndex];
   }
 

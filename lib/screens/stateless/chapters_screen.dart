@@ -41,7 +41,7 @@ class _ChaptersScreenState extends State<ChaptersScreen> {
       BibleChapter selectedChapter = widget.chapters[chapterIndex];
       BibleInfoBook selectedBookInfo = widget.bibleInfo.books.firstWhere((element) => element.name == widget.bookName);
       BibleBook book = widget.bible.books.firstWhere((element) => element.bookNumber == selectedBookInfo.bookNumber);
-      store.dispatch(UpdateChapterAction(chapterIndex + 1, selectedChapter.verses));
+      store.dispatch(UpdateChapterAction(selectedChapter.chapterNumber, selectedChapter.verses));
       store.dispatch(UpdateBookAction(selectedBookInfo, book));
       store.dispatch(updateChapter);
       store.dispatch(updateBook);
