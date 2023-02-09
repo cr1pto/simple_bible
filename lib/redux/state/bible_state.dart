@@ -22,8 +22,9 @@ class BibleState {
   BibleChapter currentChapter = BibleChapter.initial();
   BibleChapter previousChapter = BibleChapter.initial();
   BibleChapter nextChapter = BibleChapter.initial();
+  BibleVerse currentVerse = BibleVerse.initial();
 
-  BibleState({required this.bibleVm, required this.bibleInfoBook, required this.book, required this.chapter, required this.verses, required this.chapters, required this.currentChapter, required this.previousChapter, required this.nextChapter});
+  BibleState({required this.bibleVm, required this.bibleInfoBook, required this.book, required this.chapter, required this.verses, required this.chapters, required this.currentChapter, required this.previousChapter, required this.nextChapter, required this.currentVerse});
   BibleState.initial();
   BibleState.bible({required this.bibleVm});
 

@@ -24,6 +24,8 @@ BibleState _$BibleStateFromJson(Map<String, dynamic> json) => BibleState(
           json['previousChapter'] as Map<String, dynamic>),
       nextChapter:
           BibleChapter.fromJson(json['nextChapter'] as Map<String, dynamic>),
+      currentVerse:
+          BibleVerse.fromJson(json['currentVerse'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BibleStateToJson(BibleState instance) =>
@@ -37,4 +39,5 @@ Map<String, dynamic> _$BibleStateToJson(BibleState instance) =>
       'currentChapter': instance.currentChapter,
       'previousChapter': instance.previousChapter,
       'nextChapter': instance.nextChapter,
+      'currentVerse': instance.currentVerse,
     };

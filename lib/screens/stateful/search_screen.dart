@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:injectable/injectable.dart';
 import 'package:redux/redux.dart';
-import 'package:simple_bible/components/verse.dart';
 import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/models/simple_objects/bible_verse.dart';

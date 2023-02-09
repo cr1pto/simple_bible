@@ -25,7 +25,9 @@ class BibleReducers {
           verses: action.verses,
           chapters: prev.bibleState.chapters,
           currentChapter: BibleChapter(action.chapterNumber, action.verses),
-          previousChapter: prev.bibleState.previousChapter, nextChapter: prev.bibleState.nextChapter);
+          currentVerse: prev.bibleState.currentVerse,
+          previousChapter: prev.bibleState.previousChapter, nextChapter: prev.bibleState.nextChapter
+      );
       return BibleAppState(settingsState: prev.settingsState, bibleState: bibleState, chapterState: prev.chapterState, searchState: prev.searchState);
     }
     if (action is UpdateBookAction) {
@@ -37,6 +39,7 @@ class BibleReducers {
           chapters: prev.bibleState.chapters,
           currentChapter: prev.bibleState.currentChapter,
           previousChapter: prev.bibleState.previousChapter,
+          currentVerse: prev.bibleState.currentVerse,
           nextChapter: prev.bibleState.nextChapter);
       return BibleAppState(settingsState: prev.settingsState, bibleState: bibleState, chapterState: prev.chapterState, searchState: prev.searchState);
     }
@@ -48,6 +51,19 @@ class BibleReducers {
     }
     else if(action is FetchBibleVmAction) {
       return BibleAppState(settingsState: prev.settingsState, bibleState: BibleState.bible(bibleVm: action.bibleVm), chapterState: prev.chapterState, searchState: prev.searchState);
+    }
+    else if(action is UpdateCurrentVerseAction) {
+      BibleState bibleState = BibleState(bibleVm: prev.bibleState.bibleVm,
+          bibleInfoBook: prev.bibleState.bibleInfoBook,
+          book: prev.bibleState.book,
+          chapter: prev.bibleState.chapter,
+          verses: prev.bibleState.verses,
+          chapters: prev.bibleState.chapters,
+          currentChapter: prev.bibleState.currentChapter,
+          previousChapter: prev.bibleState.previousChapter,
+          currentVerse: action.currentVerse,
+          nextChapter: prev.bibleState.nextChapter);
+      return BibleAppState(settingsState: prev.settingsState, bibleState: bibleState, chapterState: prev.chapterState, searchState: prev.searchState);
     }
     else if(action is FetchSettingsAction) {
       SettingsState settingsState = SettingsState(fontWeightIndex: action.fontWeightIndex,

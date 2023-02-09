@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:injectable/injectable.dart';
 import 'package:redux/redux.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/models/simple_objects/bible_chapter.dart';
 import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
@@ -13,16 +14,23 @@ import 'package:simple_bible/services/log.service.dart';
 import 'package:simple_bible/viewModels/bible_vm.dart';
 
 @Injectable()
-class RecentVerse extends StatelessWidget {
-  final BibleService bibleService = getIt();
-  final LogService logService = getIt();
-  final Store<BibleAppState> store = getIt();
+class RecentVerse extends StatefulWidget {
   final BibleVerse verse;
 
   RecentVerse({
     super.key,
     required this.verse,
   });
+
+  @override
+  State<RecentVerse> createState() => _RecentVerseState();
+}
+
+class _RecentVerseState extends State<RecentVerse> {
+  final BibleService bibleService = getIt();
+  final LogService logService = getIt();
+  final Store<BibleAppState> store = getIt();
+  final ItemScrollController _scrollController = ItemScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +41,10 @@ class RecentVerse extends StatelessWidget {
   }
 
   getRecentVerse(BuildContext context) {
-    BibleVm bibleVm = store.state.bibleState!.bibleVm ?? BibleVm.initial();
-    BibleInfoBook bookInfo = bibleService.getBookInfoFromBookNumberIndex(bibleVm.bible, bibleVm.bibleInfo, verse.bookNumber - 1);
-    BibleInfoBook verseInfoBook = bibleService.getBookInfoFromBookNumberIndex(bibleVm.bible, bibleVm.bibleInfo, verse.bookNumber - 1);
-    BibleChapter chapter = bibleService.getChapterInfoFromNumberIndex(bibleVm.bible, verseInfoBook, verse.chapterNumber - 1);
+    BibleVm bibleVm = store.state.bibleState.bibleVm;
+    BibleInfoBook bookInfo = bibleService.getBookInfoFromBookNumberIndex(bibleVm.bible, bibleVm.bibleInfo, widget.verse.bookNumber - 1);
+    BibleInfoBook verseInfoBook = bibleService.getBookInfoFromBookNumberIndex(bibleVm.bible, bibleVm.bibleInfo, widget.verse.bookNumber - 1);
+    BibleChapter chapter = bibleService.getChapterInfoFromNumberIndex(bibleVm.bible, verseInfoBook, widget.verse.chapterNumber - 1);
     return Card(
       child: ListTile(
         onTap: () {
@@ -46,10 +54,10 @@ class RecentVerse extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (routeContext) => ChapterScreen()));
+                  builder: (routeContext) => ChapterScreen(scrollController: _scrollController)));
         },
         title: Text(
-            "${bookInfo.name} ${verse.chapterNumber}:${verse.verseNumber} - ${verse.text}",
+            "${bookInfo.name} ${widget.verse.chapterNumber}:${widget.verse.verseNumber} - ${widget.verse.text}",
             style: const TextStyle(
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.w300,

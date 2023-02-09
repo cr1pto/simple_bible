@@ -6,10 +6,10 @@ part 'bible_verse.g.dart';
 @JsonSerializable()
 class BibleVerse extends Equatable {
   int? id;
-  late int verseNumber;
-  late String text;
-  late int chapterNumber;
-  late int bookNumber;
+  int verseNumber = 0;
+  String text = "";
+  int chapterNumber = 0;
+  int bookNumber = 0;
 
   BibleVerse(
       this.verseNumber,
@@ -17,16 +17,7 @@ class BibleVerse extends Equatable {
       this.chapterNumber,
       this.bookNumber
       );
-
-  // Map<String, dynamic> toMap() {
-  //   return {
-  //     'id': id,
-  //     'verseNumber': verseNumber,
-  //     'text': text,
-  //     'chapterNumber': chapterNumber,
-  //     'bookNumber': bookNumber,
-  //   };
-  // }
+  BibleVerse.initial();
 
   Map<String, dynamic> toMap() => _$BibleVerseToJson(this);
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:redux/redux.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/models/simple_objects/bible.dart';
@@ -36,6 +37,8 @@ class _ChaptersScreenState extends State<ChaptersScreen> {
   final Store<BibleAppState> store = getIt();
   final BibleService bibleService = getIt();
 
+  final ItemScrollController scrollController = ItemScrollController();
+
   openSelectedChapter(BuildContext context, int chapterIndex) {
     setState(() {
       BibleChapter selectedChapter = widget.chapters[chapterIndex];
@@ -47,7 +50,7 @@ class _ChaptersScreenState extends State<ChaptersScreen> {
       store.dispatch(updateBook);
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => ChapterScreen(),
+          builder: (context) => ChapterScreen(scrollController: scrollController),
         ),
       );
     });

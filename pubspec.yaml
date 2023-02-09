@@ -34,12 +34,12 @@ dependencies:
   path_provider: ^2.0.12
   sembast: ^3.4.0+6
   shared_preferences: ^2.0.17
-  flutter_bloc: ^8.1.1
+  flutter_bloc: ^8.1.2
   equatable: ^2.0.5
 #  // Our service locator
   get_it: ^7.2.0
 #  // For state management
-  bloc: ^8.1.0
+  bloc: ^8.1.1
 #  // Generates code for us by providing annotations we can use
   injectable: ^2.1.0
 #  // Allows converting json to dart class and back
@@ -54,6 +54,7 @@ dependencies:
   redux_logging: ^0.5.0
   redux_persist_flutter: ^0.9.0
   redux_persist: ^0.9.0
+  scroll_to_index: ^3.0.1
 
   # Layout & design
   flutter_staggered_grid_view: ^0.6.2
@@ -61,6 +62,7 @@ dependencies:
   http: ^0.13.5
   intl: ^0.17.0
   path: ^1.8.2
+  scrollable_positioned_list: ^0.3.5
   uuid: ^3.0.7
 #  sqfentity:
 #  sqfentity_gen:

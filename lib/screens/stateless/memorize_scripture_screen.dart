@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:injectable/injectable.dart';
 import 'package:redux/redux.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:simple_bible/data/sembast_db.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/injection.dart';
@@ -15,20 +16,28 @@ import 'package:simple_bible/services/bible.service.dart';
 import 'package:simple_bible/viewModels/bible_vm.dart';
 
 @Injectable()
-class MemorizeScriptureScreen extends StatelessWidget {
+class MemorizeScriptureScreen extends StatefulWidget {
+
+  MemorizeScriptureScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MemorizeScriptureScreen> createState() => _MemorizeScriptureScreenState();
+}
+
+class _MemorizeScriptureScreenState extends State<MemorizeScriptureScreen> {
   final SPSettings settings = getIt();
   final SembastDb sembastDb = getIt();
   final BibleService bibleService = getIt();
   final Store<BibleAppState> store = getIt();
-  BibleVerse randomBibleVerse = BibleVerse(0, "", 0, 0);
+  final ItemScrollController scrollController = ItemScrollController();
 
-  MemorizeScriptureScreen({Key? key}) : super(key: key);
+  BibleVerse randomBibleVerse = BibleVerse(0, "", 0, 0);
 
   // @override
   openSelectedChapter(BuildContext context, String bookName, BibleChapter chapter) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ChapterScreen(),
+        builder: (context) => ChapterScreen(scrollController: scrollController),
       ),
     );
   }
@@ -47,7 +56,7 @@ class MemorizeScriptureScreen extends StatelessWidget {
   }
 
   Widget getRandomScripture(BuildContext context) {
-    BibleVm bibleVm = store.state.bibleState!.bibleVm ?? BibleVm.initial();
+    BibleVm bibleVm = store.state.bibleState.bibleVm;
     BibleVerse verse = bibleService.getRandomVerse(bibleVm.bibleInfo, bibleVm.bible);
     BibleInfoBook bookInfo = bibleService.getBookInfoFromBookNumberIndex(bibleVm.bible, bibleVm.bibleInfo, verse.bookNumber - 1);
     BibleChapter bibleChapter = bibleService.getChapterInfoFromNumberIndex(bibleVm.bible, bookInfo, verse.chapterNumber - 1);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:injectable/injectable.dart';
 import 'package:redux/redux.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:simple_bible/data/sembast_db.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/injection.dart';
@@ -15,12 +16,12 @@ import 'package:simple_bible/shared/menu_bar.dart';
 @Injectable()
 class BibleNavigationLayout extends StatelessWidget {
   final Widget child;
-  final String? title;
+  final ItemScrollController scrollController;
 
   BibleNavigationLayout({
     super.key,
     required this.child,
-    this.title,
+    required this.scrollController
   });
 
   final SPSettings settings = getIt();
@@ -35,14 +36,12 @@ class BibleNavigationLayout extends StatelessWidget {
           converter: (store) => store.state,
           builder: (_, state) {
             return Scaffold(
-              appBar: title != null
-                  ? AppBar(
+              appBar: AppBar(
                 backgroundColor: Color(state.settingsState.settingColor),
-                title: Text(title!),
-              )
-                  : null,
+                title: Text('${state.bibleState.bibleInfoBook.name} ${state.bibleState.currentChapter.chapterNumber}'),
+              ),
               drawer: MenuDrawer(),
-              bottomNavigationBar: title != null ? BottomAppBar(
+              bottomNavigationBar: BottomAppBar(
                 color: Color(state.settingsState.settingColor),
                 child: IconTheme(
                   data: IconThemeData(color: Theme
@@ -78,7 +77,7 @@ class BibleNavigationLayout extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (routeContext) =>
                                   //TODO: update to get previous chapter via redux
-                                      ChapterScreen()));
+                                      ChapterScreen(scrollController: scrollController,)));
                         },
                       ),
                       IconButton(
@@ -93,13 +92,13 @@ class BibleNavigationLayout extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (routeContext) =>
-                                      ChapterScreen()));
+                                      ChapterScreen(scrollController: scrollController,)));
                         },
                       ),
                     ],
                   ),
                 ),
-              ) : null,
+              ),
               body: child,
             );
           }),

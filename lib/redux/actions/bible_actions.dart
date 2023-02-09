@@ -108,6 +108,14 @@ class UpdateBookAction {
   UpdateBookAction(this._bookInfo, this._book);
 }
 
+class UpdateCurrentVerseAction {
+  final BibleVerse _currentVerse;
+
+  BibleVerse get currentVerse => _currentVerse;
+
+  UpdateCurrentVerseAction(this._currentVerse);
+}
+
 class FetchBibleBooksAction {
   final List<BibleBook> _books;
 
