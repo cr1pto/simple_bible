@@ -39,8 +39,6 @@ class _VerseState extends State<Verse> {
   }
 
   Widget createVerseAddedPopup(BuildContext context, List<BibleVerse> versesAdded, int addedValue) {
-    // String json = jsonEncode(versesAdded.map((e) => e.toMap()).toList());
-
    return AlertDialog(
       title: const Text('Verse added'),
       content: Column(
