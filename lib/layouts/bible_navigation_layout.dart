@@ -16,18 +16,17 @@ import 'package:simple_bible/shared/menu_bar.dart';
 @Injectable()
 class BibleNavigationLayout extends StatelessWidget {
   final Widget child;
-  final ItemScrollController scrollController;
 
   BibleNavigationLayout({
     super.key,
     required this.child,
-    required this.scrollController
   });
 
   final SPSettings settings = getIt();
   final BibleService bibleService = getIt();
   final SembastDb sembastDb = getIt();
   final Store<BibleAppState> store = getIt();
+  final double size = 35.0;
 
   Widget createBibleNavigation(BuildContext context) {
     return StoreProvider<BibleAppState>(
@@ -53,7 +52,9 @@ class BibleNavigationLayout extends StatelessWidget {
                     children: <Widget>[
                       IconButton(
                         tooltip: 'Bible',
-                        icon: Icon(Icons.book_outlined,
+                        icon: Icon(
+                            Icons.book_outlined,
+                            size: size,
                             color: Color(state.settingsState.settingColor)
                         ),
                         onPressed: () {
@@ -66,7 +67,9 @@ class BibleNavigationLayout extends StatelessWidget {
                       // if (centerLocations.contains(fabLocation)) const Spacer(),
                       IconButton(
                         tooltip: 'Previous Chapter',
-                        icon: Icon(Icons.arrow_circle_left,
+                        icon: Icon(
+                            Icons.arrow_circle_left,
+                            size: size,
                             color: Color(state.settingsState.settingColor)
                         ),
                         onPressed: () {
@@ -77,12 +80,14 @@ class BibleNavigationLayout extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (routeContext) =>
                                   //TODO: update to get previous chapter via redux
-                                      ChapterScreen(scrollController: scrollController,)));
+                                      ChapterScreen()));
                         },
                       ),
                       IconButton(
                         tooltip: 'Next Chapter',
-                        icon: Icon(Icons.arrow_circle_right,
+                        icon: Icon(
+                            Icons.arrow_circle_right,
+                            size: size,
                             color: Color(state.settingsState.settingColor)
                         ),
                         onPressed: () {
@@ -92,7 +97,7 @@ class BibleNavigationLayout extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (routeContext) =>
-                                      ChapterScreen(scrollController: scrollController,)));
+                                      ChapterScreen()));
                         },
                       ),
                     ],

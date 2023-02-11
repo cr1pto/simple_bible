@@ -15,12 +15,7 @@ import 'package:simple_bible/services/bible.service.dart';
 
 @Injectable()
 class VersesScreen extends StatefulWidget {
-  // final ScrollController scrollController;
-  final ItemScrollController scrollController;
-
-  VersesScreen({super.key,
-    required this.scrollController
-  });
+  VersesScreen({super.key});
 
   @override
   State<VersesScreen> createState() => _VersesScreenState();
@@ -28,14 +23,21 @@ class VersesScreen extends StatefulWidget {
 
 class _VersesScreenState extends State<VersesScreen> {
   final BibleService bibleService = getIt();
-  bool hasScrolled = false;
+  bool hasJumped = false;
+  final ItemScrollController _itemScrollController = ItemScrollController();
 
   openSelectedChapter(BuildContext context, String bookName, BibleChapter chapter) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ChapterScreen(scrollController: widget.scrollController),
+        builder: (context) => ChapterScreen(),
       ),
     );
+  }
+
+  @override
+  initState() {
+
+    super.initState();
   }
 
   @override
@@ -43,17 +45,19 @@ class _VersesScreenState extends State<VersesScreen> {
     return StoreConnector<BibleAppState, BibleState>(
       converter: (store) => store.state.bibleState,
       builder: (ctx, state) => BibleNavigationLayout(
-        scrollController: widget.scrollController,
         child: ScrollablePositionedList.builder(
-            physics: Platform.isIOS ? const ClampingScrollPhysics(): const AlwaysScrollableScrollPhysics(),
-
-            itemScrollController: widget.scrollController,
+          initialScrollIndex: 0,
+          physics: Platform.isIOS
+              ? const ClampingScrollPhysics()
+              : const AlwaysScrollableScrollPhysics(),
+          itemScrollController: _itemScrollController,
           itemCount: state.currentChapter.verses.length,
           itemBuilder: (context, i) {
             Future.delayed(Duration(milliseconds: 500)).then((value)  {
-              if(widget.scrollController.isAttached && !hasScrolled) {
-                widget.scrollController.jumpTo(index: state.currentVerse.verseNumber - 1);
-                hasScrolled = true;
+              if(_itemScrollController.isAttached && !hasJumped) {
+                var index = state.currentVerse.verseNumber <= 0 ? 0 : state.currentVerse.verseNumber - 1;
+                _itemScrollController.jumpTo(index: index);
+                hasJumped = true;
               }
             });
             return Verse(verse: state.currentChapter.verses[i]);

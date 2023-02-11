@@ -30,7 +30,6 @@ class _RecentVerseState extends State<RecentVerse> {
   final BibleService bibleService = getIt();
   final LogService logService = getIt();
   final Store<BibleAppState> store = getIt();
-  final ItemScrollController _scrollController = ItemScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +53,7 @@ class _RecentVerseState extends State<RecentVerse> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (routeContext) => ChapterScreen(scrollController: _scrollController)));
+                  builder: (routeContext) => ChapterScreen()));
         },
         title: Text(
             "${bookInfo.name} ${widget.verse.chapterNumber}:${widget.verse.verseNumber} - ${widget.verse.text}",

@@ -52,7 +52,7 @@ class _VerseSearchState extends State<VerseSearch> {
             store.dispatch(UpdateCurrentVerseAction(widget.verse));
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => ChapterScreen(scrollController: scrollController),
+                builder: (context) => ChapterScreen(),
               ),
             );
           },

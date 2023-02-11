@@ -50,7 +50,7 @@ class _ChaptersScreenState extends State<ChaptersScreen> {
       store.dispatch(updateBook);
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => ChapterScreen(scrollController: scrollController),
+          builder: (context) => ChapterScreen(),
         ),
       );
     });

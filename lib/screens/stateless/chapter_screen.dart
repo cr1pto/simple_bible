@@ -15,11 +15,8 @@ import 'package:simple_bible/screens/stateless/verses_screen.dart';
 
 @Injectable()
 class ChapterScreen extends StatefulWidget {
-  final ItemScrollController scrollController;
-
   ChapterScreen({
-    super.key,
-    required this.scrollController
+    super.key
   });
 
   @override
@@ -34,9 +31,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
       builder: (ctx, state) => MainLayout(
         floatingBack: true,
         floatingBackHero: "chapter-back",
-        child: VersesScreen(
-          scrollController: widget.scrollController,
-        ),
+        child: VersesScreen(),
       ),
     );
   }
