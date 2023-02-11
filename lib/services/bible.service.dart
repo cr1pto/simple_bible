@@ -66,6 +66,9 @@ class BibleService {
 
     //get the current book
     bookIndex = bookInfo.bookNumber - 1;
+
+    if(chapterNumberIndex <= 0 && bookIndex <= 0) return bible.books[0].chapters[0];
+
     //decrement the book number
     bookIndex--;
 
@@ -91,11 +94,14 @@ class BibleService {
 
     //get the current book
     bookIndex = bookInfo.bookNumber - 1;
+
+    if(chapterNumberIndex >= 21 && bookIndex >= 65) return bible.books[21].chapters[65];
+
     //increment the book number
     bookIndex++;
 
     //is this Revelation?
-    if(bookIndex >= 66) bookIndex = 65;
+    if(bookIndex >= 65) bookIndex = 65;
 
     //get the previous book
     BibleBook nextBook = bible.books[bookIndex];
@@ -149,7 +155,6 @@ class BibleService {
     BibleBook book = bible.books[bookIndex];
 
     prevChapterIndex = chapterNumberIndex - 1;
-
     prevChapter = book.chapters[prevChapterIndex];
 
     return prevChapter;

@@ -76,12 +76,7 @@ class _MemorizeScriptureScreenState extends State<MemorizeScriptureScreen> {
                 fontSize: state.settingsState.fontSize,
               )),
           onTap: () async {
-            // int addedValue = await sembastDb.addVerse(db, widget.verse);
-            // List<BibleVerse> versesAdded = await sembastDb.getVerses(db);
-            // showDialog(context: context, builder: (buildContext) => createVerseAddedPopup(buildContext, versesAdded, addedValue));
             BibleBook book = state.bibleState.bibleVm.bible.books[verse.bookNumber - 1];
-            // BibleInfoBook bookInfo = state.bibleState.bibleVm.bibleInfo.books[widget.verse.bookNumber - 1];
-            // BibleChapter selectedChapter = state.bibleState.bibleVm.bible.books[widget.verse.bookNumber - 1].chapters[widget.verse.chapterNumber - 1];
             store.dispatch(UpdateChapterAction(bibleChapter.chapterNumber, bibleChapter.verses));
             store.dispatch(UpdateBookAction(bookInfo, book));
             store.dispatch(updateChapter);
