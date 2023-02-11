@@ -105,10 +105,8 @@ class BibleService {
 
     //get the previous book
     BibleBook nextBook = bible.books[bookIndex];
-    // BibleInfoBook previousBookInfo = bibleInfo.books[bookIndex];
 
     nextChapter = nextBook.chapters.first;
-
     bookInfo = bibleInfo.books[bookIndex];
 
     return nextChapter;
