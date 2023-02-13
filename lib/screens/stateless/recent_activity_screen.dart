@@ -5,9 +5,14 @@ import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/models/simple_objects/bible_verse.dart';
 
 @Injectable()
-class RecentActivityScreen extends StatelessWidget {
+class RecentActivityScreen extends StatefulWidget {
   RecentActivityScreen({Key? key}) : super(key: key);
 
+  @override
+  State<RecentActivityScreen> createState() => _RecentActivityScreenState();
+}
+
+class _RecentActivityScreenState extends State<RecentActivityScreen> {
   List<BibleVerse> verses = List.empty();
 
   Widget confirmDeleteVersePopup(BuildContext context) {
@@ -22,17 +27,9 @@ class RecentActivityScreen extends StatelessWidget {
       ),
       actions: <Widget>[
         TextButton(
-          // style: ButtonStyle(backgroundColor: Color.),
           onPressed: () {
-            // sembastDb.init().then((db) async {
-            //   await sembastDb.clearAllVerses(db);
-            //   setState(() {
-            //     verses = [];
-            //     Navigator.of(context).pop();
-            //   });
-            // });
+
           },
-          // textColor: Theme.of(context).primaryColor,
           child: const Text('Clear All'),
         ),
         TextButton(

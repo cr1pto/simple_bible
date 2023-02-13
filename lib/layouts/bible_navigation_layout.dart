@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:injectable/injectable.dart';
 import 'package:redux/redux.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:simple_bible/data/sembast_db.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/injection.dart';
@@ -15,18 +16,17 @@ import 'package:simple_bible/shared/menu_bar.dart';
 @Injectable()
 class BibleNavigationLayout extends StatelessWidget {
   final Widget child;
-  final String? title;
 
   BibleNavigationLayout({
     super.key,
     required this.child,
-    this.title,
   });
 
   final SPSettings settings = getIt();
   final BibleService bibleService = getIt();
   final SembastDb sembastDb = getIt();
   final Store<BibleAppState> store = getIt();
+  final double size = 35.0;
 
   Widget createBibleNavigation(BuildContext context) {
     return StoreProvider<BibleAppState>(
@@ -35,14 +35,12 @@ class BibleNavigationLayout extends StatelessWidget {
           converter: (store) => store.state,
           builder: (_, state) {
             return Scaffold(
-              appBar: title != null
-                  ? AppBar(
+              appBar: AppBar(
                 backgroundColor: Color(state.settingsState.settingColor),
-                title: Text(title!),
-              )
-                  : null,
+                title: Text('${state.bibleState.bibleInfoBook.name} ${state.bibleState.currentChapter.chapterNumber}'),
+              ),
               drawer: MenuDrawer(),
-              bottomNavigationBar: title != null ? BottomAppBar(
+              bottomNavigationBar: BottomAppBar(
                 color: Color(state.settingsState.settingColor),
                 child: IconTheme(
                   data: IconThemeData(color: Theme
@@ -54,7 +52,9 @@ class BibleNavigationLayout extends StatelessWidget {
                     children: <Widget>[
                       IconButton(
                         tooltip: 'Bible',
-                        icon: Icon(Icons.book_outlined,
+                        icon: Icon(
+                            Icons.book_outlined,
+                            size: size,
                             color: Color(state.settingsState.settingColor)
                         ),
                         onPressed: () {
@@ -67,7 +67,9 @@ class BibleNavigationLayout extends StatelessWidget {
                       // if (centerLocations.contains(fabLocation)) const Spacer(),
                       IconButton(
                         tooltip: 'Previous Chapter',
-                        icon: Icon(Icons.arrow_circle_left,
+                        icon: Icon(
+                            Icons.arrow_circle_left,
+                            size: size,
                             color: Color(state.settingsState.settingColor)
                         ),
                         onPressed: () {
@@ -83,7 +85,9 @@ class BibleNavigationLayout extends StatelessWidget {
                       ),
                       IconButton(
                         tooltip: 'Next Chapter',
-                        icon: Icon(Icons.arrow_circle_right,
+                        icon: Icon(
+                            Icons.arrow_circle_right,
+                            size: size,
                             color: Color(state.settingsState.settingColor)
                         ),
                         onPressed: () {
@@ -99,7 +103,7 @@ class BibleNavigationLayout extends StatelessWidget {
                     ],
                   ),
                 ),
-              ) : null,
+              ),
               body: child,
             );
           }),

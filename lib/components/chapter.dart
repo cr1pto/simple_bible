@@ -17,7 +17,7 @@ class Chapter extends StatelessWidget {
     return ListView.builder(
       itemCount: chapter.verses.length,
       itemBuilder: (context, i) {
-        return Verse(verse: chapter.verses[i]);
+        return Verse(verse: chapter.verses[i], isVerseSelected: false, onVerseAdded: (key) => null,);
       },
     );
   }

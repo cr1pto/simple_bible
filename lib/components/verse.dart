@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:sembast/sembast.dart';
+import 'package:simple_bible/components/verse_text.dart';
 import 'package:simple_bible/data/sembast_db.dart';
 import 'package:simple_bible/data/shared_prefs.dart';
 import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/models/simple_objects/bible_verse.dart';
 
 class Verse extends StatefulWidget {
+  final Function(Key? key)? onVerseAdded;
+  final bool isVerseSelected;
   const Verse({
     super.key,
     required this.verse,
+    required this.isVerseSelected,
+    required this.onVerseAdded,
   });
 
   final BibleVerse verse;
@@ -39,8 +44,6 @@ class _VerseState extends State<Verse> {
   }
 
   Widget createVerseAddedPopup(BuildContext context, List<BibleVerse> versesAdded, int addedValue) {
-    // String json = jsonEncode(versesAdded.map((e) => e.toMap()).toList());
-
    return AlertDialog(
       title: const Text('Verse added'),
       content: Column(
@@ -65,28 +68,11 @@ class _VerseState extends State<Verse> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        title: Text(widget.verse.text,
-            style: TextStyle(
-          fontStyle: FontStyle.normal,
-          fontWeight: FontWeight.w300,
-          fontSize: fontSize,
-        )),
-        onTap: () async {
-          int addedValue = await sembastDb.addVerse(db, widget.verse);
-          List<BibleVerse> versesAdded = await sembastDb.getVerses(db);
-          showDialog(context: context, builder: (buildContext) => createVerseAddedPopup(buildContext, versesAdded, addedValue));
-        },
-        leading: Text(
-          widget.verse.verseNumber.toString(),
-            style: const TextStyle(
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w300,
-              fontSize: 20.0,
-            ),
-        ),
-      ),
-    );
+    return VerseText(
+        fontSize: fontSize,
+        verseText: widget.verse.text,
+        verseNumber: widget.verse.verseNumber,
+        selected: widget.isVerseSelected,
+        onTap: widget.onVerseAdded);
   }
 }

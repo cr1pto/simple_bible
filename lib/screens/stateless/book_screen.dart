@@ -4,7 +4,7 @@ import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/models/simple_objects/bible.dart';
 import 'package:simple_bible/models/simple_objects/bible_book.dart';
 import 'package:simple_bible/models/simple_objects/bibleinfo.dart';
-import 'package:simple_bible/screens/stateless/chapters_screen.dart';
+import 'package:simple_bible/screens/stateful/chapters_screen.dart';
 
 @Injectable()
 class BookScreen extends StatelessWidget {
