@@ -25,11 +25,10 @@ class BibleService {
       final info = await loadInfo();
       final bible = await loadKJV();
       return BibleVm(bibleInfo: info, bible: bible);
-      // emit(BibleLoaded(info: info, bible: bible));
+
     } catch (e) {
       logService.fatal("Error loading bible:", e, Error().stackTrace);
       const String message = "Failed to load bible";
-      // emit(const BibleLoadFailed(message: message));
       rethrow;
     }
   }
@@ -66,6 +65,9 @@ class BibleService {
 
     //get the current book
     bookIndex = bookInfo.bookNumber - 1;
+
+    if(chapterNumberIndex <= 0 && bookIndex <= 0) return bible.books[0].chapters[0];
+
     //decrement the book number
     bookIndex--;
 
@@ -91,18 +93,19 @@ class BibleService {
 
     //get the current book
     bookIndex = bookInfo.bookNumber - 1;
+
+    if(chapterNumberIndex >= 21 && bookIndex >= 65) return bible.books[21].chapters[65];
+
     //increment the book number
     bookIndex++;
 
     //is this Revelation?
-    if(bookIndex >= 66) bookIndex = 65;
+    if(bookIndex >= 65) bookIndex = 65;
 
     //get the previous book
     BibleBook nextBook = bible.books[bookIndex];
-    // BibleInfoBook previousBookInfo = bibleInfo.books[bookIndex];
 
     nextChapter = nextBook.chapters.first;
-
     bookInfo = bibleInfo.books[bookIndex];
 
     return nextChapter;
@@ -149,7 +152,6 @@ class BibleService {
     BibleBook book = bible.books[bookIndex];
 
     prevChapterIndex = chapterNumberIndex - 1;
-
     prevChapter = book.chapters[prevChapterIndex];
 
     return prevChapter;
@@ -258,5 +260,24 @@ class BibleService {
 
   static getInstance() {
     return BibleService();
+  }
+
+  List<BibleVerse> getVerseFromSearchCriteria(Bible bible, BibleInfo bibleInfo, String searchText) {
+    List<BibleVerse> verses = <BibleVerse>[];
+
+    if(searchText == "") return verses;
+
+    //move all verses to sqlite db store for long-term retention
+    for(var i = 0; i < bible.books.length; i++) {
+      for(var j = 0; j < bible.books[i].chapters.length; j++) {
+        verses.addAll(bible.books[i].chapters[j].verses.where((element) => element.text.toUpperCase().contains(searchText.toUpperCase())));
+      }
+    }
+
+    return verses;
+  }
+
+  String getBookNameByBookNumber(BibleInfo bibleInfo, int bookNumber) {
+    return bibleInfo.books.firstWhere((element) => element.bookNumber == bookNumber, orElse: BibleInfoBook.initial).name;
   }
 }

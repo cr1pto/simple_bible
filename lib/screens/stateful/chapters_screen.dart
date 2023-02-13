@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:redux/redux.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/models/simple_objects/bible.dart';

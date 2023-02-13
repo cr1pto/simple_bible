@@ -4,7 +4,7 @@ import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/screens/stateless/bible_screen.dart';
 import 'package:simple_bible/screens/stateless/memorize_scripture_screen.dart';
 import 'package:simple_bible/screens/stateless/recent_activity_screen.dart';
-import 'package:simple_bible/screens/stateless/search_screen.dart';
+import 'package:simple_bible/screens/stateful/search_screen.dart';
 
 @Injectable()
 class HomeOptionsScreen extends StatelessWidget {

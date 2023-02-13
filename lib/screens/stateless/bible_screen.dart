@@ -6,7 +6,7 @@ import 'package:simple_bible/injection.dart';
 import 'package:simple_bible/layouts/main_layout.dart';
 import 'package:simple_bible/redux/state/bible_app_state.dart';
 import 'package:simple_bible/redux/state/bible_state.dart';
-import 'package:simple_bible/screens/stateless/books_screen.dart';
+import 'package:simple_bible/screens/stateful/books_screen.dart';
 
 @Injectable()
 class BibleScreen extends StatelessWidget {

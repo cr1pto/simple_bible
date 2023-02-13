@@ -60,6 +60,7 @@ class _MainLayoutState extends State<MainLayout> {
             )
                 : null,
             body: widget.child,
+
           );
         });
   }
