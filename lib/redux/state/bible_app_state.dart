@@ -23,7 +23,6 @@ class BibleAppState{
 
   factory BibleAppState.fromJson(Map<String, dynamic> json) => _$BibleAppStateFromJson(json);
   Map<String, dynamic> toJson() => _$BibleAppStateToJson(this);
-
 }
 
 @immutable
@@ -31,8 +30,9 @@ class BibleAppState{
 class ChapterState {
   BibleInfoBook bookInfo = BibleInfoBook.initial();
   BibleChapter chapter = BibleChapter.initial();
+  bool hasJumpedToVerse = false;
 
-  ChapterState({required this.bookInfo, required this.chapter});
+  ChapterState({required this.bookInfo, required this.chapter, required this.hasJumpedToVerse});
   ChapterState.initial();
 
   factory ChapterState.fromJson(Map<String, dynamic> json) => _$ChapterStateFromJson(json);

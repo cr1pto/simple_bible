@@ -32,7 +32,6 @@ class _MemorizeScriptureScreenState extends State<MemorizeScriptureScreen> {
   final SembastDb sembastDb = getIt();
   final BibleService bibleService = getIt();
   final Store<BibleAppState> store = getIt();
-  final ItemScrollController scrollController = ItemScrollController();
   final double fontSize = 20.0;
 
   BibleVerse randomBibleVerse = BibleVerse(0, "", 0, 0);

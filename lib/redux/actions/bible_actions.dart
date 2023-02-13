@@ -11,8 +11,10 @@ import 'package:simple_bible/services/bible.service.dart';
 import 'package:simple_bible/viewModels/bible_vm.dart';
 
 ThunkAction<BibleAppState> loadBible = (Store<BibleAppState> store) async {
-  if(store.state.bibleState.bibleVm.bibleInfo.books.isEmpty) return store.dispatch(LoadBibleAction(store.state.bibleState.bibleVm));
   BibleService bibleService = getIt();
+  if(store.state.bibleState.bibleVm.bibleInfo.books.isNotEmpty) {
+    return store.dispatch(LoadBibleAction(store.state.bibleState.bibleVm));
+  }
 
   var vm = await bibleService.loadBible();
 
@@ -86,6 +88,12 @@ class UpdateSearchAction {
   List<BibleVerse> get verses => _verses;
 
   UpdateSearchAction(this._searchText, this._verses);
+}
+
+class UpdateVerseScrollAction {
+  final bool _hasJumpedToVerse;
+  bool get  hasJumpedToVerse => _hasJumpedToVerse;
+  UpdateVerseScrollAction(this._hasJumpedToVerse);
 }
 
 class UpdateChapterAction {

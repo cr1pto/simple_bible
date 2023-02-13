@@ -25,6 +25,15 @@ class _SearchScreenState extends State<SearchScreen> {
   final Store<BibleAppState> store = getIt();
 
   @override
+  initState() {
+    setState(() {
+      store.dispatch(UpdateVerseScrollAction(false));
+      store.dispatch(UpdateSearchAction("", List.empty()));
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StoreConnector<BibleAppState, SearchState>(
       converter: (store) => store.state.searchState,
@@ -55,11 +64,11 @@ class _SearchScreenState extends State<SearchScreen> {
 
     Widget searchResultsCard = ListTile(
       title: const Text("Tap here to search. Long press to clear...",
-          style: TextStyle(
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w300,
-            fontSize: 14.0,
-          )),
+      style: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w300,
+        fontSize: 14.0,
+      )),
       onTap: () {
         setState(() {
           store.dispatch(fetchLatestSearchResults);

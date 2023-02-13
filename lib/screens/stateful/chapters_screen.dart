@@ -37,8 +37,6 @@ class _ChaptersScreenState extends State<ChaptersScreen> {
   final Store<BibleAppState> store = getIt();
   final BibleService bibleService = getIt();
 
-  final ItemScrollController scrollController = ItemScrollController();
-
   openSelectedChapter(BuildContext context, int chapterIndex) {
     setState(() {
       BibleChapter selectedChapter = widget.chapters[chapterIndex];

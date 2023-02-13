@@ -22,15 +22,12 @@ class _SearchFormState extends State<SearchForm> {
   final Store<BibleAppState> store = getIt();
   final BibleService bibleService = getIt();
 
-  ScrollController scrollController = AutoScrollController();
-
   @override
   void initState() {
     super.initState();
 
     // Start listening to changes.
     searchTextController.addListener(updateSearchResults);
-    scrollController.addListener(updateScrollPosition);
   }
 
   @override
@@ -43,28 +40,38 @@ class _SearchFormState extends State<SearchForm> {
 
   void updateSearchResults() {
     store.dispatch(UpdateSearchAction(searchTextController.text, List.empty()));
+    store.dispatch(UpdateVerseScrollAction(false));
+    store.dispatch(fetchLatestSearchResults);
+    // setState(() {
+    //
+    // });
   }
-
-  void updateScrollPosition() {
-    AutoScrollController(
-        viewportBoundaryGetter: () =>
-            Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
-        axis: Axis.vertical);
-  }
-
-  // Future _scrollToIndex() async {
-  //   await scrollController.position.
-  //   // await scrollController.scrollToIndex(6, preferPosition: AutoScrollPosition.begin);
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
-      child: TextField(
-        controller: searchTextController,
-        autofocus: true,
-        // onEditingComplete: () =,
+      child: GestureDetector(
+        child: TextField(
+          controller: searchTextController,
+          autofocus: true,
+          // onEditingComplete: () {
+          //   FocusScopeNode currentFocus = FocusScope.of(context);
+          //
+          //   if (!currentFocus.hasPrimaryFocus) {
+          //     currentFocus.unfocus();
+          //     updateSearchResults();
+          //   }
+          // },
+          onSubmitted: (res) {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+              updateSearchResults();
+            }
+          },
+        ),
       ),
     );
   }

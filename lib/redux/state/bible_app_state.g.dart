@@ -30,10 +30,12 @@ ChapterState _$ChapterStateFromJson(Map<String, dynamic> json) => ChapterState(
       bookInfo:
           BibleInfoBook.fromJson(json['bookInfo'] as Map<String, dynamic>),
       chapter: BibleChapter.fromJson(json['chapter'] as Map<String, dynamic>),
+      hasJumpedToVerse: json['hasJumpedToVerse'] as bool,
     );
 
 Map<String, dynamic> _$ChapterStateToJson(ChapterState instance) =>
     <String, dynamic>{
       'bookInfo': instance.bookInfo,
       'chapter': instance.chapter,
+      'hasJumpedToVerse': instance.hasJumpedToVerse,
     };

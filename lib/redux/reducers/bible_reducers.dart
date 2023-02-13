@@ -65,6 +65,10 @@ class BibleReducers {
           nextChapter: prev.bibleState.nextChapter);
       return BibleAppState(settingsState: prev.settingsState, bibleState: bibleState, chapterState: prev.chapterState, searchState: prev.searchState);
     }
+    else if(action is UpdateVerseScrollAction) {
+      ChapterState chapterState = ChapterState(bookInfo: prev.chapterState.bookInfo, chapter: prev.chapterState.chapter, hasJumpedToVerse: action.hasJumpedToVerse);
+      return BibleAppState(settingsState: prev.settingsState, bibleState: prev.bibleState, chapterState: chapterState, searchState: prev.searchState);
+    }
     else if(action is FetchSettingsAction) {
       SettingsState settingsState = SettingsState(fontWeightIndex: action.fontWeightIndex,
           fontStyleName: action.fontStyleName,
