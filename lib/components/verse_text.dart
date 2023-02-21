@@ -5,7 +5,7 @@ class VerseText extends StatelessWidget {
   final String verseText;
   final int verseNumber;
   final bool selected;
-    final Function(Key? key)? onTap;
+  final Function(Key? key)? onTap;
 
   const VerseText({super.key, required this.fontSize, required this.verseText, required this.verseNumber, required this.onTap, required this.selected});
 

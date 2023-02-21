@@ -47,25 +47,22 @@ class _VersesScreenState extends State<VersesScreen> {
   }
 
   Verse createVerse(BibleVerse verse) {
-    Verse addedVerse = Verse(verse: verse, onVerseAdded: (key) async => await onVerseTap(ValueKey<int>(verse.verseNumber)), isVerseSelected: isVerseSelected);
+    Verse addedVerse = Verse(verse: verse);
     selectedVerses.add(addedVerse);
     return addedVerse;
   }
 
-  Future onVerseTap(ValueKey<int> key) async {
+  void onVerseTap(ValueKey<int> key) {
     // int addedValue = await sembastDb.addVerse(db, widget.verse);
     // List<BibleVerse> versesAdded = await sembastDb.getVerses(db);
     // showDialog(context: ctx, builder: (buildContext) => createVerseAddedPopup(buildContext, versesAdded, addedValue));
-    await Future.delayed(Duration(milliseconds: 500));
+    // await Future.delayed(Duration(milliseconds: 500));
+
+    int verseIndex = key.value - 1;
+    var vrs = selectedVerses[verseIndex];
 
     setState(() {
-      int verseIndex = key.value - 1;
-      var vrs = selectedVerses[verseIndex];
-      // selectedVerses[verseNumber - 1].isVerseSelected = !selectedVerses[verseNumber - 1].isVerseSelected;
-
-      // selectedVerse = verseAdded;
-      // isVerseSelected
-      // value
+      // vrs.
     });
   }
 

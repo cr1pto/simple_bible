@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:simple_bible/models/simple_objects/bible_chapter.dart';
 import 'package:simple_bible/models/simple_objects/bible_info_book.dart';
+import 'package:simple_bible/models/simple_objects/bible_verse.dart';
 import 'package:simple_bible/redux/state/bible_state.dart';
 import 'package:simple_bible/redux/state/search_state.dart';
 import 'package:simple_bible/redux/state/settings_state.dart';
