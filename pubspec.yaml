@@ -45,7 +45,7 @@ dependencies:
 #  // Allows converting json to dart class and back
   json_annotation: ^4.8.0
 #  // Allows easier routing
-  auto_route: ^5.0.4
+  auto_route: ^6.0.5
 #  // Required to work with firebase.
   firebase_core: ^2.4.1
   redux: ^5.0.0
