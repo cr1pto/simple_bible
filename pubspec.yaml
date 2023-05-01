@@ -47,7 +47,7 @@ dependencies:
 #  // Allows easier routing
   auto_route: ^5.0.4
 #  // Required to work with firebase.
-  firebase_core: ^2.4.1
+  firebase_core: ^2.10.0
   redux: ^5.0.0
   flutter_redux: ^0.10.0
   redux_thunk: ^0.4.0
